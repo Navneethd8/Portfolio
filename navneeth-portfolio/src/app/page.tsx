@@ -15,10 +15,9 @@ export default function Home() {
       </header>
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <div className="items-center justify-center pt-[200]">
-          <h2 className = "text-left" style={{fontSize:'40px'}}>
-            Hey! I'm Navneeth Dhamotharan, An aspiring Data Scientist @ The University of Washington 
-            pursuing a double degree in Informatics: Data Science and Economics.
-          </h2>
+          <h2 className = "text-left" style={{fontSize:'40px'}}>{
+          "Hey! I'm Navneeth Dhamotharan, An aspiring Data Scientist @ The University of Washington pursuing a double degree in Informatics: Data Science and Economics."
+          }</h2>
           <hr className="my-12 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
           <h1 id="Projects"className="text-center justify-center font-semibold pt-[15] pb-[15]" style={{fontSize:'50px'}}>
             Projects
