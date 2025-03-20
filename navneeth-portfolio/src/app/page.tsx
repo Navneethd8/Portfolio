@@ -24,22 +24,34 @@ export default function Home() {
           </h1>
 
         </div>
-        <div className="items-center">
-
-        </div>
-
         <div className="bg-gray-100 rounded-2xl p-6 shadow-md w-[1000px] h-[550px] mx-auto">
           <h2 className="text-xl font-semibold text-gray-700 text-center mb-4" style={{ fontSize: '40px' }}>
             Stock Prediction Model
           </h2>
           <div className="flex flex-row items-start space-x-5">
             <div className="w-[500px] h-[430px] bg-white rounded-xl shadow-md">
-              <p style={{color:'black'}} className='p-[10px]'>
-                Hello
-              </p>
+              <div style={{color:'black',fontSize:18}} className='p-[10px]'>
+                <h1 style={{color:'grey',fontSize:18}}> Languages & Libraries: Python, SciKitLearn, numpy,pandas </h1>
+                <p className='pt-[10px]'>
+                  Developed a trend classification model in Python to predict the daily movement of the 
+                  S&P 500 stock using K-Nearest Neighbors (KNN) and Random Forest. Utilized NumPy and 
+                  Pandas for data preprocessing, handling historical stock price data and key financial 
+                  indicators. Implemented KNN for pattern recognition by analyzing similar past market 
+                  conditions and Random Forest for robust decision-making. Tuned hyperparameters and 
+                  optimized feature selection to improve predictive accuracy, achieving over 75% 
+                  accuracy on a validation dataset while mitigating overfitting.
+                </p>
+              </div>
+
             </div>
             <div className="flex flex-col pl-[50px] space-y-14">
-              <div className="w-[400px] h-[200px] bg-gray-300 rounded-lg"></div>
+            <div className="w-[400px] h-[200px] rounded-lg">
+              <img 
+                src="/images/SPYData.png" 
+                alt="SPY" 
+                style={{objectFit: 'scale-down', width: '100%', height: '100%'}}
+              />
+            </div>
               <div className="flex justify-center items-center h-full"> 
                 <button className="bg-teal-700 text-white px-4 py-2 rounded-full shadow hover:bg-teal-800 transition">
                   <Link href="https://github.com/Navneethd8/spy-trend-model">
@@ -49,6 +61,85 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>
+
+        <div className="bg-gray-100 rounded-2xl p-6 shadow-md w-[1000px] h-[550px] mx-auto">
+          <h2 className="text-xl font-semibold text-gray-700 text-center mb-4" style={{ fontSize: '40px' }}>
+            FundIt
+          </h2>
+          <div className="flex flex-row items-start space-x-5">
+            <div className="w-[500px] h-[430px] bg-white rounded-xl shadow-md">
+              <div style={{color:'black',fontSize:18}} className='p-[10px]'>
+                <h1 style={{color:'grey',fontSize:18}}> Languages: HTML, CSS, SailsJS(JavaScript), PostgreSQL </h1>
+                <p className='pt-[10px]'>
+                  FundIt is a mobile app designed to help users optimize spending, 
+                  reduce debt, and make informed investment decisions through an intuitive 
+                  budgeting and investment platform. The app features a comprehensive budgeting 
+                  tool, a net worth calculator, and a personalized user profile, enabling users 
+                  to track their financial health effectively. Built on Firebase, FundIt ensures 
+                  real-time transaction and portfolio updates, while Plaid API integration provides 
+                  secure financial data synchronization. Developed using React Native (Expo), the 
+                  app delivers a seamless, cross-platform experience.
+
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col pl-[50px] space-y-14">
+            <div className="w-[400px] h-[200px] rounded-lg">
+              <img 
+                src="/images/FundIt.png" 
+                alt="FundIt" 
+                style={{objectFit: 'scale-down', width: '100%', height: '100%'}}
+              />
+            </div>
+              <div className="flex justify-center items-center h-full"> 
+                <button className="bg-teal-700 text-white px-4 py-2 rounded-full shadow hover:bg-teal-800 transition">
+                  <Link href="https://github.com/hcp-uw/fundit/">
+                    View Code
+                  </Link>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div className="bg-gray-100 rounded-2xl p-6 shadow-md w-[1000px] h-[550px] mx-auto">
+          <h2 className="text-xl font-semibold text-gray-700 text-center mb-4" style={{ fontSize: '40px' }}>
+              SATDecoded
+          </h2>
+          <div className="flex flex-row items-start space-x-5">
+            <div className="w-[500px] h-[430px] bg-white rounded-xl shadow-md">
+              <div style={{color:'black',fontSize:18,}} className='p-[10px]'>
+                <h1 style={{color:'grey',fontSize:18}}> Languages: HTML, CSS, SailsJS(JavaScript), PostgreSQL </h1>
+                <p className='pt-[10px]'>
+                  Developed a fully functional open-source website for high school students preparing 
+                  for the SAT as part of my IB Computer Science Internal Assessment. Features include 
+                  interactive quizzes, study notes, document uploads, and a mailing system to improve 
+                  accessibility to SAT prep resources. Built using HTML, CSS, JavaScript, and SQL, 
+                  leveraging SailsJS for the backend, PostgreSQL for database management, and SendGrid 
+                  API for email integration. Designed with a user-friendly interface to enhance engagement 
+                  and ease of use.
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col pl-[50px] space-y-14">
+              <div className="w-[400px] h-[200px] bg-gray-300 rounded-lg"></div>
+              <div className="flex justify-center items-center h-full"> 
+                <button className="bg-teal-700 text-white px-4 py-2 rounded-full shadow hover:bg-teal-800 transition">
+                  <Link href="https://github.com/Navneethd8/SATDecoded">
+                    View Code
+                  </Link>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="container mx-auto px-4">
+          <hr className="w-full my-12 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
+          <h1 id="work_Experience" className="text-center font-semibold pt-[15] pb-[15]" style={{fontSize:'50px'}}>
+            Work Experience
+          </h1>
         </div>
 
       </main>
