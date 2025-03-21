@@ -158,7 +158,7 @@ export default function Home() {
             <div className="flex items-center justify-center">
               <div className="w-[150px] h-[150px] bg-gray-300 rounded-full">
               <img 
-                src="/images/ET logo.png" 
+                src="/images/ET_logo.png" 
                 alt="ET Logo" 
                 style={{objectFit: 'fill', borderRadius:'100px'}}
               />
