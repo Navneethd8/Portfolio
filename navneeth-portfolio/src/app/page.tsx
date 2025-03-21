@@ -19,14 +19,57 @@ export default function Home() {
           "Hey! I'm Navneeth Dhamotharan, An aspiring Data Scientist @ The University of Washington pursuing a double degree in Informatics: Data Science and Economics."
           }</h2>
           <hr className="my-12 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
-          <h1 id="Projects"className="text-center justify-center font-semibold pt-[15] pb-[15]" style={{fontSize:'50px'}}>
-            Projects
+          <h1 id="work_Experience"className="text-center justify-center font-semibold pt-[15] pb-[15]" style={{fontSize:'50px'}}>
+            Work Experience
           </h1>
-
         </div>
         <div className="bg-gray-100 rounded-2xl p-6 shadow-md w-[1000px] h-[550px] mx-auto">
           <h2 className="text-xl font-semibold text-gray-700 text-center mb-4" style={{ fontSize: '40px' }}>
-            Stock Prediction Model
+              Eat Together
+          </h2>
+          <div className="flex flex-row items-start space-x-5">
+            <div className="w-[500px] h-[430px] bg-white rounded-xl shadow-md">
+              <div style={{color:'black',fontSize:18,}} className='p-[10px]'>
+                <h1 style={{color:'grey',fontSize:18}}> Languages: React Native (JavaScript), Google Cloud Platforms(Firebase Firestore and Google Cloud Functions), Python </h1>
+                <p className='pt-[10px]'>
+                  {"As a Software Engineer and Development Lead at Eat Together, where I’ve grown through multiple roles, from Project Manager to Core Team Developer, I optimize user experience for nearly 500 users while mentoring 15+ developers in React Native, Firebase, and Git. My work includes refactoring the recommendation system to boost engagement, enhancing the photo gallery with real time updates, and resolving critical UI issues. With experience in development and project management, Ive led cross functional teams, streamlined workflows, and driven impactful features."}
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col pl-[50px] space-y-14">
+            <div className="flex items-center justify-center">
+              <div className="w-[150px] h-[150px] bg-gray-300 rounded-full">
+              <img 
+                src="/images/ETLogo.png" 
+                alt="ETLogo" 
+                style={{objectFit: 'fill', borderRadius:'100px'}}
+              />
+              </div>
+            </div>
+              <div className="w-[400px] h-[225px] bg-white rounded-lg shadow-md">
+                <div style={{color:'black',fontSize:17,}} className='p-[10px]'>
+                  <p className='pt-[10px]'>
+                    Eat Together is an on campus startup @ The University of Washington - Seattle that 
+                    aims to connect students at the university over shared meals through a cross platform 
+                    mobile application. The app aims to reshape the college experience by matching users 
+                    with friendly individuals nearby to meet up and share a meal.
+                  </p>
+                  <a href = 'https://eat-together.org' style={{color:'blue',fontSize:17,}}> Check it out here!</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="container mx-auto px-4">
+          <hr className="w-full my-12 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
+          <h1 id="Projects" className="text-center font-semibold pt-[15] pb-[15]" style={{fontSize:'50px'}}>
+            Projects
+          </h1>
+        </div>
+        <div className="bg-gray-100 rounded-2xl p-6 shadow-md w-[1000px] h-[550px] mx-auto">
+          <h2 className="text-xl font-semibold text-gray-700 text-center mb-4" style={{ fontSize: '40px' }}>
+            Stock Prediction Deep Learning Model
           </h2>
           <div className="flex flex-row items-start space-x-5">
             <div className="w-[500px] h-[430px] bg-white rounded-xl shadow-md">
@@ -135,52 +178,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="container mx-auto px-4">
-          <hr className="w-full my-12 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
-          <h1 id="work_Experience" className="text-center font-semibold pt-[15] pb-[15]" style={{fontSize:'50px'}}>
-            Work Experience
-          </h1>
-        </div>
-        <div className="bg-gray-100 rounded-2xl p-6 shadow-md w-[1000px] h-[550px] mx-auto">
-          <h2 className="text-xl font-semibold text-gray-700 text-center mb-4" style={{ fontSize: '40px' }}>
-              Eat Together
-          </h2>
-          <div className="flex flex-row items-start space-x-5">
-            <div className="w-[500px] h-[430px] bg-white rounded-xl shadow-md">
-              <div style={{color:'black',fontSize:18,}} className='p-[10px]'>
-                <h1 style={{color:'grey',fontSize:18}}> Languages: React Native (JavaScript), Google Cloud Platforms(Firebase Firestore and Google Cloud Functions), Python </h1>
-                <p className='pt-[10px]'>
-                  {"As a Software Engineer and Development Lead at Eat Together, where I’ve grown through multiple roles, from Project Manager to Core Team Developer, I optimize user experience for nearly 500 users while mentoring 15+ developers in React Native, Firebase, and Git. My work includes refactoring the recommendation system to boost engagement, enhancing the photo gallery with real time updates, and resolving critical UI issues. With experience in development and project management, Ive led cross functional teams, streamlined workflows, and driven impactful features."}
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col pl-[50px] space-y-14">
-            <div className="flex items-center justify-center">
-              <div className="w-[150px] h-[150px] bg-gray-300 rounded-full">
-              <img 
-                src="/images/ETLogo.png" 
-                alt="ETLogo" 
-                style={{objectFit: 'fill', borderRadius:'100px'}}
-              />
-              </div>
-            </div>
-              <div className="w-[400px] h-[225px] bg-white rounded-lg shadow-md">
-              <div style={{color:'black',fontSize:17,}} className='p-[10px]'>
-                <p className='pt-[10px]'>
-                  Eat Together is an on campus startup @ The University of Washington - Seattle that 
-                  aims to connect students at the university over shared meals through a cross platform 
-                  mobile application. The app aims to reshape the college experience by matching users 
-                  with friendly individuals nearby to meet up and share a meal.
-                </p>
-                <a href = 'https://eat-together.org' style={{color:'blue',fontSize:17,}}> Check it out here!</a>
-              </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-
-        
 
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
