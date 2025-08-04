@@ -15,8 +15,8 @@
   --h5: #555555;
   --h6: #666666;
 
-  --link: #0066CC;
-  --link-hover: #004C99;
+  --link: #66aaff;
+  --link-hover: #3388ff;
 
 }
 
@@ -43,8 +43,8 @@
     --h5: #BBBBBB;
     --h6: #AAAAAA;
 
-    --link: #0066CC;
-    --link-hover: #004C99;
+--link: #1a73e8;
+--link-hover: #0c47a1;
 
   }
 }
