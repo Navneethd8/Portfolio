@@ -1,5 +1,8 @@
 import Link from "next/link";
 import SiteLayout from "@/components/siteLayout"
+import { FaLinkedin,FaGithub,FaXTwitter } from 'react-icons/fa6';
+import { CgWebsite } from "react-icons/cg";
+import { MdEmail } from "react-icons/md";
 
 
 export default function Home() {
@@ -209,47 +212,96 @@ export default function Home() {
     <SiteLayout
       sidebar={
         <div className="flex flex-col h-full w-full">
-  <div className="flex-shrink-0 mb-4">
-       <h1 className="text-2xl font-semibold mb-2 text-[var(--background)]">Navneeth Dhamotharan</h1>
-            <p className="text-[var(--background)] text-xl">Data Scientist / Software Engineer</p>
-  </div>
+          <div className="flex-shrink-0 mb-4">
+              <h1 className="text-2xl font-semibold mb-2 text-[var(--background)]">Navneeth Dhamotharan</h1>
+              <p className="text-[var(--background)] text-xl">Data Scientist / Software Engineer</p>
+          </div>
 
-  <nav
-    className="
-      flex
-      gap-2
-      flex-row
-      overflow-x-auto
-      whitespace-nowrap
+          <div className="flex flex-col gap-4">
+            <nav 
+              className="
+                  flex
+                  gap-2
+                  flex-row 
+                  overflow-x-auto 
+                  whitespace-nowrap 
+                  
+                  lg:flex-col 
+                  lg:overflow-visible 
+                  lg:whitespace-normal
+                  lg:pr-2
+                  lg:flex-grow
 
-      lg:flex-col
-      lg:overflow-y-auto
-      lg:overflow-x-hidden
-      lg:whitespace-normal
-      lg:pr-2
-      lg:flex-grow
-    "
-  >
-    <a href="#" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
-      About
-    </a>
-    <a href="#" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
-      Education
-    </a>
-    <a href="#" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
-      Experience
-    </a>
-    <a href="#" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
-      Skills
-    </a>
-    <a href="#" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
-      Projects
-    </a>
-    <a href="#" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
-      Github Stats
-    </a>
-  </nav>
-</div>
+                  "
+            >
+              <a href="#" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
+                About
+              </a>
+              <a href="#" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
+                Education
+              </a>
+              <a href="#" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
+                Experience
+              </a>
+              <a href="#" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
+                Skills
+              </a>
+              <a href="#" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
+                Projects
+              </a>
+              <a href="#" className="px-4 py-1 text-xl">
+                Github Stats
+              </a>
+            </nav>
+
+            <div>
+              <p className="text-[var(--background)] text-xl">Let's Connect!</p>
+            </div>
+            <nav 
+              className="
+                  flex
+                  gap-2
+                  justify-center
+                  flex-row 
+                  overflow-x-auto 
+                  whitespace-nowrap 
+
+                  
+                  lg:flex-col 
+                  lg:overflow-visible 
+                  lg:whitespace-normal
+                  lg:pr-2
+                  lg:flex-grow
+
+                  "
+            >
+<a href="#" className="px-4 py-1 text-xl flex flex-row items-center gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
+  <MdEmail />
+  <span className="hidden lg:inline">nd17@uw.edu</span>
+</a>
+
+<a href="#" className="px-4 py-1 text-xl flex flex-row items-center gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
+  <FaLinkedin />
+  <span className="hidden lg:inline">LinkedIn</span>
+</a>
+
+<a href="#" className="px-4 py-1 text-xl flex flex-row items-center gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
+  <FaGithub />
+  <span className="hidden lg:inline">GitHub</span>
+</a>
+
+<a href="#" className="px-4 py-1 text-xl flex flex-row items-center gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
+  <CgWebsite />
+  <span className="hidden lg:inline">Website</span>
+</a>
+
+<a href="#" className="px-4 py-1 text-xl flex flex-row items-center gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
+  <FaXTwitter />
+  <span className="hidden lg:inline">Twitter</span>
+</a>
+            </nav>
+          </div>
+        </div>
 
         // <div>
         //   <div className="flex-shrink-0 mb-4">

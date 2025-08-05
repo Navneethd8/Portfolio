@@ -23,7 +23,7 @@ const SiteLayout: React.FC<SiteLayoutProps> = ({ sidebar, children }) => {
             lg:sticky
             lg:top-0
             lg:h-screen
-            lg:overflow-y-auto
+            // lg:overflow-y-auto
             lg:whitespace-normal
             lg:border-b-0
             lg:border-r

@@ -27,7 +27,7 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
     --background: #1A1A1A;
     --foreground: #FFFFFF;
