@@ -34,7 +34,7 @@ const SiteLayout: React.FC<SiteLayoutProps> = ({ sidebar, children }) => {
     >
       {sidebar}
     </aside>
-  <main className="p-8 mx-auto w-full max-w-4xl">
+  <main className="p-8 mx-auto w-full max-w-8xl">
     {children}
   </main>
 </div>
