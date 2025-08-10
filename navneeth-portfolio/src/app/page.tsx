@@ -154,7 +154,8 @@ export default function Home() {
         </div>
         <p className="leading-relaxed">
           <span className="font-semibold">Relevant Coursework:</span> Data Structures and Algorithms, 
-          Introduction to Data Science, Statistical Analysis in R, Databases, Econometrics
+          Introduction to Data Science, Statistical Analysis in R, Databases, Econometrics, Object Oriented Programming,
+          Intermediate Data Programming
         </p>
       </section>
       <section id="#experience" className="mb-4">
@@ -224,6 +225,20 @@ export default function Home() {
         <h1 id="skills-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
           Resume
         </h1>
+        <h2 className="text-xl font-semibold mb-1 text-start md:text-center">
+          Download my resume below
+        </h2>
+        <div className="flex justify-start md:justify-center">
+        <a
+          href="Resume_Navneeth.pdf"
+          target="_blank"
+          className="resume-link px-3 py-1 rounded-md text-sm font-mono text-center"
+        >
+          Resume
+        </a>
+        </div>
+
+
       </section>
 
     </SiteLayout>
