@@ -102,18 +102,74 @@ export default function Home() {
         </div>
       }
     >
-      <section>
-        <h2 id="about"className="text-2xl font-semibold mb-4">Hi! I'm Navneeth Dhamotharan</h2>
-        <p className="text-l mb-4">
-          I'm currently a Bachelor's student at the University of Washington, specializing in Data Science under the iSchool, with a second degree in Economics. My primary interests lie in Software and Data Engineering, with a growing focus on the intersection of Machine Learning and economic applications.
-        </p>
-        <p className="text-l mb-4">
-          Outside the classroom, I’m a director at Eat Together, a platform helping students connect over shared meals. I also contribute to the Software Engineering Career Club, building tools like SWECC Labs and the Resume Review platform to support students in becoming better engineers.
-        </p>
-        <p className="text-l mb-4">
-          I'm currently developing a stock market prediction platform that brings together software, data pipelines, and ML modeling—culminating in an interactive dashboard to visualize forecasts and trends.
+      <section id="about" className="mb-8">
+        <h1 id="about-subheading" className="relative text-2xl font-bold mb-6 after:content-[''] after:block after:h-[2px] after:w-12 after:bg-[var(--foreground)] after:mt-2">
+          About Me !
+        </h1>
+        <div className="flex flex-col md:flex-row items-start gap-6 md:items-center">
+          <img
+            src="images/ETLogo.png"
+            alt="Navneeth Dhamotharan"
+            className="w-40 h-40 rounded-lg object-cover flex-shrink-0 mx-auto md:mx-0"
+          />
+
+          <div className="flex-1">
+            <h2 className="text-xl font-semibold mb-4">
+              Hi! I'm Navneeth Dhamotharan
+            </h2>
+            <p className="text-l mb-4">
+              I'm currently a Bachelor's student at the University of Washington,
+              specializing in Data Science under the iSchool, with a second degree in
+              Economics. My primary interests lie in Software and Data Engineering,
+              with a growing focus on the intersection of Machine Learning and
+              economic applications.
+            </p>
+            <p className="text-l mb-4">
+              Outside the classroom, I’m the director at Eat Together, a platform
+              helping students connect over shared meals. I also contribute to the
+              Software Engineering Career Club, building tools like SWECC Labs and
+              the Resume Review platform to support students in becoming better
+              engineers.
+            </p>
+            <p className="text-l mb-4">
+              I'm currently developing a stock market prediction platform that brings
+              together software, data pipelines, and ML modeling—culminating in an
+              interactive dashboard to visualize forecasts and trends.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="education">
+        <h1 id="education-subheading" className="relative text-2xl font-bold mb-6 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
+          Education
+        </h1>
+        <h2 className="text-xl font-semibold mb-1">
+          University of Washington, Seattle
+        </h2>
+        <div className="flex flex-wrap justify-between items-center text-lg text-[var(--sidebar)] mb-2">
+          <span>B.S. Informatics: Data Science &nbsp; + &nbsp; B.A. Economics</span>
+          <span className="text-lg italic text-[var(--sidebar)]">
+            Sep 2023 – Jun 2027 (Expected)
+          </span>
+        </div>
+        <p className="leading-relaxed">
+          <span className="font-semibold">Relevant Coursework:</span> Data Structures and Algorithms, 
+          Introduction to Data Science, Statistical Analysis in R, Databases, Econometrics
         </p>
       </section>
+      <section id="#experience">
+
+      </section>
+      <section id="#skills">
+
+      </section>
+      <section id="#projects">
+
+      </section>
+      <section id="#resume">
+
+      </section>
+
     </SiteLayout>
   );
 }
