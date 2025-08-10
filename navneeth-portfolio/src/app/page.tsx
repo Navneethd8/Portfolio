@@ -167,7 +167,6 @@ export default function Home() {
         <h1 id="skills-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
           Skills
         </h1>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <h3 className="text-sm font-bold text-[var(--foreground)] uppercase mb-3">Languages</h3>
@@ -182,7 +181,6 @@ export default function Home() {
               ))}
             </div>
           </div>
-
           <div>
             <h3 className="text-sm font-bold text-[var(--foreground)] uppercase mb-3"> Tools & Frameworks</h3>
             <div className="flex flex-wrap gap-2">
@@ -214,7 +212,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
       </section>
       <section id="#projects" className="mb-4">
         <h1 id="skills-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
@@ -229,18 +226,15 @@ export default function Home() {
           Download my resume below
         </h2>
         <div className="flex justify-start md:justify-center">
-        <a
-          href="Resume_Navneeth.pdf"
-          target="_blank"
-          className="resume-link px-3 py-1 rounded-md text-sm font-mono text-center"
-        >
-          Resume
-        </a>
+          <a
+            href="Resume_Navneeth.pdf"
+            target="_blank"
+            className="resume-link px-3 py-1 rounded-md text-sm font-mono text-center"
+          >
+            Resume
+          </a>
         </div>
-
-
       </section>
-
     </SiteLayout>
   );
 }
