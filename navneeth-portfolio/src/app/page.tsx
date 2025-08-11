@@ -158,12 +158,180 @@ export default function Home() {
           Intermediate Data Programming
         </p>
       </section>
-      <section id="#experience" className="mb-4">
+      <section id="experience" className="mb-4">
         <h1 id="experience-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
           Experience
         </h1>
+        <div className="flex flex-col md:flex-row gap-4 mb-6">
+          <div className="w-full md:w-28 flex-shrink-0">
+            <img
+              src="images/flydubai.avif"
+              alt="Company Logo"
+              className="w-20 h-20 object-contain mx-auto md:mx-0 rounded-lg"
+            />
+          </div>
+
+          <div className="flex-1">
+            <div className="flex justify-between flex-wrap">
+              <h3 className="text-lg font-semibold">Data Engineer Intern</h3>
+              <span className="text-lg text-[var(--foreground)]">Jun. 2025 – Present</span>
+            </div>
+
+            <div className="flex justify-between flex-wrap">
+              <span className="text-[var(--h3)]">FlyDubai</span>
+              <span className="text-[var(--h3)]">Dubai, UAE</span>
+            </div>
+
+            <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+              <li>Developed models to predict flight delay accuracy for <b>600,000+ rows</b> and <b>90+ features</b> with an <b>80% R<sup>2</sup></b>.</li>
+              <li>Built data and ML pipelines using AWS S3, Lambda, and Step Functions to perform ETL and schema design integrating data from 5+ sources make accurate predictions.</li>
+              <li>Enhanced model prediction by <b>5%</b> by performing EDA on <b> 50+</b> numerical features</li>
+            </ul>
+          </div>
+        </div>
+        <div className="flex flex-col md:flex-row gap-4 mb-6">
+          <div className="w-full md:w-28 flex-shrink-0">
+            <img
+              src="images/swecc.jpg"
+              alt="Company Logo"
+              className="w-20 h-20 object-contain mx-auto md:mx-0 rounded-lg"
+            />
+            <div className="mt-2 flex flex-row justify-center md:justify-start gap-1 text-lg">
+              <a 
+                className="flex items-center gap-1"
+                href="https://github.com/navneethd8"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaGithub/>
+              </a>
+              <a 
+                className="flex items-center gap-1"
+                href="https://github.com/navneethd8"
+                target="_blank"
+                rel="noopener noreferrer"
+        
+              >
+                <CgWebsite/>
+              </a>
+            </div>
+          </div>
+
+          <div className="flex-1">
+            <div className="flex justify-between flex-wrap">
+              <h3 className="text-lg font-semibold">Software Engineering Officer</h3>
+              <span className="text-lg text-[var(--foreground)]">Apr. 2024 – Present</span>
+            </div>
+
+            <div className="flex justify-between flex-wrap">
+              <span className="text-[var(--h3)]">FlyDubai</span>
+              <span className="text-[var(--h3)]">Dubai, UAE</span>
+            </div>
+
+            <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+              <li>Led SWECC Labs, mentoring <b>35+ students</b> to open-source development for career growth.</li>
+              <li>Improved the job search process for <b>2000+</b> aspiring software engineers by developing and enhancing platforms across <b>38+</b> repositories.</li>
+            </ul>
+          </div>
+        </div>
+        <div className="flex flex-col md:flex-row gap-4 mb-6">
+          <div className="w-full md:w-28 flex-shrink-0">
+            <img
+              src="images/ETLogo.png"
+              alt="Company Logo"
+              className="w-20 h-20 object-contain mx-auto md:mx-0 rounded-lg"
+            />
+            <div className="mt-2 flex flex-row justify-center md:justify-start gap-1 text-lg">
+              <a 
+                className="flex items-center gap-1"
+                href="https://github.com/navneethd8"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaGithub/>
+              </a>
+              <a 
+                className="flex items-center gap-1"
+                href="https://github.com/navneethd8"
+                target="_blank"
+                rel="noopener noreferrer"
+        
+              >
+                <CgWebsite/>
+              </a>
+            </div>
+          </div>
+
+          <div className="flex-1">
+            <div className="flex justify-between flex-wrap">
+              <h3 className="text-lg font-semibold">Development Lead</h3>
+              <span className="text-lg text-[var(--foreground)]">Dec. 2024 – Present</span>
+            </div>
+
+            <div className="flex justify-between flex-wrap">
+              <span className="text-[var(--h3)]">Eat Together</span>
+              <span className="text-[var(--h3)]">Seattle, WA</span>
+            </div>
+
+            <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+              <li>Led a team of 6 developers for a student-led startup by enhancing engagement for 500+ users.</li>
+              <li>Added 30 users by redeveloping the website, app availability selection, and developing a community Discord bot.</li>
+              <li>Reduced code review time by 20% through hands-on workshops and feedback sessions, mentoring 20+ developers in React Native(Expo), Git, and Google Cloud Platform for a cross functional cohort of 35.</li>
+            </ul>
+          </div>
+        </div>
+        <div className="flex flex-col md:flex-row gap-4 mb-6">
+          <div className="w-full md:w-28 flex-shrink-0">
+            <img
+              src="images/ETLogo.png"
+              alt="Company Logo"
+              className="w-20 h-20 object-contain mx-auto md:mx-0 rounded-lg"
+            />
+            <div className="mt-2 flex flex-row justify-center md:justify-start gap-1 text-lg">
+              <a 
+                className="flex items-center gap-1"
+                href="https://github.com/navneethd8"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaGithub/>
+              </a>
+              <a 
+                className="flex items-center gap-1"
+                href="https://github.com/navneethd8"
+                target="_blank"
+                rel="noopener noreferrer"
+        
+              >
+                <CgWebsite/>
+              </a>
+            </div>
+          </div>
+
+          <div className="flex-1">
+            <div className="flex justify-between flex-wrap">
+              <h3 className="text-lg font-semibold">Eat Together</h3>
+              <span className="text-lg text-[var(--foreground)]">Jan. 2024 – Dec. 2024</span>
+            </div>
+
+            <div className="flex justify-between flex-wrap">
+              <span className="text-[var(--h3)]">Eat Together</span>
+              <span className="text-[var(--h3)]">Seattle, WA</span>
+            </div>
+
+            <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+              <li>Enhanced media management by developing a photo gallery using React Native and Expo Image Picker.</li>
+              <li>Integrated Firebase for seamless image storage and retrieval, optimizing app performance and user interaction.</li>
+              <li>Scaled the app to 400+ users by enhancing core functionality through batch processing and load reduction.</li>
+              <li>Resolved 35+ UI bugs and 8+ critical issues, improving app stability and user experience.</li>
+
+            </ul>
+          </div>
+        </div>
+
+
       </section>
-      <section id="#skills" className="mb-4">
+      <section id="skills" className="mb-4">
         <h1 id="skills-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
           Skills
         </h1>
@@ -213,12 +381,12 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section id="#projects" className="mb-4">
+      <section id="projects" className="mb-4">
         <h1 id="skills-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
           Projects
         </h1>
       </section>
-      <section id="#resume" className="mb-4">
+      <section id="resume" className="mb-4">
         <h1 id="skills-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
           Resume
         </h1>
