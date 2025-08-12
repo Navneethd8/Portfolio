@@ -385,6 +385,62 @@ export default function Home() {
         <h1 id="skills-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
           Projects
         </h1>
+        <div className="project-card border-b border-gray-300 pb-4 mb-6">
+          <div className="flex">
+            <div className="flex-1 pr-4">
+              <div className="flex justify-between items-center mb-1">
+                <h3 className="text-lg font-bold">Project Name</h3>
+                <div className="text-lg whitespace-nowrap">
+                  Jan. 2024 – Present
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-2 mb-2">
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">React</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Firebase</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Tailwind</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Plaid API</span>
+              </div>
+              <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+                <li>Developed a budgeting and expense tracking feature integrated with Plaid API.</li>
+                <li>Implemented authentication and real-time database updates using Firebase.</li>
+                <li>Designed mobile-friendly UI using TailwindCSS with smooth animations.</li>
+              </ul>
+            </div>
+
+            {/* Right 40% */}
+            <div className="w-2/5 flex items-start justify-end">
+              <img
+                src="images/ETLogo.png"
+                alt="Project Screenshot"
+                className="w-full h-auto max-h-40 object-cover rounded-md"
+              />
+            </div>
+          </div>
+        </div>
+
+
+        <div className="project-card border-b border-gray-300 pb-4 mb-6">
+          <div className="flex justify-between items-center mb-1">
+            <h3 className="text-lg font-bold">Project Name</h3>
+            <div className="text-lg">Jan. 2024 – Present</div>
+          </div>
+
+          <div className="flex flex-wrap gap-2 mb-2">
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">React</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Firebase</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Tailwind</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Plaid API</span>
+          </div>
+
+          <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+            <li>Developed a budgeting and expense tracking feature integrated with Plaid API.</li>
+            <li>Implemented authentication and real-time database updates using Firebase.</li>
+            <li>Designed mobile-friendly UI using TailwindCSS with smooth animations.</li>
+          </ul>
+        </div>
+
+
       </section>
       <section id="resume" className="mb-4">
         <h1 id="skills-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
