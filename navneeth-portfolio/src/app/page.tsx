@@ -473,51 +473,51 @@ export default function Home() {
         </h1>
 
         <div className="project-card border-b border-gray-300 pb-4 mb-6">
-  <div className="flex flex-col-reverse md:flex-row-reverse items-start gap-4">
-    <div className="flex-1 md:pr-4">
-      <div className="flex justify-between items-center mb-1">
-        <h3 className="text-lg font-bold">Bingo on the Ave</h3>
-        <div className="text-lg whitespace-nowrap">
-          Apr. 2025
+          <div className="flex flex-col-reverse md:flex-row-reverse items-start gap-4">
+            <div className="flex-1 md:pr-4">
+              <div className="flex justify-between items-center mb-1">
+                <h3 className="text-lg font-bold">Bingo on the Ave</h3>
+                <div className="text-lg whitespace-nowrap">
+                  Apr. 2025
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-2 mb-2">
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">React</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Next</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">TypeScript</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Google Places API</span>
+              </div>
+
+              <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+                <li>Developed Bingo on the Ave, a full-stack checklist site for students visiting essential UW locations, targeting <b>40,000+ students.</b></li>
+                <li>Integrated geolocation and Google Search APIs with anti-cheating checks to track visits to <b>9</b> essential locations.</li>
+                <li>Delivered fully functional, interactive prototype during April 2025 SWECCAthon, receiving <b>3rd place</b> and positive feedback from <b>5 judges</b>.</li>
+              </ul>
+            </div>
+
+            <div className="w-full md:w-[25%] flex flex-col items-center md:items-start mb-4 md:mb-0">
+              <img
+                src="images/AveBingo.png"
+                alt="Project Screenshot"
+                className="w-full h-auto max-h-40 object-cover rounded-md"
+              />
+              <a
+                className="flex items-center gap-1 mt-2"
+                href="https://avebingo.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <CgWebsite className="text-2xl" />
+              </a>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div className="flex flex-wrap gap-2 mb-2">
-        <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">React</span>
-        <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Next</span>
-        <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">TypeScript</span>
-        <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Google Places API</span>
-      </div>
-
-      <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
-        <li>Developed Bingo on the Ave, a full-stack checklist site for students visiting essential UW locations, targeting <b>40,000+ students.</b></li>
-        <li>Integrated geolocation and Google Search APIs with anti-cheating checks to track visits to <b>9</b> essential locations.</li>
-        <li>Delivered fully functional, interactive prototype during April 2025 SWECCAthon, receiving <b>3rd place</b> and positive feedback from <b>5 judges</b>.</li>
-      </ul>
-    </div>
-
-    <div className="w-full md:w-[25%] flex flex-col items-center md:items-start mb-4 md:mb-0">
-      <img
-        src="images/AveBingo.png"
-        alt="Project Screenshot"
-        className="w-full h-auto max-h-40 object-cover rounded-md"
-      />
-      <a
-        className="flex items-center gap-1 mt-2"
-        href="https://avebingo.vercel.app/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <CgWebsite className="text-2xl" />
-      </a>
-    </div>
-  </div>
-</div>
 
 
         <div className="project-card border-b border-gray-300 pb-4 mb-6">
-          <div className="flex">
-            <div className="flex-1 pr-4">
+          <div className="flex flex-col-reverse md:flex-row items-start gap-4">
+            <div className="flex-1 md:pl-4">
               <div className="flex justify-between items-center mb-1">
                 <h3 className="text-lg font-bold">Fundit</h3>
                 <div className="text-lg whitespace-nowrap">
@@ -532,12 +532,12 @@ export default function Home() {
                 <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">TypeScript</span>
                 <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Plaid API</span>
                 <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Polygon API</span>
-
               </div>
+
               <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
                 <li>Engineered a comprehensive stock overview feature using <b>Polygon API and React Native</b>, designed to boost user engagement with portfolio management by an estimated <b>15%</b> and enhance personalized financial tracking.</li>
                 <li>Designed and maintained a robust and scalable <b>Firebase</b> backend using Firestore and Storage, ensuring seamless real-time data flow for transactions and stock portfolios, achieving instant updates.</li>
-                <li>Integrated <b>Plaid API</b> with React Native(Expo) to deliver a smooth, cross-platform mobile experience with secure financial data synchronization, targeting over <b>95%</b> successful bank account linkages and a seamless experience.</li>
+                <li>Integrated <b>Plaid API</b> with React Native (Expo) to deliver a smooth, cross-platform mobile experience with secure financial data synchronization, targeting over <b>95%</b> successful bank account linkages and a seamless experience.</li>
               </ul>
             </div>
 
