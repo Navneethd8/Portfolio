@@ -44,16 +44,20 @@ export default function Home() {
               <a href="#skills" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
                 Skills
               </a>
-              <a href="#projects" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
-                Projects
+              <a href="#projects-data" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
+                Data Projects
               </a>
+              <a href="#projects-swe" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
+                SWE Projects
+              </a>
+
               <a href="#resume" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
                 Resume
               </a>
             </nav>
 
             <div>
-              <p className="text-[var(--background)] text-xl">Let's Connect!</p>
+              <p className="text-[var(--background)] text-xl">Get In Touch</p>
             </div>
             <nav 
               className="
@@ -108,7 +112,7 @@ export default function Home() {
         </h1>
         <div className="flex flex-col md:flex-row items-start gap-6 md:items-center">
           <img
-            src="images/ETLogo.png"
+            src="images/navneeth.jpeg"
             alt="Navneeth Dhamotharan"
             className="w-40 h-40 rounded-lg object-cover flex-shrink-0 mx-auto md:mx-0"
           />
@@ -125,10 +129,10 @@ export default function Home() {
               economic applications.
             </p>
             <p className="text-l mb-4">
-              Outside the classroom, I’m the director at Eat Together, a platform
+              Outside the classroom, I’m the incoming director at <a href="https://eat-together.org/">Eat Together</a>, a platform
               helping students connect over shared meals. I also contribute to the
-              Software Engineering Career Club, building tools and community through SWECC Labs,
-              Resume Review platform and other projects to support students in becoming better
+              Software Engineering Career Club, building tools and community through an in house
+              Resume Review platform, <a href="https://labs.swecc.org/" className="text-[var(--link)]">SWECC Labs</a> and other projects to support students in becoming better
               engineers.
             </p>
             <p className="text-l mb-4">
@@ -184,8 +188,8 @@ export default function Home() {
 
             <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
               <li>Developed models to predict flight delay accuracy for <b>600,000+ rows</b> and <b>90+ features</b> with an <b>80% R<sup>2</sup></b>.</li>
-              <li>Built data and ML pipelines using AWS S3, Lambda, and Step Functions to perform ETL and schema design integrating data from 5+ sources make accurate predictions.</li>
-              <li>Enhanced model prediction by <b>5%</b> by performing EDA on <b> 50+</b> numerical features</li>
+              <li>Enhanced model prediction by <b>8%</b> by performing EDA on <b> 50+</b> numerical features.</li>
+              <li>Performed Experiments on <b>3 weather APIs</b> to find the data optimal for the model.</li>
             </ul>
           </div>
         </div>
@@ -199,7 +203,7 @@ export default function Home() {
             <div className="mt-2 flex flex-row justify-center md:justify-start gap-1 text-lg">
               <a 
                 className="flex items-center gap-1"
-                href="https://github.com/navneethd8"
+                href="https://github.com/swecc-uw"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -207,7 +211,7 @@ export default function Home() {
               </a>
               <a 
                 className="flex items-center gap-1"
-                href="https://github.com/navneethd8"
+                href="https://swecc.org/"
                 target="_blank"
                 rel="noopener noreferrer"
         
@@ -244,15 +248,7 @@ export default function Home() {
             <div className="mt-2 flex flex-row justify-center md:justify-start gap-1 text-lg">
               <a 
                 className="flex items-center gap-1"
-                href="https://github.com/navneethd8"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaGithub/>
-              </a>
-              <a 
-                className="flex items-center gap-1"
-                href="https://github.com/navneethd8"
+                href="https://www.eat-together.org/"
                 target="_blank"
                 rel="noopener noreferrer"
         
@@ -274,9 +270,9 @@ export default function Home() {
             </div>
 
             <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
-              <li>Led a team of 6 developers for a student-led startup by enhancing engagement for 500+ users.</li>
-              <li>Added 30 users by redeveloping the website, app availability selection, and developing a community Discord bot.</li>
-              <li>Reduced code review time by 20% through hands-on workshops and feedback sessions, mentoring 20+ developers in React Native(Expo), Git, and Google Cloud Platform for a cross functional cohort of 35.</li>
+              <li>Led a team of <b>6 developers</b> for a student-led startup by enhancing engagement for <b>500+ users</b>.</li>
+              <li>Added <b>30 users</b> by redeveloping the website, app availability selection, and developing a community Discord bot.</li>
+              <li>Reduced code review time by <b>20%</b> through hands-on workshops and feedback sessions, mentoring <b>20+</b> developers in <b>React Native(Expo), Git, and Google Cloud Platform</b> for a cross functional developmental cohort of <b>35</b>.</li>
             </ul>
           </div>
         </div>
@@ -290,15 +286,7 @@ export default function Home() {
             <div className="mt-2 flex flex-row justify-center md:justify-start gap-1 text-lg">
               <a 
                 className="flex items-center gap-1"
-                href="https://github.com/navneethd8"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaGithub/>
-              </a>
-              <a 
-                className="flex items-center gap-1"
-                href="https://github.com/navneethd8"
+                href="https://www.eat-together.org/"
                 target="_blank"
                 rel="noopener noreferrer"
         
@@ -320,10 +308,10 @@ export default function Home() {
             </div>
 
             <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
-              <li>Enhanced media management by developing a photo gallery using React Native and Expo Image Picker.</li>
-              <li>Integrated Firebase for seamless image storage and retrieval, optimizing app performance and user interaction.</li>
-              <li>Scaled the app to 400+ users by enhancing core functionality through batch processing and load reduction.</li>
-              <li>Resolved 35+ UI bugs and 8+ critical issues, improving app stability and user experience.</li>
+              <li>Enhanced media management by developing a photo gallery using <b>React Native and Expo Image Picker</b>.</li>
+              <li><b>Integrated Firebase</b> for seamless image storage and retrieval, optimizing app performance and user interaction.</li>
+              <li>Scaled the app to <b>400+</b> users by enhancing core functionality through batch processing and load reduction.</li>
+              <li>Resolved <b>35+ bugs</b> and <b>8+ critical issues</b>, improving app stability and user experience.</li>
 
             </ul>
           </div>
@@ -381,176 +369,11 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section id="projects" className="mb-4">
-        <h1 id="skills-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
-          Projects
+      <section id="projects-data" className="mb-4">
+        <h1 id="sprojects-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
+          Data Projects
         </h1>
         
-        <div className="project-card border-b border-gray-300 pb-4 mb-6">
-          <div className="flex">
-            <div className="flex-1 pr-4">
-              <div className="flex justify-between items-center mb-1">
-                <h3 className="text-lg font-bold">SAT Decoded</h3>
-                <div className="text-lg whitespace-nowrap">
-                  Jan. 2024 – Present
-                </div>
-              </div>
-
-              <div className="flex flex-wrap gap-2 mb-2">
-                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">React</span>
-                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Firebase</span>
-                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Tailwind</span>
-                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Plaid API</span>
-              </div>
-              <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
-                <li>Developed a budgeting and expense tracking feature integrated with Plaid API.</li>
-                <li>Implemented authentication and real-time database updates using Firebase.</li>
-                <li>Designed mobile-friendly UI using TailwindCSS with smooth animations.</li>
-              </ul>
-            </div>
-
-            <div className="w-2/5 flex items-start justify-end">
-              <img
-                src="images/ETLogo.png"
-                alt="Project Screenshot"
-                className="w-full h-auto max-h-40 object-cover rounded-md"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="project-card border-b border-gray-300 pb-4 mb-6">
-          <div className="flex">
-            <div className="flex-1 pr-4">
-              <div className="flex justify-between items-center mb-1">
-                <h3 className="text-lg font-bold">Discord Bot</h3>
-                <div className="text-lg whitespace-nowrap">
-                  Jan. 2024 – Present
-                </div>
-              </div>
-
-              <div className="flex flex-wrap gap-2 mb-2">
-                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">React</span>
-                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Firebase</span>
-                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Tailwind</span>
-                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Plaid API</span>
-              </div>
-              <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
-                <li>Developed a budgeting and expense tracking feature integrated with Plaid API.</li>
-                <li>Implemented authentication and real-time database updates using Firebase.</li>
-                <li>Designed mobile-friendly UI using TailwindCSS with smooth animations.</li>
-              </ul>
-            </div>
-
-            <div className="w-2/5 flex items-start justify-end">
-              <img
-                src="images/ETLogo.png"
-                alt="Project Screenshot"
-                className="w-full h-auto max-h-40 object-cover rounded-md"
-              />
-            </div>
-          </div>
-        </div>
-        <div className="project-card border-b border-gray-300 pb-4 mb-6">
-          <div className="flex">
-            <div className="flex-1 pr-4">
-              <div className="flex justify-between items-center mb-1">
-                <h3 className="text-lg font-bold">Bingo on the Ave</h3>
-                <div className="text-lg whitespace-nowrap">
-                  Jan. 2024 – Present
-                </div>
-              </div>
-
-              <div className="flex flex-wrap gap-2 mb-2">
-                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">React</span>
-                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Firebase</span>
-                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Tailwind</span>
-                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Plaid API</span>
-              </div>
-              <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
-                <li>Developed a budgeting and expense tracking feature integrated with Plaid API.</li>
-                <li>Implemented authentication and real-time database updates using Firebase.</li>
-                <li>Designed mobile-friendly UI using TailwindCSS with smooth animations.</li>
-              </ul>
-            </div>
-
-            <div className="w-2/5 flex items-start justify-end">
-              <img
-                src="images/ETLogo.png"
-                alt="Project Screenshot"
-                className="w-full h-auto max-h-40 object-cover rounded-md"
-              />
-            </div>
-          </div>
-        </div>
-        <div className="project-card border-b border-gray-300 pb-4 mb-6">
-          <div className="flex">
-            <div className="flex-1 pr-4">
-              <div className="flex justify-between items-center mb-1">
-                <h3 className="text-lg font-bold">Mentura</h3>
-                <div className="text-lg whitespace-nowrap">
-                  Jan. 2024 – Present
-                </div>
-              </div>
-
-              <div className="flex flex-wrap gap-2 mb-2">
-                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">React</span>
-                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Firebase</span>
-                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Tailwind</span>
-                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Plaid API</span>
-              </div>
-              <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
-                <li>Developed a budgeting and expense tracking feature integrated with Plaid API.</li>
-                <li>Implemented authentication and real-time database updates using Firebase.</li>
-                <li>Designed mobile-friendly UI using TailwindCSS with smooth animations.</li>
-              </ul>
-            </div>
-
-            <div className="w-2/5 flex items-start justify-end">
-              <img
-                src="images/ETLogo.png"
-                alt="Project Screenshot"
-                className="w-full h-auto max-h-40 object-cover rounded-md"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="project-card border-b border-gray-300 pb-4 mb-6">
-          <div className="flex">
-            <div className="flex-1 pr-4">
-              <div className="flex justify-between items-center mb-1">
-                <h3 className="text-lg font-bold">Fundit</h3>
-                <div className="text-lg whitespace-nowrap">
-                  Jan. 2024 – Present
-                </div>
-              </div>
-
-              <div className="flex flex-wrap gap-2 mb-2">
-                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">React</span>
-                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Firebase</span>
-                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Tailwind</span>
-                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Plaid API</span>
-              </div>
-              <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
-                <li>Developed a budgeting and expense tracking feature integrated with Plaid API.</li>
-                <li>Implemented authentication and real-time database updates using Firebase.</li>
-                <li>Designed mobile-friendly UI using TailwindCSS with smooth animations.</li>
-              </ul>
-            </div>
-
-            <div className="w-2/5 flex items-start justify-end">
-              <img
-                src="images/ETLogo.png"
-                alt="Project Screenshot"
-                className="w-full h-auto max-h-40 object-cover rounded-md"
-              />
-            </div>
-          </div>
-        </div>
-
-
-
         <div className="project-card border-b border-gray-300 pb-4 mb-6">
           <div className="flex justify-between items-center mb-1">
             <h3 className="text-lg font-bold">Stock Market Analysis</h3>
@@ -567,7 +390,7 @@ export default function Home() {
           </div>
 
           <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
-            <li>Developing a predictive model using the last 10 years of SPY data for efficiency.</li>
+            <li>Developing a predictive model using the last <b>10 years</b> of SPY data for efficiency.</li>
             <li>Extending the model for real-time predictions via a BI dashboard and live data stream.</li>
           </ul>
         </div>
@@ -591,9 +414,9 @@ export default function Home() {
           </div>
 
           <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
-            <li>Processed 400K+ IMF records with Pandas/GeoPandas, integrating fiscal and balance-of-payments data, and built an interactive global economic map using Folium.</li>
-            <li>Generated 6 trend charts with Seaborn/Matplotlib to visualize macroeconomic indicators and support inflation prediction insights.</li>
-            <li>Improved prediction accuracy by 20%, reducing RMSE from 2.899 to 2.309 and maintaining MAE under 1.21 through Random Forest optimization, hyperparameter tuning, and data validation.</li>
+            <li>Processed <b>400K+</b> IMF records with Pandas/GeoPandas, integrating fiscal and balance-of-payments data, and built an interactive global economic map using Folium.</li>
+            <li>Generated <b>6</b> trend charts with Seaborn/Matplotlib to visualize macroeconomic indicators and support inflation prediction insights.</li>
+            <li>Improved prediction accuracy by <b>20%</b>, reducing <b>RMSE from 2.899</b> to <b>2.309</b> and maintaining <b>MAE under 1.21</b> through Random Forest optimization, hyperparameter tuning, and data validation.</li>
           </ul>
         </div>
 
@@ -617,13 +440,13 @@ export default function Home() {
 
           <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
             <li>Awarded <b>3rd</b> place for <b>Best Machine Learning Model</b> in the 6th DubsTech Datathon.</li>
-            <li>Predicted avgerage costs for <b>1.2M healthcare records</b> using Pandas and Scikit-learn, achieving 99% data retention.</li>
-            <li>Engineered features with Scikit-learn’s LabelEncoder, transforming 4 categorical variables for model readiness.</li>
-            <li>Tuned hyperparameters for predictive modeling using Scikit-learn and Optuna, improving prediction accuracy.</li>
+            <li>Predicted avgerage costs for <b>1.2M healthcare records</b> using Pandas and Scikit-learn, with <b>99% data retention</b>.</li>
+            <li>Engineered features with Scikit-learn’s LabelEncoder, transforming <b>4 categorical variables</b> for model readiness.</li>
+            <li> Improved model accuracy by <b>3%</b> for predictive modelling by tuning hyperparameters using Optuna.</li>
           </ul>
         </div>
 
-        <div className="project-card border-b border-gray-300 pb-4 mb-6">
+        <div className="project-card pb-4 mb-6">
           <div className="flex justify-between items-center mb-1">
             <h3 className="text-lg font-bold">March Madness vs. Regular Season</h3>
             <div className="text-lg">Jan 2025. - Mar. 2025</div>
@@ -638,15 +461,186 @@ export default function Home() {
           </div>
 
           <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
-            <li>Analyzed 20 years of men's college basketball free throws across 300K+ rows from three datasets.</li>
-            <li>Calculated 0.25 correlation between regular season free throws and NCAA tournament wins.</li>
-            <li>Merged datasets, created 10+ analysis columns, cleaned missing values, and visualized success rates.</li>
+            <li>Analyzed <b>20 years</b> of men's college basketball free throws across <b>300K+ rows</b> from three datasets.</li>
+            <li>Calculated <b>0.25</b> correlation between regular season free throws and NCAA tournament wins.</li>
+            <li>Merged datasets, created <b>10+</b> analysis columns, cleaned missing values, and visualized success rates.</li>
           </ul>
         </div>
 
       </section>
+      <section id="projects-swe">
+        <h1 id="resume-subheading" className="relative text-2xl font-bold mb-6 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
+          Software Engineering Projects
+        </h1>
+
+        <div className="project-card border-b border-gray-300 pb-4 mb-6">
+  <div className="flex flex-col-reverse md:flex-row-reverse items-start gap-4">
+    <div className="flex-1 md:pr-4">
+      <div className="flex justify-between items-center mb-1">
+        <h3 className="text-lg font-bold">Bingo on the Ave</h3>
+        <div className="text-lg whitespace-nowrap">
+          Apr. 2025
+        </div>
+      </div>
+
+      <div className="flex flex-wrap gap-2 mb-2">
+        <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">React</span>
+        <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Next</span>
+        <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">TypeScript</span>
+        <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Google Places API</span>
+      </div>
+
+      <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+        <li>Developed Bingo on the Ave, a full-stack checklist site for students visiting essential UW locations, targeting <b>40,000+ students.</b></li>
+        <li>Integrated geolocation and Google Search APIs with anti-cheating checks to track visits to <b>9</b> essential locations.</li>
+        <li>Delivered fully functional, interactive prototype during April 2025 SWECCAthon, receiving <b>3rd place</b> and positive feedback from <b>5 judges</b>.</li>
+      </ul>
+    </div>
+
+    <div className="w-full md:w-[25%] flex flex-col items-center md:items-start mb-4 md:mb-0">
+      <img
+        src="images/AveBingo.png"
+        alt="Project Screenshot"
+        className="w-full h-auto max-h-40 object-cover rounded-md"
+      />
+      <a
+        className="flex items-center gap-1 mt-2"
+        href="https://avebingo.vercel.app/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <CgWebsite className="text-2xl" />
+      </a>
+    </div>
+  </div>
+</div>
+
+
+        <div className="project-card border-b border-gray-300 pb-4 mb-6">
+          <div className="flex">
+            <div className="flex-1 pr-4">
+              <div className="flex justify-between items-center mb-1">
+                <h3 className="text-lg font-bold">Fundit</h3>
+                <div className="text-lg whitespace-nowrap">
+                  Oct. 2024 – Jun. 2025
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-2 mb-2">
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">React Native</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Expo</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Firebase</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">TypeScript</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Plaid API</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Polygon API</span>
+
+              </div>
+              <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+                <li>Engineered a comprehensive stock overview feature using <b>Polygon API and React Native</b>, designed to boost user engagement with portfolio management by an estimated <b>15%</b> and enhance personalized financial tracking.</li>
+                <li>Designed and maintained a robust and scalable <b>Firebase</b> backend using Firestore and Storage, ensuring seamless real-time data flow for transactions and stock portfolios, achieving instant updates.</li>
+                <li>Integrated <b>Plaid API</b> with React Native(Expo) to deliver a smooth, cross-platform mobile experience with secure financial data synchronization, targeting over <b>95%</b> successful bank account linkages and a seamless experience.</li>
+              </ul>
+            </div>
+
+            <div className="w-full md:w-[25%] flex flex-col items-center md:items-start mb-4 md:mb-0">
+              <img
+                src="images/FundIt.png"
+                alt="Project Screenshot"
+                className="w-full h-auto max-h-40 object-cover rounded-md"
+              />
+              <a
+                className="flex items-center gap-1 mt-2"
+                href="https://www.eat-together.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <CgWebsite className="text-2xl" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="project-card border-b border-gray-300 pb-4 mb-6">
+          <div className="flex flex-col-reverse md:flex-row-reverse items-start gap-4">
+            <div className="flex-1 md:pr-4">
+              <div className="flex justify-between items-center mb-1">
+                <h3 className="text-lg font-bold">Mentura</h3>
+                <div className="text-lg whitespace-nowrap">
+                  Oct. 2024
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-2 mb-2">
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">React</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Next</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">AWS Amplify</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Perplexity API</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">YouTube API</span>
+              </div>
+
+              <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+                <li>Developed Mentura, a full-stack<b> AWS Amplify</b> platform potentially serving <b>3,000+</b> UW STEM freshmen.</li>
+                <li>Integrated <b>YouTube API</b> to deliver <b>15</b> curated videos per concept, improving study material accessibility.</li>
+                <li>Built AI-powered concept overviews via <b>Perplexity API</b> and delivered scalable prototype in <b>48 hours</b> at DubHacks.</li>
+              </ul>
+            </div>
+
+            <div className="w-full md:w-[25%] flex flex-col items-center md:items-start mb-4 md:mb-0">
+              <img
+                src="images/Mentura.png"
+                alt="Project Screenshot"
+                className="w-full h-auto max-h-40 object-cover rounded-md"
+              />
+              <a
+                className="flex items-center gap-1 mt-2"
+                href="https://www.eat-together.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <CgWebsite className="text-2xl" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="project-card border-b border-gray-300 pb-4 mb-6">
+          <div className="flex flex-col-reverse md:flex-row items-start gap-4">
+            <div className="flex-1 md:pl-4">
+              <div className="flex justify-between items-center mb-1">
+                <h3 className="text-lg font-bold">SAT Decoded</h3>
+                <div className="text-lg whitespace-nowrap">
+                  Jun. 2023 – Sep. 2024
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-2 mb-2">
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">HTML</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">CSS</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">SailsJS</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">PostgreSQL</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Sendgrid API</span>
+              </div>
+
+              <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+                <li>Created an open-source website targeting <b>800+</b> students preparing for the SAT for my IB Diploma.</li>
+                <li>Improved accessibility to SAT resources through interactive quizzes and resource uploads.</li>
+                <li>Built using <b>HTML, CSS, PostgreSQL, and JavaScript</b> with <b>SailsJS, SendGrid API</b> for email reporting.</li>
+              </ul>
+            </div>
+
+            <div className="w-full md:w-[25%] flex flex-col items-center md:items-start mb-4 md:mb-0">
+              <img
+                src="images/SATDecoded.png"
+                alt="Project Screenshot"
+                className="w-full h-auto max-h-40 object-cover rounded-md"
+              />
+            </div>
+          </div>
+        </div>
+
+
+      </section>
       <section id="resume" className="mb-4">
-        <h1 id="skills-subheading" className="relative text-2xl font-bold mb-6 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
+        <h1 id="resume-subheading" className="relative text-2xl font-bold mb-6 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
           Resume
         </h1>
         <h2 className="text-xl font-semibold mb-6 text-center">

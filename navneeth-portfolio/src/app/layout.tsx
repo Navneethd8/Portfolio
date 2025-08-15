@@ -23,10 +23,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {children}
-      </body>
-    </html>
+  <html lang="en">
+    <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      {/* Background overlay (optional) */}
+      <div className="bg-overlay"></div>
+      
+      {/* Your actual page content */}
+      {children}
+    </body>
+  </html>
   );
 }
