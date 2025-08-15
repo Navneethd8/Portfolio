@@ -1,4 +1,3 @@
-import Link from "next/link";
 import SiteLayout from "@/components/siteLayout"
 import { FaLinkedin,FaGithub,FaXTwitter } from 'react-icons/fa6';
 import { CgWebsite } from "react-icons/cg";
@@ -119,24 +118,24 @@ export default function Home() {
 
           <div className="flex-1">
             <h2 className="text-xl font-semibold mb-4">
-              Hi! I'm Navneeth
+              Hi! I&apos;m Navneeth
             </h2>
             <p className="text-l mb-4">
-              I'm currently a Bachelor's student at the University of Washington,
+              I&apos;m currently a Bachelor&apos;s student at the University of Washington,
               specializing in Data Science under the iSchool, with a second degree in
               Economics. My primary interests lie in Software and Data Engineering,
               with a growing focus on the intersection of Machine Learning and
               economic applications.
             </p>
             <p className="text-l mb-4">
-              Outside the classroom, I’m the incoming director at <a href="https://eat-together.org/">Eat Together</a>, a platform
+              Outside the classroom, I&apos;m the incoming director at <a href="https://eat-together.org/">Eat Together</a>, a platform
               helping students connect over shared meals. I also contribute to the
               Software Engineering Career Club, building tools and community through an in house
               Resume Review platform, <a href="https://labs.swecc.org/" className="text-[var(--link)]">SWECC Labs</a> and other projects to support students in becoming better
               engineers.
             </p>
             <p className="text-l mb-4">
-              I'm currently developing a stock market prediction platform that brings
+              I&apos;m currently developing a stock market prediction platform that brings
               together software, data pipelines, and ML modeling—culminating in an
               interactive dashboard to visualize forecasts and trends.
             </p>
@@ -441,7 +440,7 @@ export default function Home() {
           <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
             <li>Awarded <b>3rd</b> place for <b>Best Machine Learning Model</b> in the 6th DubsTech Datathon.</li>
             <li>Predicted avgerage costs for <b>1.2M healthcare records</b> using Pandas and Scikit-learn, with <b>99% data retention</b>.</li>
-            <li>Engineered features with Scikit-learn’s LabelEncoder, transforming <b>4 categorical variables</b> for model readiness.</li>
+            <li>Engineered features with Scikit-learn&apos;s LabelEncoder, transforming <b>4 categorical variables</b> for model readiness.</li>
             <li> Improved model accuracy by <b>3%</b> for predictive modelling by tuning hyperparameters using Optuna.</li>
           </ul>
         </div>
@@ -461,7 +460,7 @@ export default function Home() {
           </div>
 
           <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
-            <li>Analyzed <b>20 years</b> of men's college basketball free throws across <b>300K+ rows</b> from three datasets.</li>
+            <li>Analyzed <b>20 years</b> of men&apos;s college basketball free throws across <b>300K+ rows</b> from three datasets.</li>
             <li>Calculated <b>0.25</b> correlation between regular season free throws and NCAA tournament wins.</li>
             <li>Merged datasets, created <b>10+</b> analysis columns, cleaned missing values, and visualized success rates.</li>
           </ul>
@@ -548,14 +547,14 @@ export default function Home() {
                 alt="Project Screenshot"
                 className="w-full h-auto max-h-40 object-cover rounded-md"
               />
-              <a
+              {/* <a
                 className="flex items-center gap-1 mt-2"
                 href="https://www.eat-together.org/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <CgWebsite className="text-2xl" />
-              </a>
+              </a> */}
             </div>
           </div>
         </div>
@@ -593,7 +592,7 @@ export default function Home() {
               />
               <a
                 className="flex items-center gap-1 mt-2"
-                href="https://www.eat-together.org/"
+                href="https://main.dhulrjtlxnvx6.amplifyapp.com/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
