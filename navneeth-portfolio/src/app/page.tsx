@@ -1,208 +1,660 @@
-import Link from "next/link";
+import SiteLayout from "@/components/siteLayout"
+import { FaLinkedin,FaGithub,FaXTwitter } from 'react-icons/fa6';
+import { CgWebsite } from "react-icons/cg";
+import { MdEmail } from "react-icons/md";
+
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">  
-      <header>
-        <div className="pt-[200]">
-          <h1 className="text-center font-semibold" style={{fontSize:'80px'}}>
-            Turning data into insights,
-          </h1>
-          <h1 className="indent-18" style={{fontSize:'80px'}}>
-              and code into solutions.
-          </h1>
+    <SiteLayout
+      sidebar={
+        <div className="flex flex-col h-full w-full">
+          <div className="flex-shrink-0 mb-4">
+              <h1 className="text-2xl font-semibold mb-2 text-[var(--background)]">Navneeth Dhamotharan</h1>
+              <p className="text-[var(--background)] text-xl">Aspiring Data / Software Engineer</p>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <nav 
+              className="
+                  flex
+                  gap-2
+                  flex-row 
+                  overflow-x-auto 
+                  whitespace-nowrap 
+                  
+                  lg:flex-col 
+                  lg:overflow-visible 
+                  lg:whitespace-normal
+                  lg:pr-2
+                  lg:flex-grow
+
+                  "
+            >
+              <a href="#about" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
+                About
+              </a>
+              <a href="#education" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
+                Education
+              </a>
+              <a href="#experience" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
+                Experience
+              </a>
+              <a href="#skills" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
+                Skills
+              </a>
+              <a href="#projects-data" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
+                Data Projects
+              </a>
+              <a href="#projects-swe" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
+                SWE Projects
+              </a>
+
+              <a href="#resume" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
+                Resume
+              </a>
+            </nav>
+
+            <div>
+              <p className="text-[var(--background)] text-xl">Get In Touch</p>
+            </div>
+            <nav 
+              className="
+                  flex
+                  gap-2
+                  justify-center
+                  flex-row 
+                  overflow-x-auto 
+                  whitespace-nowrap 
+
+                  
+                  lg:flex-col 
+                  lg:overflow-visible 
+                  lg:whitespace-normal
+                  lg:pr-2
+                  lg:flex-grow
+
+                  "
+            >
+              <a href="mailto:nd17@uw.edu" className="px-4 py-1 text-xl flex flex-row items-center gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
+                <MdEmail />
+                <span className="hidden lg:inline">nd17@uw.edu</span>
+              </a>
+
+              <a href="https://www.linkedin.com/in/navneethd" target="_blank" rel="noopener noreferrer" className="px-4 py-1 text-xl flex flex-row items-center gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
+                <FaLinkedin />
+                <span className="hidden lg:inline">LinkedIn</span>
+              </a>
+
+              <a href="https://github.com/navneethd8" target="_blank" rel="noopener noreferrer" className="px-4 py-1 text-xl flex flex-row items-center gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
+                <FaGithub />
+                <span className="hidden lg:inline">GitHub</span>
+              </a>
+
+              <a href="https://navneeth.vercel.app" target="_blank" rel="noopener noreferrer" className="px-4 py-1 text-xl flex flex-row items-center gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
+                <CgWebsite />
+                <span className="hidden lg:inline">Website</span>
+              </a>
+
+              <a href="https://x.com/NavneethDG" target="_blank" rel="noopener noreferrer" className="px-4 py-1 text-xl flex flex-row items-center gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
+                <FaXTwitter />
+                <span className="hidden lg:inline">Twitter / X</span>
+              </a>
+            </nav>
+          </div>
         </div>
-      </header>
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <div className="items-center justify-center pt-[200]">
-          <h2 className = "text-left" style={{fontSize:'40px'}}>{
-          "Hey! I'm Navneeth Dhamotharan, An aspiring Data Scientist @ The University of Washington pursuing a double degree in Informatics: Data Science and Economics."
-          }</h2>
-          <hr className="my-12 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
-          <h1 id="work_Experience"className="text-center justify-center font-semibold pt-[15] pb-[15]" style={{fontSize:'50px'}}>
-            Work Experience
-          </h1>
+      }
+    >
+      <section id="about" className="mb-4">
+        <h1 id="about-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[2px] after:w-12 after:bg-[var(--foreground)] after:mt-2">
+          About Me !
+        </h1>
+        <div className="flex flex-col md:flex-row items-start gap-6 md:items-center">
+          <img
+            src="images/navneeth.jpeg"
+            alt="Navneeth Dhamotharan"
+            className="w-40 h-40 rounded-lg object-cover flex-shrink-0 mx-auto md:mx-0"
+          />
+
+          <div className="flex-1">
+            <h2 className="text-xl font-semibold mb-4">
+              Hi! I&apos;m Navneeth
+            </h2>
+            <p className="text-l mb-4">
+              I&apos;m currently a Bachelor&apos;s student at the University of Washington,
+              specializing in Data Science under the iSchool, with a second degree in
+              Economics. My primary interests lie in Software and Data Engineering,
+              with a growing focus on the intersection of Machine Learning and
+              economic applications.
+            </p>
+            <p className="text-l mb-4">
+              Outside the classroom, I&apos;m the incoming director at <a href="https://eat-together.org/">Eat Together</a>, a platform
+              helping students connect over shared meals. I also contribute to the
+              Software Engineering Career Club, building tools and community through an in house
+              Resume Review platform, <a href="https://labs.swecc.org/" className="text-[var(--link)]">SWECC Labs</a> and other projects to support students in becoming better
+              engineers.
+            </p>
+            <p className="text-l mb-4">
+              I&apos;m currently developing a stock market prediction platform that brings
+              together software, data pipelines, and ML modeling—culminating in an
+              interactive dashboard to visualize forecasts and trends.
+            </p>
+          </div>
         </div>
-        <div className="bg-gray-100 rounded-2xl p-6 shadow-md w-[1000px] h-[550px] mx-auto">
-          <h2 className="text-xl font-semibold text-gray-700 text-center mb-4" style={{ fontSize: '40px' }}>
-              Eat Together
-          </h2>
-          <div className="flex flex-row items-start space-x-5">
-            <div className="w-[500px] h-[430px] bg-white rounded-xl shadow-md">
-              <div style={{color:'black',fontSize:18,}} className='p-[10px]'>
-                <h1 style={{color:'grey',fontSize:18}}> Languages: React Native (JavaScript), Google Cloud Platforms(Firebase Firestore and Google Cloud Functions), Python </h1>
-                <p className='pt-[10px]'>
-                  {"As a Software Engineer and Development Lead at Eat Together, where I’ve grown through multiple roles, from Project Manager to Core Team Developer, I optimize user experience for nearly 500 users while mentoring 15+ developers in React Native, Firebase, and Git. My work includes refactoring the recommendation system to boost engagement, enhancing the photo gallery with real time updates, and resolving critical UI issues. With experience in development and project management, Ive led cross functional teams, streamlined workflows, and driven impactful features."}
-                </p>
+      </section>
+      <section id="education" className="mb-4">
+        <h1 id="education-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
+          Education
+        </h1>
+        <h2 className="text-xl font-semibold mb-1">
+          University of Washington, Seattle
+        </h2>
+        <div className="flex flex-wrap justify-between items-center text-lg text-[var(--sidebar)] mb-2">
+          <span>B.S. Informatics: Data Science &nbsp; + &nbsp; B.A. Economics (GPA: 3.54)</span>
+          <span className="text-lg italic text-[var(--sidebar)]">
+            Sep 2023 – Jun 2027 (Expected)
+          </span>
+        </div>
+        <p className="leading-relaxed">
+          <span className="font-semibold">Relevant Coursework:</span> Data Structures and Algorithms, 
+          Introduction to Data Science, Statistical Analysis in R, Databases, Econometrics, Object Oriented Programming,
+          Intermediate Data Programming
+        </p>
+      </section>
+      <section id="experience" className="mb-4">
+        <h1 id="experience-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
+          Experience
+        </h1>
+        <div className="flex flex-col md:flex-row gap-4 mb-6">
+          <div className="w-full md:w-28 flex-shrink-0">
+            <img
+              src="images/flydubai.avif"
+              alt="Company Logo"
+              className="w-20 h-20 object-contain mx-auto md:mx-0 rounded-lg"
+            />
+          </div>
+
+          <div className="flex-1">
+            <div className="flex justify-between flex-wrap">
+              <h3 className="text-lg font-semibold">Data Engineer Intern</h3>
+              <span className="text-lg text-[var(--foreground)]">Jun. 2025 – Present</span>
+            </div>
+
+            <div className="flex justify-between flex-wrap">
+              <span className="text-[var(--h3)]">FlyDubai</span>
+              <span className="text-[var(--h3)]">Dubai, UAE</span>
+            </div>
+
+            <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+              <li>Developed models to predict flight delay accuracy for <b>600,000+ rows</b> and <b>90+ features</b> with an <b>80% R<sup>2</sup></b>.</li>
+              <li>Enhanced model prediction by <b>8%</b> by performing EDA on <b> 50+</b> numerical features.</li>
+              <li>Performed Experiments on <b>3 weather APIs</b> to find the data optimal for the model.</li>
+            </ul>
+          </div>
+        </div>
+        <div className="flex flex-col md:flex-row gap-4 mb-6">
+          <div className="w-full md:w-28 flex-shrink-0">
+            <img
+              src="images/swecc.jpg"
+              alt="Company Logo"
+              className="w-20 h-20 object-contain mx-auto md:mx-0 rounded-lg"
+            />
+            <div className="mt-2 flex flex-row justify-center md:justify-start gap-1 text-lg">
+              <a 
+                className="flex items-center gap-1"
+                href="https://github.com/swecc-uw"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaGithub/>
+              </a>
+              <a 
+                className="flex items-center gap-1"
+                href="https://swecc.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+        
+              >
+                <CgWebsite/>
+              </a>
+            </div>
+          </div>
+
+          <div className="flex-1">
+            <div className="flex justify-between flex-wrap">
+              <h3 className="text-lg font-semibold">Software Engineering Officer</h3>
+              <span className="text-lg text-[var(--foreground)]">Apr. 2024 – Present</span>
+            </div>
+
+            <div className="flex justify-between flex-wrap">
+              <span className="text-[var(--h3)]">Software Engineering Career Club</span>
+              <span className="text-[var(--h3)]">Seattle, WA</span>
+            </div>
+
+            <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+              <li>Led SWECC Labs, mentoring <b>35+ students</b> to open-source development for career growth.</li>
+              <li>Improved the job search process for <b>2000+</b> aspiring software engineers by developing and enhancing platforms across <b>38+</b> repositories.</li>
+            </ul>
+          </div>
+        </div>
+        <div className="flex flex-col md:flex-row gap-4 mb-6">
+          <div className="w-full md:w-28 flex-shrink-0">
+            <img
+              src="images/ETLogo.png"
+              alt="Company Logo"
+              className="w-20 h-20 object-contain mx-auto md:mx-0 rounded-lg"
+            />
+            <div className="mt-2 flex flex-row justify-center md:justify-start gap-1 text-lg">
+              <a 
+                className="flex items-center gap-1"
+                href="https://www.eat-together.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+        
+              >
+                <CgWebsite/>
+              </a>
+            </div>
+          </div>
+
+          <div className="flex-1">
+            <div className="flex justify-between flex-wrap">
+              <h3 className="text-lg font-semibold">Development Lead</h3>
+              <span className="text-lg text-[var(--foreground)]">Dec. 2024 – Present</span>
+            </div>
+
+            <div className="flex justify-between flex-wrap">
+              <span className="text-[var(--h3)]">Eat Together</span>
+              <span className="text-[var(--h3)]">Seattle, WA</span>
+            </div>
+
+            <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+              <li>Led a team of <b>6 developers</b> for a student-led startup by enhancing engagement for <b>500+ users</b>.</li>
+              <li>Added <b>30 users</b> by redeveloping the website, app availability selection, and developing a community Discord bot.</li>
+              <li>Reduced code review time by <b>20%</b> through hands-on workshops and feedback sessions, mentoring <b>20+</b> developers in <b>React Native(Expo), Git, and Google Cloud Platform</b> for a cross functional developmental cohort of <b>35</b>.</li>
+            </ul>
+          </div>
+        </div>
+        <div className="flex flex-col md:flex-row gap-4 mb-6">
+          <div className="w-full md:w-28 flex-shrink-0">
+            <img
+              src="images/ETLogo.png"
+              alt="Company Logo"
+              className="w-20 h-20 object-contain mx-auto md:mx-0 rounded-lg"
+            />
+            <div className="mt-2 flex flex-row justify-center md:justify-start gap-1 text-lg">
+              <a 
+                className="flex items-center gap-1"
+                href="https://www.eat-together.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+        
+              >
+                <CgWebsite/>
+              </a>
+            </div>
+          </div>
+
+          <div className="flex-1">
+            <div className="flex justify-between flex-wrap">
+              <h3 className="text-lg font-semibold">Eat Together</h3>
+              <span className="text-lg text-[var(--foreground)]">Jan. 2024 – Dec. 2024</span>
+            </div>
+
+            <div className="flex justify-between flex-wrap">
+              <span className="text-[var(--h3)]">Eat Together</span>
+              <span className="text-[var(--h3)]">Seattle, WA</span>
+            </div>
+
+            <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+              <li>Enhanced media management by developing a photo gallery using <b>React Native and Expo Image Picker</b>.</li>
+              <li><b>Integrated Firebase</b> for seamless image storage and retrieval, optimizing app performance and user interaction.</li>
+              <li>Scaled the app to <b>400+</b> users by enhancing core functionality through batch processing and load reduction.</li>
+              <li>Resolved <b>35+ bugs</b> and <b>8+ critical issues</b>, improving app stability and user experience.</li>
+
+            </ul>
+          </div>
+        </div>
+
+
+      </section>
+      <section id="skills" className="mb-4">
+        <h1 id="skills-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
+          Skills
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h3 className="text-sm font-bold text-[var(--foreground)] uppercase mb-3">Languages</h3>
+            <div className="flex flex-wrap gap-2">
+              {["Java", "Python", "SQL(Postgres)", "JavaScript", "HTML", "CSS", "R", "React", "Node.js"].map((lang) => (
+                <span
+                  key={lang}
+                  className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-3 py-1 rounded-md text-sm font-mono"
+                >
+                  {lang}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3 className="text-sm font-bold text-[var(--foreground)] uppercase mb-3"> Tools & Frameworks</h3>
+            <div className="flex flex-wrap gap-2">
+              {[ "Git", "Google Cloud Platform(GCP)", "Homebrew", "Firebase", "RStudio", "Docker", "bash", "AWS"].map((tool) => (
+                <span
+                  key={tool}
+                  className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-3 py-1 rounded-md text-sm font-mono"
+                >
+                  {tool}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="md:col-span-full flex md:justify-center">
+            <div>
+              <h3 className="text-sm font-bold text-[var(--foreground)] uppercase mb-3 text-left md:text-center">
+                Libraries
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 justify-items-start md:justify-items-center">
+                {["Pandas", "NumPy", "Matplotlib", "Seaborn", "Geopandas", "TensorFlow", "SciKitLearn", "Tidyverse"].map((lib) => (
+                  <span
+                    key={lib}
+                    className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-3 py-1 rounded-md text-sm font-mono"
+                  >
+                    {lib}
+                  </span>
+                ))}
               </div>
             </div>
-            <div className="flex flex-col pl-[50px] space-y-14">
-            <div className="flex items-center justify-center">
-              <div className="w-[150px] h-[150px] bg-gray-300 rounded-full">
-              <img 
-                src="/images/ETLogo.png" 
-                alt="ETLogo" 
-                style={{objectFit: 'fill', borderRadius:'100px'}}
-              />
-              </div>
-            </div>
-              <div className="w-[400px] h-[225px] bg-white rounded-lg shadow-md">
-                <div style={{color:'black',fontSize:17,}} className='p-[10px]'>
-                  <p className='pt-[10px]'>
-                    Eat Together is an on campus startup @ The University of Washington - Seattle that 
-                    aims to connect students at the university over shared meals through a cross platform 
-                    mobile application. The app aims to reshape the college experience by matching users 
-                    with friendly individuals nearby to meet up and share a meal.
-                  </p>
-                  <a href = 'https://eat-together.org' style={{color:'blue',fontSize:17,}}> Check it out here!</a>
+          </div>
+        </div>
+      </section>
+      <section id="projects-data" className="mb-4">
+        <h1 id="sprojects-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
+          Data Projects
+        </h1>
+        
+        <div className="project-card border-b border-gray-300 pb-4 mb-6">
+          <div className="flex justify-between items-center mb-1">
+            <h3 className="text-lg font-bold">Stock Market Analysis</h3>
+            <div className="text-lg">Ongoing</div>
+          </div>
+
+          <div className="flex flex-wrap gap-2 mb-2">
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Python</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">XGBoost</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Scikit-learn</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Pandas</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Tableau</span>
+
+          </div>
+
+          <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+            <li>Developing a predictive model using the last <b>10 years</b> of SPY data for efficiency.</li>
+            <li>Extending the model for real-time predictions via a BI dashboard and live data stream.</li>
+          </ul>
+        </div>
+
+
+        <div className="project-card border-b border-gray-300 pb-4 mb-6">
+          <div className="flex justify-between items-center mb-1">
+            <h3 className="text-lg font-bold">MacroScope</h3>
+            <div className="text-lg">May 2025. - Jun. 2025</div>
+          </div>
+
+          <div className="flex flex-wrap gap-2 mb-2">
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Python</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Geopandas</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Folium</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">XGBoost</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Scikit-learn</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Pandas</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Seaborn</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Matplotlib</span>
+          </div>
+
+          <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+            <li>Processed <b>400K+</b> IMF records with Pandas/GeoPandas, integrating fiscal and balance-of-payments data, and built an interactive global economic map using Folium.</li>
+            <li>Generated <b>6</b> trend charts with Seaborn/Matplotlib to visualize macroeconomic indicators and support inflation prediction insights.</li>
+            <li>Improved prediction accuracy by <b>20%</b>, reducing <b>RMSE from 2.899</b> to <b>2.309</b> and maintaining <b>MAE under 1.21</b> through Random Forest optimization, hyperparameter tuning, and data validation.</li>
+          </ul>
+        </div>
+
+
+
+        <div className="project-card border-b border-gray-300 pb-4 mb-6">
+          <div className="flex justify-between items-center mb-1">
+            <h3 className="text-lg font-bold">DataMed</h3>
+            <div className="text-lg">Apr. 2025</div>
+          </div>
+
+          <div className="flex flex-wrap gap-2 mb-2">
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Python</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Scikit-learn</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Optuna</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Pandas</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Numpy</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Seaborn</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Matplotlib</span>
+          </div>
+
+          <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+            <li>Awarded <b>3rd</b> place for <b>Best Machine Learning Model</b> in the 6th DubsTech Datathon.</li>
+            <li>Predicted avgerage costs for <b>1.2M healthcare records</b> using Pandas and Scikit-learn, with <b>99% data retention</b>.</li>
+            <li>Engineered features with Scikit-learn&apos;s LabelEncoder, transforming <b>4 categorical variables</b> for model readiness.</li>
+            <li> Improved model accuracy by <b>3%</b> for predictive modelling by tuning hyperparameters using Optuna.</li>
+          </ul>
+        </div>
+
+        <div className="project-card pb-4 mb-6">
+          <div className="flex justify-between items-center mb-1">
+            <h3 className="text-lg font-bold">March Madness vs. Regular Season</h3>
+            <div className="text-lg">Jan 2025. - Mar. 2025</div>
+          </div>
+
+          <div className="flex flex-wrap gap-2 mb-2">
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">R</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">R Studio</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">tidyverse</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">ggplot2</span>
+            <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">dplyr</span>
+          </div>
+
+          <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+            <li>Analyzed <b>20 years</b> of men&apos;s college basketball free throws across <b>300K+ rows</b> from three datasets.</li>
+            <li>Calculated <b>0.25</b> correlation between regular season free throws and NCAA tournament wins.</li>
+            <li>Merged datasets, created <b>10+</b> analysis columns, cleaned missing values, and visualized success rates.</li>
+          </ul>
+        </div>
+
+      </section>
+      <section id="projects-swe">
+        <h1 id="resume-subheading" className="relative text-2xl font-bold mb-6 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
+          Software Engineering Projects
+        </h1>
+
+        <div className="project-card border-b border-gray-300 pb-4 mb-6">
+  <div className="flex flex-col-reverse md:flex-row-reverse items-start gap-4">
+    <div className="flex-1 md:pr-4">
+      <div className="flex justify-between items-center mb-1">
+        <h3 className="text-lg font-bold">Bingo on the Ave</h3>
+        <div className="text-lg whitespace-nowrap">
+          Apr. 2025
+        </div>
+      </div>
+
+      <div className="flex flex-wrap gap-2 mb-2">
+        <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">React</span>
+        <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Next</span>
+        <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">TypeScript</span>
+        <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Google Places API</span>
+      </div>
+
+      <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+        <li>Developed Bingo on the Ave, a full-stack checklist site for students visiting essential UW locations, targeting <b>40,000+ students.</b></li>
+        <li>Integrated geolocation and Google Search APIs with anti-cheating checks to track visits to <b>9</b> essential locations.</li>
+        <li>Delivered fully functional, interactive prototype during April 2025 SWECCAthon, receiving <b>3rd place</b> and positive feedback from <b>5 judges</b>.</li>
+      </ul>
+    </div>
+
+    <div className="w-full md:w-[25%] flex flex-col items-center md:items-start mb-4 md:mb-0">
+      <img
+        src="images/AveBingo.png"
+        alt="Project Screenshot"
+        className="w-full h-auto max-h-40 object-cover rounded-md"
+      />
+      <a
+        className="flex items-center gap-1 mt-2"
+        href="https://avebingo.vercel.app/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <CgWebsite className="text-2xl" />
+      </a>
+    </div>
+  </div>
+</div>
+
+
+        <div className="project-card border-b border-gray-300 pb-4 mb-6">
+          <div className="flex">
+            <div className="flex-1 pr-4">
+              <div className="flex justify-between items-center mb-1">
+                <h3 className="text-lg font-bold">Fundit</h3>
+                <div className="text-lg whitespace-nowrap">
+                  Oct. 2024 – Jun. 2025
                 </div>
               </div>
+
+              <div className="flex flex-wrap gap-2 mb-2">
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">React Native</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Expo</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Firebase</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">TypeScript</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Plaid API</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Polygon API</span>
+
+              </div>
+              <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+                <li>Engineered a comprehensive stock overview feature using <b>Polygon API and React Native</b>, designed to boost user engagement with portfolio management by an estimated <b>15%</b> and enhance personalized financial tracking.</li>
+                <li>Designed and maintained a robust and scalable <b>Firebase</b> backend using Firestore and Storage, ensuring seamless real-time data flow for transactions and stock portfolios, achieving instant updates.</li>
+                <li>Integrated <b>Plaid API</b> with React Native(Expo) to deliver a smooth, cross-platform mobile experience with secure financial data synchronization, targeting over <b>95%</b> successful bank account linkages and a seamless experience.</li>
+              </ul>
+            </div>
+
+            <div className="w-full md:w-[25%] flex flex-col items-center md:items-start mb-4 md:mb-0">
+              <img
+                src="images/FundIt.png"
+                alt="Project Screenshot"
+                className="w-full h-auto max-h-40 object-cover rounded-md"
+              />
+              {/* <a
+                className="flex items-center gap-1 mt-2"
+                href="https://www.eat-together.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <CgWebsite className="text-2xl" />
+              </a> */}
             </div>
           </div>
         </div>
 
-        <div className="container mx-auto px-4">
-          <hr className="w-full my-12 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
-          <h1 id="Projects" className="text-center font-semibold pt-[15] pb-[15]" style={{fontSize:'50px'}}>
-            Projects
-          </h1>
-        </div>
-        <div className="bg-gray-100 rounded-2xl p-6 shadow-md w-[1000px] h-[550px] mx-auto">
-          <h2 className="text-xl font-semibold text-gray-700 text-center mb-4" style={{ fontSize: '40px' }}>
-            Stock Prediction Deep Learning Model
-          </h2>
-          <div className="flex flex-row items-start space-x-5">
-            <div className="w-[500px] h-[430px] bg-white rounded-xl shadow-md">
-              <div style={{color:'black',fontSize:18}} className='p-[10px]'>
-                <h1 style={{color:'grey',fontSize:18}}> Languages & Libraries: Python, SciKitLearn, numpy,pandas </h1>
-                <p className='pt-[10px]'>
-                  Developed a trend classification model in Python to predict the daily movement of the 
-                  S&P 500 stock using K-Nearest Neighbors (KNN) and Random Forest. Utilized NumPy and 
-                  Pandas for data preprocessing, handling historical stock price data and key financial 
-                  indicators. Implemented KNN for pattern recognition by analyzing similar past market 
-                  conditions and Random Forest for robust decision-making. Tuned hyperparameters and 
-                  optimized feature selection to improve predictive accuracy, achieving over 75% 
-                  accuracy on a validation dataset while mitigating overfitting.
-                </p>
+        <div className="project-card border-b border-gray-300 pb-4 mb-6">
+          <div className="flex flex-col-reverse md:flex-row-reverse items-start gap-4">
+            <div className="flex-1 md:pr-4">
+              <div className="flex justify-between items-center mb-1">
+                <h3 className="text-lg font-bold">Mentura</h3>
+                <div className="text-lg whitespace-nowrap">
+                  Oct. 2024
+                </div>
               </div>
 
+              <div className="flex flex-wrap gap-2 mb-2">
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">React</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Next</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">AWS Amplify</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Perplexity API</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">YouTube API</span>
+              </div>
+
+              <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+                <li>Developed Mentura, a full-stack<b> AWS Amplify</b> platform potentially serving <b>3,000+</b> UW STEM freshmen.</li>
+                <li>Integrated <b>YouTube API</b> to deliver <b>15</b> curated videos per concept, improving study material accessibility.</li>
+                <li>Built AI-powered concept overviews via <b>Perplexity API</b> and delivered scalable prototype in <b>48 hours</b> at DubHacks.</li>
+              </ul>
             </div>
-            <div className="flex flex-col pl-[50px] space-y-14">
-            <div className="w-[400px] h-[200px] rounded-lg">
-              <img 
-                src="/images/SPYData.png" 
-                alt="SPY" 
-                style={{objectFit: 'scale-down', width: '100%', height: '100%'}}
+
+            <div className="w-full md:w-[25%] flex flex-col items-center md:items-start mb-4 md:mb-0">
+              <img
+                src="images/Mentura.png"
+                alt="Project Screenshot"
+                className="w-full h-auto max-h-40 object-cover rounded-md"
+              />
+              <a
+                className="flex items-center gap-1 mt-2"
+                href="https://main.dhulrjtlxnvx6.amplifyapp.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <CgWebsite className="text-2xl" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="project-card border-b border-gray-300 pb-4 mb-6">
+          <div className="flex flex-col-reverse md:flex-row items-start gap-4">
+            <div className="flex-1 md:pl-4">
+              <div className="flex justify-between items-center mb-1">
+                <h3 className="text-lg font-bold">SAT Decoded</h3>
+                <div className="text-lg whitespace-nowrap">
+                  Jun. 2023 – Sep. 2024
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-2 mb-2">
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">HTML</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">CSS</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">SailsJS</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">PostgreSQL</span>
+                <span className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-2 py-1 rounded-md text-xs font-mono">Sendgrid API</span>
+              </div>
+
+              <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+                <li>Created an open-source website targeting <b>800+</b> students preparing for the SAT for my IB Diploma.</li>
+                <li>Improved accessibility to SAT resources through interactive quizzes and resource uploads.</li>
+                <li>Built using <b>HTML, CSS, PostgreSQL, and JavaScript</b> with <b>SailsJS, SendGrid API</b> for email reporting.</li>
+              </ul>
+            </div>
+
+            <div className="w-full md:w-[25%] flex flex-col items-center md:items-start mb-4 md:mb-0">
+              <img
+                src="images/SATDecoded.png"
+                alt="Project Screenshot"
+                className="w-full h-auto max-h-40 object-cover rounded-md"
               />
             </div>
-              <div className="flex justify-center items-center h-full"> 
-                <button className="bg-teal-700 text-white px-4 py-2 rounded-full shadow hover:bg-teal-800 transition">
-                  <Link href="https://github.com/Navneethd8/spy-trend-model">
-                    View Code
-                  </Link>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-gray-100 rounded-2xl p-6 shadow-md w-[1000px] h-[550px] mx-auto">
-          <h2 className="text-xl font-semibold text-gray-700 text-center mb-4" style={{ fontSize: '40px' }}>
-            FundIt
-          </h2>
-          <div className="flex flex-row items-start space-x-5">
-            <div className="w-[500px] h-[430px] bg-white rounded-xl shadow-md">
-              <div style={{color:'black',fontSize:18}} className='p-[10px]'>
-                <h1 style={{color:'grey',fontSize:18}}> Languages: ReactJS (JavaScript), PlaidAPI, Google Cloud Platforms (Firebase Firestore) </h1>
-                <p className='pt-[10px]'>
-                  FundIt is a mobile app designed to help users optimize spending, 
-                  reduce debt, and make informed investment decisions through an intuitive 
-                  budgeting and investment platform. The app features a comprehensive budgeting 
-                  tool, a net worth calculator, and a personalized user profile, enabling users 
-                  to track their financial health effectively. Built on Firebase, FundIt ensures 
-                  real-time transaction and portfolio updates, while Plaid API integration provides 
-                  secure financial data synchronization. Developed using React Native (Expo), the 
-                  app delivers a seamless, cross-platform experience.
-
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col pl-[50px] space-y-14">
-            <div className="w-[400px] h-[200px] rounded-lg">
-              <img 
-                src="/images/FundIt.png" 
-                alt="FundIt" 
-                style={{objectFit: 'scale-down', width: '100%', height: '100%'}}
-              />
-            </div>
-              <div className="flex justify-center items-center h-full"> 
-                <button className="bg-teal-700 text-white px-4 py-2 rounded-full shadow hover:bg-teal-800 transition">
-                  <Link href="https://github.com/hcp-uw/fundit/">
-                    View Code
-                  </Link>
-                </button>
-              </div>
-            </div>
           </div>
         </div>
 
 
-        <div className="bg-gray-100 rounded-2xl p-6 shadow-md w-[1000px] h-[550px] mx-auto">
-          <h2 className="text-xl font-semibold text-gray-700 text-center mb-4" style={{ fontSize: '40px' }}>
-              SATDecoded
-          </h2>
-          <div className="flex flex-row items-start space-x-5">
-            <div className="w-[500px] h-[430px] bg-white rounded-xl shadow-md">
-              <div style={{color:'black',fontSize:18,}} className='p-[10px]'>
-                <h1 style={{color:'grey',fontSize:18}}> Languages: HTML, CSS, SailsJS(JavaScript), PostgreSQL </h1>
-                <p className='pt-[10px]'>
-                  Developed a fully functional open-source website for high school students preparing 
-                  for the SAT as part of my IB Computer Science Internal Assessment. Features include 
-                  interactive quizzes, study notes, document uploads, and a mailing system to improve 
-                  accessibility to SAT prep resources. Built using HTML, CSS, JavaScript, and SQL, 
-                  leveraging SailsJS for the backend, PostgreSQL for database management, and SendGrid 
-                  API for email integration. Designed with a user-friendly interface to enhance engagement 
-                  and ease of use.
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col pl-[50px] space-y-14">
-              <div className="w-[400px] h-[200px] bg-gray-300 rounded-lg"></div>
-              <div className="flex justify-center items-center h-full"> 
-                <button className="bg-teal-700 text-white px-4 py-2 rounded-full shadow hover:bg-teal-800 transition">
-                  <Link href="https://github.com/Navneethd8/SATDecoded">
-                    View Code
-                  </Link>
-                </button>
-              </div>
-            </div>
-          </div>
+      </section>
+      <section id="resume" className="mb-4">
+        <h1 id="resume-subheading" className="relative text-2xl font-bold mb-6 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
+          Resume
+        </h1>
+        <h2 className="text-xl font-semibold mb-6 text-center">
+          Download my resume below!
+        </h2>
+        <div className="flex justify-center">
+          <a
+            href="Resume_Navneeth.pdf"
+            target="_blank"
+            className="resume-link px-6 py-2 rounded-md text-lg font-mono text-center"
+          >
+            Resume
+          </a>
         </div>
-
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-        </a>
-      </footer>
-    </div>
+      </section>
+    </SiteLayout>
   );
 }
