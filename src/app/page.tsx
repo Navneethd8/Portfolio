@@ -165,6 +165,44 @@ export default function Home() {
         <h1 id="experience-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
           Experience
         </h1>
+
+        <div className="flex flex-col md:flex-row gap-4 mb-6">
+          <div className="w-full md:w-28 flex-shrink-0">
+            <img
+              src="images/ETLogo.png"
+              alt="Company Logo"
+              className="w-20 h-20 object-contain mx-auto md:mx-0 rounded-lg"
+            />
+            <div className="mt-2 flex flex-row justify-center md:justify-start gap-1 text-lg">
+              <a 
+                className="flex items-center gap-1"
+                href="https://www.eat-together.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+        
+              >
+                <CgWebsite/>
+              </a>
+            </div>
+          </div>
+
+          <div className="flex-1">
+            <div className="flex justify-between flex-wrap">
+              <h3 className="text-lg font-semibold">Director</h3>
+              <span className="text-lg text-[var(--foreground)]">Sep. 2025 – Present</span>
+            </div>
+
+            <div className="flex justify-between flex-wrap">
+              <span className="text-[var(--h3)]">Eat Together</span>
+              <span className="text-[var(--h3)]">Seattle, WA</span>
+            </div>
+
+            <ul className="list-disc pl-5 mt-2 space-y-1 text-[var(--h4)]">
+              <li>Connected over <b>550</b> students through shared meals @The University of Washington.</li>
+            </ul>
+          </div>
+        </div>
+
         <div className="flex flex-col md:flex-row gap-4 mb-6">
           <div className="w-full md:w-28 flex-shrink-0">
             <img
@@ -176,8 +214,8 @@ export default function Home() {
 
           <div className="flex-1">
             <div className="flex justify-between flex-wrap">
-              <h3 className="text-lg font-semibold">Data Engineer Intern</h3>
-              <span className="text-lg text-[var(--foreground)]">Jun. 2025 – Present</span>
+              <h3 className="text-lg font-semibold">Data Science Intern</h3>
+              <span className="text-lg text-[var(--foreground)]">Jun. 2025 – Sep. 2025</span>
             </div>
 
             <div className="flex justify-between flex-wrap">
@@ -189,6 +227,8 @@ export default function Home() {
               <li>Developed models to predict flight delay accuracy for <b>600,000+ rows</b> and <b>90+ features</b> with an <b>80% R<sup>2</sup></b>.</li>
               <li>Enhanced model prediction by <b>8%</b> by performing EDA on <b> 50+</b> numerical features.</li>
               <li>Performed Experiments on <b>3 weather APIs</b> to find the data optimal for the model.</li>
+              <li>Optimized operational efficiency by 3% through a PuLP-based linear programming optimizer in Python.</li>
+              <li>Achieved 30% improvement in sentiment analysis accuracy by testing 3 prompting techniques on Amazon Bedrock.</li>
             </ul>
           </div>
         </div>
@@ -223,7 +263,7 @@ export default function Home() {
           <div className="flex-1">
             <div className="flex justify-between flex-wrap">
               <h3 className="text-lg font-semibold">Software Engineering Officer</h3>
-              <span className="text-lg text-[var(--foreground)]">Apr. 2024 – Present</span>
+              <span className="text-lg text-[var(--foreground)]">Apr. 2025 – Present</span>
             </div>
 
             <div className="flex justify-between flex-wrap">
@@ -237,6 +277,7 @@ export default function Home() {
             </ul>
           </div>
         </div>
+
         <div className="flex flex-col md:flex-row gap-4 mb-6">
           <div className="w-full md:w-28 flex-shrink-0">
             <img
@@ -260,7 +301,7 @@ export default function Home() {
           <div className="flex-1">
             <div className="flex justify-between flex-wrap">
               <h3 className="text-lg font-semibold">Development Lead</h3>
-              <span className="text-lg text-[var(--foreground)]">Dec. 2024 – Present</span>
+              <span className="text-lg text-[var(--foreground)]">Dec. 2024 – Sep. 2025</span>
             </div>
 
             <div className="flex justify-between flex-wrap">
@@ -502,14 +543,23 @@ export default function Home() {
                 alt="Project Screenshot"
                 className="w-full h-auto max-h-40 object-cover rounded-md"
               />
-              <a
-                className="flex items-center gap-1 mt-2"
-                href="https://avebingo.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <CgWebsite className="text-2xl" />
-              </a>
+              <div className="flex items-center gap-1 mt-2">
+                <a
+                  href="https://avebingo.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <CgWebsite className="text-2xl" />
+                </a>
+                <a
+                  href="https://github.com/Navneethd8/sweccathon25"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaGithub className="text-2xl" />
+                </a>
+
+              </div>
             </div>
           </div>
         </div>
@@ -547,14 +597,14 @@ export default function Home() {
                 alt="Project Screenshot"
                 className="w-full h-auto max-h-40 object-cover rounded-md"
               />
-              {/* <a
+              <a
                 className="flex items-center gap-1 mt-2"
-                href="https://www.eat-together.org/"
+                href="https://github.com/hcp-uw/fundit"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <CgWebsite className="text-2xl" />
-              </a> */}
+                <FaGithub className="text-2xl" />
+              </a>
             </div>
           </div>
         </div>
@@ -590,14 +640,22 @@ export default function Home() {
                 alt="Project Screenshot"
                 className="w-full h-auto max-h-40 object-cover rounded-md"
               />
-              <a
-                className="flex items-center gap-1 mt-2"
-                href="https://main.dhulrjtlxnvx6.amplifyapp.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <CgWebsite className="text-2xl" />
-              </a>
+              <div className="flex items-center gap-1 mt-2">
+                <a
+                  href="https://main.dhulrjtlxnvx6.amplifyapp.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <CgWebsite className="text-2xl" />
+                </a>
+                <a
+                  href="https://github.com/study-app-dh24/study-app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaGithub className="text-2xl" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -632,6 +690,15 @@ export default function Home() {
                 alt="Project Screenshot"
                 className="w-full h-auto max-h-40 object-cover rounded-md"
               />
+              <a
+                className="flex items-center gap-1 mt-2"
+                href="https://github.com/Navneethd8/SATDecoded"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaGithub className="text-2xl" />
+              </a>
+
             </div>
           </div>
         </div>
@@ -645,13 +712,20 @@ export default function Home() {
         <h2 className="text-xl font-semibold mb-6 text-center">
           Download my resume below!
         </h2>
-        <div className="flex justify-center">
+        <div className="flex justify-center gap-5">
           <a
-            href="Resume_Navneeth.pdf"
+            href="Navneeth_Dhamotharan_Resume.pdf"
             target="_blank"
             className="resume-link px-6 py-2 rounded-md text-lg font-mono text-center"
           >
-            Resume
+            Software Engineering Resume
+          </a>
+          <a
+            href="Dhamotharan_Navneeth_Resume.pdf"
+            target="_blank"
+            className=" resume-link px-6 py-2 rounded-md text-lg font-mono text-center"
+          >
+            Data Science Resume
           </a>
         </div>
       </section>
