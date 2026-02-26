@@ -1,5 +1,5 @@
 import SiteLayout from "@/components/siteLayout"
-import { FaLinkedin,FaGithub,FaXTwitter } from 'react-icons/fa6';
+import { FaLinkedin, FaGithub, FaXTwitter } from 'react-icons/fa6';
 import { CgWebsite } from "react-icons/cg";
 import { MdEmail } from "react-icons/md";
 
@@ -9,96 +9,76 @@ export default function Home() {
     <SiteLayout
       sidebar={
         <div className="flex flex-col h-full w-full">
-          <div className="flex-shrink-0 mb-4">
-              <h1 className="text-2xl font-semibold mb-2 text-[var(--background)]">Navneeth Dhamotharan</h1>
-              <p className="text-[var(--background)] text-xl">Aspiring Data / Software Engineer</p>
+          <div className="flex-shrink-0 mb-8 lg:mb-4 text-center lg:text-left pt-4 lg:pt-0">
+            <h1 className="hidden lg:block text-2xl font-semibold mb-2 text-[var(--background)]">Navneeth Dhamotharan</h1>
+            <p className="text-[var(--background)] text-xl lg:text-lg font-medium">Aspiring Data / Software Engineer</p>
           </div>
 
           <div className="flex flex-col gap-4">
-            <nav 
+            <nav
               className="
-                  flex
-                  gap-2
-                  flex-row 
-                  overflow-x-auto 
-                  whitespace-nowrap 
-                  
-                  lg:flex-col 
-                  lg:overflow-visible 
-                  lg:whitespace-normal
-                  lg:pr-2
-                  lg:flex-grow
-
+                  flex flex-col gap-6 lg:gap-2
+                  text-center lg:text-left
+                  lg:pr-2 lg:flex-grow
                   "
             >
-              <a href="#about" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
+              <a href="#about" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
                 About
               </a>
-              <a href="#education" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
+              <a href="#education" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
                 Education
               </a>
-              <a href="#experience" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
+              <a href="#experience" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
                 Experience
               </a>
-              <a href="#skills" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
+              <a href="#skills" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
                 Skills
               </a>
-              <a href="#projects-data" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
+              <a href="#projects-data" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
                 Data Projects
               </a>
-              <a href="#projects-swe" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
+              <a href="#projects-swe" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
                 SWE Projects
               </a>
 
-              <a href="#resume" className="px-4 py-1 text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
+              <a href="#resume" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl text-[var(--link)] hover:text-[var(--link-hover)]">
                 Resume
               </a>
             </nav>
 
-            <div>
-              <p className="text-[var(--background)] text-xl">Get In Touch</p>
+            <div className="mt-8 lg:mt-0 text-center lg:text-left">
+              <p className="text-[var(--background)] text-2xl lg:text-xl font-medium">Get In Touch</p>
             </div>
-            <nav 
+            <nav
               className="
-                  flex
-                  gap-2
-                  justify-center
-                  flex-row 
-                  overflow-x-auto 
-                  whitespace-nowrap 
-
-                  
-                  lg:flex-col 
-                  lg:overflow-visible 
-                  lg:whitespace-normal
-                  lg:pr-2
-                  lg:flex-grow
-
+                  flex flex-col gap-6 lg:gap-2
+                  items-center lg:items-start
+                  lg:pr-2 lg:flex-grow
                   "
             >
-              <a href="mailto:nd17@uw.edu" className="px-4 py-1 text-xl flex flex-row items-center gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
+              <a href="mailto:nd17@uw.edu" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl flex flex-row items-center gap-4 lg:gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
                 <MdEmail />
-                <span className="hidden lg:inline">nd17@uw.edu</span>
+                <span>nd17@uw.edu</span>
               </a>
 
-              <a href="https://www.linkedin.com/in/navneethd" target="_blank" rel="noopener noreferrer" className="px-4 py-1 text-xl flex flex-row items-center gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
+              <a href="https://www.linkedin.com/in/navneethd" target="_blank" rel="noopener noreferrer" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl flex flex-row items-center gap-4 lg:gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
                 <FaLinkedin />
-                <span className="hidden lg:inline">LinkedIn</span>
+                <span>LinkedIn</span>
               </a>
 
-              <a href="https://github.com/navneethd8" target="_blank" rel="noopener noreferrer" className="px-4 py-1 text-xl flex flex-row items-center gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
+              <a href="https://github.com/navneethd8" target="_blank" rel="noopener noreferrer" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl flex flex-row items-center gap-4 lg:gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
                 <FaGithub />
-                <span className="hidden lg:inline">GitHub</span>
+                <span>GitHub</span>
               </a>
 
-              <a href="https://navneeth.vercel.app" target="_blank" rel="noopener noreferrer" className="px-4 py-1 text-xl flex flex-row items-center gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
+              <a href="https://navneeth.vercel.app" target="_blank" rel="noopener noreferrer" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl flex flex-row items-center gap-4 lg:gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
                 <CgWebsite />
-                <span className="hidden lg:inline">Website</span>
+                <span>Website</span>
               </a>
 
-              <a href="https://x.com/NavneethDG" target="_blank" rel="noopener noreferrer" className="px-4 py-1 text-xl flex flex-row items-center gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
+              <a href="https://x.com/NavneethDG" target="_blank" rel="noopener noreferrer" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl flex flex-row items-center gap-4 lg:gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
                 <FaXTwitter />
-                <span className="hidden lg:inline">Twitter / X</span>
+                <span>Twitter / X</span>
               </a>
             </nav>
           </div>
@@ -156,7 +136,7 @@ export default function Home() {
           </span>
         </div>
         <p className="leading-relaxed">
-          <span className="font-semibold">Relevant Coursework:</span> Data Structures and Algorithms, 
+          <span className="font-semibold">Relevant Coursework:</span> Data Structures and Algorithms,
           Introduction to Data Science, Statistical Analysis in R, Databases, Econometrics, Object Oriented Programming,
           Intermediate Data Programming
         </p>
@@ -174,14 +154,14 @@ export default function Home() {
               className="w-20 h-20 object-contain mx-auto md:mx-0 rounded-lg"
             />
             <div className="mt-2 flex flex-row justify-center md:justify-start gap-1 text-lg">
-              <a 
+              <a
                 className="flex items-center gap-1"
                 href="https://www.eat-together.org/"
                 target="_blank"
                 rel="noopener noreferrer"
-        
+                aria-label="Eat Together Website"
               >
-                <CgWebsite/>
+                <CgWebsite />
               </a>
             </div>
           </div>
@@ -240,22 +220,23 @@ export default function Home() {
               className="w-20 h-20 object-contain mx-auto md:mx-0 rounded-lg"
             />
             <div className="mt-2 flex flex-row justify-center md:justify-start gap-1 text-lg">
-              <a 
+              <a
                 className="flex items-center gap-1"
                 href="https://github.com/swecc-uw"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="SWECC GitHub"
               >
-                <FaGithub/>
+                <FaGithub />
               </a>
-              <a 
+              <a
                 className="flex items-center gap-1"
                 href="https://swecc.org/"
                 target="_blank"
                 rel="noopener noreferrer"
-        
+                aria-label="SWECC Website"
               >
-                <CgWebsite/>
+                <CgWebsite />
               </a>
             </div>
           </div>
@@ -286,14 +267,14 @@ export default function Home() {
               className="w-20 h-20 object-contain mx-auto md:mx-0 rounded-lg"
             />
             <div className="mt-2 flex flex-row justify-center md:justify-start gap-1 text-lg">
-              <a 
+              <a
                 className="flex items-center gap-1"
                 href="https://www.eat-together.org/"
                 target="_blank"
                 rel="noopener noreferrer"
-        
+                aria-label="Eat Together Website"
               >
-                <CgWebsite/>
+                <CgWebsite />
               </a>
             </div>
           </div>
@@ -324,14 +305,14 @@ export default function Home() {
               className="w-20 h-20 object-contain mx-auto md:mx-0 rounded-lg"
             />
             <div className="mt-2 flex flex-row justify-center md:justify-start gap-1 text-lg">
-              <a 
+              <a
                 className="flex items-center gap-1"
                 href="https://www.eat-together.org/"
                 target="_blank"
                 rel="noopener noreferrer"
-        
+                aria-label="Eat Together Website"
               >
-                <CgWebsite/>
+                <CgWebsite />
               </a>
             </div>
           </div>
@@ -380,7 +361,7 @@ export default function Home() {
           <div>
             <h3 className="text-sm font-bold text-[var(--foreground)] uppercase mb-3"> Tools & Frameworks</h3>
             <div className="flex flex-wrap gap-2">
-              {[ "Git", "Google Cloud Platform(GCP)", "Homebrew", "Firebase", "RStudio", "Docker", "bash", "AWS"].map((tool) => (
+              {["Git", "Google Cloud Platform(GCP)", "Homebrew", "Firebase", "RStudio", "Docker", "bash", "AWS"].map((tool) => (
                 <span
                   key={tool}
                   className="bg-[var(--link-hover)] dark:bg-[var(--link)] px-3 py-1 rounded-md text-sm font-mono"
@@ -413,7 +394,7 @@ export default function Home() {
         <h1 id="sprojects-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
           Data Projects
         </h1>
-        
+
         <div className="project-card border-b border-gray-300 pb-4 mb-6">
           <div className="flex justify-between items-center mb-1">
             <h3 className="text-lg font-bold">Stock Market Analysis</h3>
@@ -548,6 +529,7 @@ export default function Home() {
                   href="https://avebingo.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Bingo on the Ave Website"
                 >
                   <CgWebsite className="text-2xl" />
                 </a>
@@ -555,6 +537,7 @@ export default function Home() {
                   href="https://github.com/Navneethd8/sweccathon25"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Bingo on the Ave GitHub"
                 >
                   <FaGithub className="text-2xl" />
                 </a>
@@ -602,6 +585,7 @@ export default function Home() {
                 href="https://github.com/hcp-uw/fundit"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Fundit GitHub"
               >
                 <FaGithub className="text-2xl" />
               </a>
@@ -645,6 +629,7 @@ export default function Home() {
                   href="https://main.dhulrjtlxnvx6.amplifyapp.com/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Mentura Website"
                 >
                   <CgWebsite className="text-2xl" />
                 </a>
@@ -652,6 +637,7 @@ export default function Home() {
                   href="https://github.com/study-app-dh24/study-app"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Mentura GitHub"
                 >
                   <FaGithub className="text-2xl" />
                 </a>
@@ -695,6 +681,7 @@ export default function Home() {
                 href="https://github.com/Navneethd8/SATDecoded"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="SAT Decoded GitHub"
               >
                 <FaGithub className="text-2xl" />
               </a>
