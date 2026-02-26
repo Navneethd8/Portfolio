@@ -1,0 +1,180 @@
+{
+    "experience": [
+        {
+            "role": "Director",
+            "company": "Eat Together",
+            "location": "Seattle, WA",
+            "date": "Sep. 2025 – Present",
+            "logoSrc": "images/ETLogo.png",
+            "link": "https://www.eat-together.org/",
+            "bullets": [
+                "Connected over 550 students through shared meals @The University of Washington."
+            ]
+        },
+        {
+            "role": "Data Science Intern",
+            "company": "FlyDubai",
+            "location": "Dubai, UAE",
+            "date": "Jun. 2025 – Sep. 2025",
+            "logoSrc": "images/flydubai.avif",
+            "bullets": [
+                "Developed models to predict flight delay accuracy for 600,000+ rows and 90+ features with an 80% R².",
+                "Enhanced model prediction by 8% by performing EDA on 50+ numerical features.",
+                "Performed Experiments on 3 weather APIs to find the data optimal for the model.",
+                "Optimized operational efficiency by 3% through a PuLP-based linear programming optimizer in Python.",
+                "Achieved 30% improvement in sentiment analysis accuracy by testing 3 prompting techniques on Amazon Bedrock."
+            ]
+        },
+        {
+            "role": "Software Engineering Officer",
+            "company": "Software Engineering Career Club",
+            "location": "Seattle, WA",
+            "date": "Apr. 2025 – Present",
+            "logoSrc": "images/swecc.jpg",
+            "link": "https://swecc.org/",
+            "github": "https://github.com/swecc-uw",
+            "bullets": [
+                "Led SWECC Labs, mentoring 35+ students to open-source development for career growth.",
+                "Improved the job search process for 2000+ aspiring software engineers by developing and enhancing platforms across 38+ repositories."
+            ]
+        },
+        {
+            "role": "Development Lead",
+            "company": "Eat Together",
+            "location": "Seattle, WA",
+            "date": "Dec. 2024 – Sep. 2025",
+            "logoSrc": "images/ETLogo.png",
+            "link": "https://www.eat-together.org/",
+            "bullets": [
+                "Led a team of 6 developers for a student-led startup by enhancing engagement for 500+ users.",
+                "Added 30 users by redeveloping the website, app availability selection, and developing a community Discord bot.",
+                "Reduced code review time by 20% through hands-on workshops and feedback sessions, mentoring 20+ developers in React Native(Expo), Git, and Google Cloud Platform for a cross functional developmental cohort of 35."
+            ]
+        },
+        {
+            "role": "Software Engineer",
+            "company": "Eat Together",
+            "location": "Seattle, WA",
+            "date": "Jan. 2024 – Dec. 2024",
+            "logoSrc": "images/ETLogo.png",
+            "link": "https://www.eat-together.org/",
+            "bullets": [
+                "Enhanced media management by developing a photo gallery using React Native and Expo Image Picker.",
+                "Integrated Firebase for seamless image storage and retrieval, optimizing app performance and user interaction.",
+                "Scaled the app to 400+ users by enhancing core functionality through batch processing and load reduction.",
+                "Resolved 35+ bugs and 8+ critical issues, improving app stability and user experience."
+            ]
+        }
+    ],
+    "dataProjects": [
+        {
+            "title": "Stock Market Analysis",
+            "date": "Ongoing",
+            "tags": [
+                "Python",
+                "XGBoost",
+                "Scikit-learn",
+                "Pandas",
+                "Tableau"
+            ],
+            "summary": "Predictive model for SPY stock data scaling into a real-time BI dashboard."
+        },
+        {
+            "title": "MacroScope",
+            "date": "May 2025. - Jun. 2025",
+            "tags": [
+                "Python",
+                "Geopandas",
+                "Folium",
+                "XGBoost",
+                "Scikit-learn",
+                "Pandas",
+                "Seaborn",
+                "Matplotlib"
+            ],
+            "summary": "Interactive global economic map predicting inflation trends trained on 400K+ IMF macroeconomic records."
+        },
+        {
+            "title": "DataMed",
+            "date": "Apr. 2025",
+            "tags": [
+                "Python",
+                "Scikit-learn",
+                "Optuna",
+                "Pandas",
+                "Numpy",
+                "Seaborn",
+                "Matplotlib"
+            ],
+            "summary": "Award-winning ML model optimizing healthcare cost predictions across 1.2M medical records."
+        },
+        {
+            "title": "March Madness vs. Regular Season",
+            "date": "Jan 2025. - Mar. 2025",
+            "tags": [
+                "R",
+                "R Studio",
+                "tidyverse",
+                "ggplot2",
+                "dplyr"
+            ],
+            "summary": "Statistical analysis linking 20 years of NCAA regular season free throws to post-season tournament success."
+        }
+    ],
+    "sweProjects": [
+        {
+            "title": "Bingo on the Ave",
+            "date": "Apr. 2025",
+            "tags": [
+                "React",
+                "Next",
+                "TypeScript",
+                "Google Places API"
+            ],
+            "summary": "Award-winning geolocation checklist app engaging 40,000+ UW students with location-verified scavenger hunts.",
+            "link": "https://avebingo.vercel.app/",
+            "github": "https://github.com/Navneethd8/sweccathon25"
+        },
+        {
+            "title": "Fundit",
+            "date": "Oct. 2024 – Jun. 2025",
+            "tags": [
+                "React Native",
+                "Expo",
+                "Firebase",
+                "TypeScript",
+                "Plaid API",
+                "Polygon API"
+            ],
+            "summary": "Cross-platform financial app providing real-time portfolio management via Plaid and Polygon integration.",
+            "github": "https://github.com/hcp-uw/fundit"
+        },
+        {
+            "title": "Mentura",
+            "date": "Oct. 2024",
+            "tags": [
+                "React",
+                "Next",
+                "AWS Amplify",
+                "Perplexity API",
+                "YouTube API"
+            ],
+            "summary": "AI-powered STEM learning platform serving curated concept overviews and video tutorials.",
+            "link": "https://main.dhulrjtlxnvx6.amplifyapp.com/",
+            "github": "https://github.com/study-app-dh24/study-app"
+        },
+        {
+            "title": "SAT Decoded",
+            "date": "Jun. 2023 – Sep. 2024",
+            "tags": [
+                "HTML",
+                "CSS",
+                "SailsJS",
+                "PostgreSQL",
+                "Sendgrid API"
+            ],
+            "summary": "Open-source interactive test prep platform helping 800+ students master the SAT.",
+            "github": "https://github.com/Navneethd8/SATDecoded"
+        }
+    ]
+}
