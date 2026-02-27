@@ -2,8 +2,10 @@
 
 :root {
   --background: #FFFFFF;
-  --foreground: #1A1A1A;
+  --foreground: #050E3C;
   --sidebar: #2B2B2B;
+  --sidebar-link: #93C5FD;
+  --card-bg: #F0F4F8;
 
   --text: #2C2C2C;
   --paragraph: #4D4D4D;
@@ -15,15 +17,18 @@
   --h5: #555555;
   --h6: #666666;
 
-  --link: #66aaff;
-  --link-hover: #3388ff;
+  --link: #2563EB;
+  --link-hover: #1D4ED8;
+
+  --tag-bg: #3B82F6;
+  --tag-text: #FFFFFF;
 
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-space-grotesk);
   --font-mono: var(--font-geist-mono);
 }
 
@@ -32,6 +37,8 @@
     --background: #1A1A1A;
     --foreground: #FFFFFF;
     --sidebar: #F4F4F4;
+    --sidebar-link: #1D4ED8;
+    --card-bg: #2C3036;
 
     --text: #EAEAEA;
     --paragraph: #CCCCCC;
@@ -44,14 +51,18 @@
 
     --h6: #AAAAAA;
 
---link: #1a73e8;
---link-hover: #0c47a1;
+    --link: #64B5F6;
+    --link-hover: #90CAF9;
+
+    --tag-bg: #2563EB;
+    --tag-text: #FFFFFF;
 
   }
 }
 
 a {
   color: var(--link);
+  text-decoration: underline;
   transition: color 0.2s ease;
 }
 
@@ -59,24 +70,32 @@ a:hover {
   color: var(--link-hover);
 }
 
+nav a,
+a.resume-link {
+  text-decoration: none;
+}
+
+nav a {
+  color: var(--sidebar-link);
+}
+
+nav a:hover {
+  color: var(--link-hover);
+}
+
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-space-grotesk), Arial, Helvetica, sans-serif;
 }
 
 .resume-link {
-  color: var(--foreground);
-  background-color: var(--link);
-}
-
-.dark .resume-link {
-  background-color:var(--foreground);
+  color: var(--tag-text);
+  background-color: var(--tag-bg);
 }
 
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-

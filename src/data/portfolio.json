@@ -7,6 +7,7 @@
             "date": "Sep. 2025 – Present",
             "logoSrc": "images/ETLogo.png",
             "link": "https://www.eat-together.org/",
+            "summary": "Leading student connectivity and a shared meal platform for the UW community.",
             "bullets": [
                 "Connected over 550 students through shared meals @The University of Washington."
             ]
@@ -17,6 +18,7 @@
             "location": "Dubai, UAE",
             "date": "Jun. 2025 – Sep. 2025",
             "logoSrc": "images/flydubai.avif",
+            "summary": "Developed highly accurate ML models for flight delay prediction and operations optimizations.",
             "bullets": [
                 "Developed models to predict flight delay accuracy for 600,000+ rows and 90+ features with an 80% R².",
                 "Enhanced model prediction by 8% by performing EDA on 50+ numerical features.",
@@ -33,6 +35,7 @@
             "logoSrc": "images/swecc.jpg",
             "link": "https://swecc.org/",
             "github": "https://github.com/swecc-uw",
+            "summary": "Mentoring 35+ students in open-source development and improving job search platforms.",
             "bullets": [
                 "Led SWECC Labs, mentoring 35+ students to open-source development for career growth.",
                 "Improved the job search process for 2000+ aspiring software engineers by developing and enhancing platforms across 38+ repositories."
@@ -45,6 +48,7 @@
             "date": "Dec. 2024 – Sep. 2025",
             "logoSrc": "images/ETLogo.png",
             "link": "https://www.eat-together.org/",
+            "summary": "Led a cross-functional team of 6 developers in building cross-platform engagement features.",
             "bullets": [
                 "Led a team of 6 developers for a student-led startup by enhancing engagement for 500+ users.",
                 "Added 30 users by redeveloping the website, app availability selection, and developing a community Discord bot.",
@@ -58,6 +62,7 @@
             "date": "Jan. 2024 – Dec. 2024",
             "logoSrc": "images/ETLogo.png",
             "link": "https://www.eat-together.org/",
+            "summary": "Developed media galleries, integrated Firebase, and scaled the app by minimizing load.",
             "bullets": [
                 "Enhanced media management by developing a photo gallery using React Native and Expo Image Picker.",
                 "Integrated Firebase for seamless image storage and retrieval, optimizing app performance and user interaction.",
@@ -77,7 +82,9 @@
                 "Pandas",
                 "Tableau"
             ],
-            "summary": "Predictive model for SPY stock data scaling into a real-time BI dashboard."
+            "summary": "Predictive model for SPY stock data, visualizing real-time financial insights via BI dashboard.",
+            "github": "",
+            "link": ""
         },
         {
             "title": "MacroScope",
@@ -92,7 +99,9 @@
                 "Seaborn",
                 "Matplotlib"
             ],
-            "summary": "Interactive global economic map predicting inflation trends trained on 400K+ IMF macroeconomic records."
+            "summary": "Interactive global economic map predicting inflation trends across 400K+ IMF fiscal records.",
+            "github": "",
+            "link": ""
         },
         {
             "title": "DataMed",
@@ -106,10 +115,12 @@
                 "Seaborn",
                 "Matplotlib"
             ],
-            "summary": "Award-winning ML model optimizing healthcare cost predictions across 1.2M medical records."
+            "summary": "Award-winning ML model optimizing healthcare cost predictions across 1.2M medical records.",
+            "github": "",
+            "link": ""
         },
         {
-            "title": "March Madness vs. Regular Season",
+            "title": "NCAA Basketball Analysis",
             "date": "Jan 2025. - Mar. 2025",
             "tags": [
                 "R",
@@ -118,7 +129,9 @@
                 "ggplot2",
                 "dplyr"
             ],
-            "summary": "Statistical analysis linking 20 years of NCAA regular season free throws to post-season tournament success."
+            "summary": "Statistical analysis linking NCAA regular season free throws to post-season tournament wins.",
+            "github": "https://github.com/Navneethd8",
+            "link": ""
         }
     ],
     "sweProjects": [
@@ -131,7 +144,7 @@
                 "TypeScript",
                 "Google Places API"
             ],
-            "summary": "Award-winning geolocation checklist app engaging 40,000+ UW students with location-verified scavenger hunts.",
+            "summary": "Award-winning geolocation checklist app engaging 40,000+ UW students with scavenger hunts.",
             "link": "https://avebingo.vercel.app/",
             "github": "https://github.com/Navneethd8/sweccathon25"
         },
@@ -146,7 +159,7 @@
                 "Plaid API",
                 "Polygon API"
             ],
-            "summary": "Cross-platform financial app providing real-time portfolio management via Plaid and Polygon integration.",
+            "summary": "Cross-platform financial app providing real-time portfolio management via Plaid and Polygon.",
             "github": "https://github.com/hcp-uw/fundit"
         },
         {
@@ -173,7 +186,7 @@
                 "PostgreSQL",
                 "Sendgrid API"
             ],
-            "summary": "Open-source interactive test prep platform helping 800+ students master the SAT.",
+            "summary": "Open-source interactive test prep platform helping 800+ high school students master the SAT.",
             "github": "https://github.com/Navneethd8/SATDecoded"
         }
     ]
