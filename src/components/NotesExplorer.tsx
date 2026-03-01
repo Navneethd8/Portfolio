@@ -30,16 +30,6 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
 
     const availableTags = useMemo(() => ["all", ...allTags], [allTags]);
 
-    const groupMap = useMemo(() => {
-        return notes.reduce((acc, note) => {
-            const group = note.group;
-            if (!acc[group]) acc[group] = { total: 0, subgroups: new Set<string>() };
-            acc[group].total += 1;
-            if (note.subgroup) acc[group].subgroups.add(note.subgroup);
-            return acc;
-        }, {} as Record<string, { total: number; subgroups: Set<string> }>);
-    }, [notes]);
-
     const sidebarTree = useMemo(() => {
         const tree: Record<string, { notes: Note[], subgroups: Record<string, Note[]> }> = {};
 

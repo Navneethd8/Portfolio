@@ -4,6 +4,7 @@ import { CgWebsite } from "react-icons/cg";
 import ExperienceTimeline, { ExperienceTimelineItem } from "@/components/ExperienceTimeline";
 import ProjectCarousel, { ProjectCard } from "@/components/ProjectCarousel";
 import portfolioData from "@/data/portfolio.json";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -13,9 +14,11 @@ export default function Home() {
           About Me !
         </h2>
         <div className="flex flex-col md:flex-row items-start gap-6 md:items-center">
-          <img
-            src="images/navneeth.jpeg"
+          <Image
+            src="/images/navneeth.jpeg"
             alt="Navneeth Dhamotharan"
+            width={160}
+            height={160}
             className="w-40 h-40 rounded-lg object-cover flex-shrink-0 mx-auto md:mx-0"
           />
 

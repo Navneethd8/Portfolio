@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 
 interface ExperienceTimelineItemProps {
     role: string;
@@ -31,9 +32,11 @@ export function ExperienceTimelineItem({
 
             {/* Logo / dot */}
             <div className="relative z-10 flex-shrink-0">
-                <img
+                <Image
                     src={logoSrc}
                     alt={`${company} Logo`}
+                    width={48}
+                    height={48}
                     className="w-12 h-12 rounded-full object-cover"
                 />
             </div>
