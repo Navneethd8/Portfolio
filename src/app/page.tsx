@@ -49,6 +49,9 @@ export default function Home() {
               <a href="#resume" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl text-[var(--sidebar-link)] hover:text-[var(--link-hover)]">
                 Resume
               </a>
+              <a href="/notes" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl font-bold text-[var(--link-hover)] border-l-2 border-[var(--link-hover)] lg:pl-3 mt-4">
+                My Notes
+              </a>
             </nav>
 
             <div className="mt-8 lg:mt-0 text-center lg:text-left">

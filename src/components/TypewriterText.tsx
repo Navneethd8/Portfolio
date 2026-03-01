@@ -2,14 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 
-const titles = [
+const defaultTitles = [
     "Software Engineer",
     "Data Engineer",
     "Machine Learning Engineer",
     "Data Scientist",
 ];
 
-export default function TypewriterText() {
+export default function TypewriterText({ titles = defaultTitles }: { titles?: string[] }) {
     const [titleIndex, setTitleIndex] = useState(0);
     const [charIndex, setCharIndex] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
@@ -38,7 +38,7 @@ export default function TypewriterText() {
         }, isDeleting ? 40 : 80);
 
         return () => clearTimeout(timeout);
-    }, [charIndex, isDeleting, titleIndex]);
+    }, [charIndex, isDeleting, titleIndex, titles]);
 
     const displayText = titles[titleIndex].slice(0, charIndex);
 
