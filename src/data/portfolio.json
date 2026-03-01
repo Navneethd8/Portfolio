@@ -1,4 +1,8 @@
 {
+    "about": {
+        "description": "I'm currently a Bachelor's student at the University of Washington, specializing in Data Science under the iSchool, with a second degree in Economics. My primary interests lie in Software and Data Engineering, with a growing focus on the intersection of Machine Learning and economic applications.",
+        "resumeUrl": "Navneeth_Dhamotharan_Resume.pdf"
+    },
     "experience": [
         {
             "role": "Director",
