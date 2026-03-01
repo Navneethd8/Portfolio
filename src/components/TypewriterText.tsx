@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 
 const defaultTitles = [
     "Software Engineer",
@@ -9,7 +9,7 @@ const defaultTitles = [
     "Data Scientist",
 ];
 
-export default function TypewriterText({ titles = defaultTitles }: { titles?: string[] }) {
+const TypewriterText = memo(({ titles = defaultTitles }: { titles?: string[] }) => {
     const [titleIndex, setTitleIndex] = useState(0);
     const [charIndex, setCharIndex] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
@@ -24,7 +24,7 @@ export default function TypewriterText({ titles = defaultTitles }: { titles?: st
                     setCharIndex(charIndex + 1);
                 } else {
                     // Pause at end before deleting
-                    setTimeout(() => setIsDeleting(true), 1500);
+                    setTimeout(() => setIsDeleting(true), 2000);
                 }
             } else {
                 // Deleting
@@ -35,7 +35,7 @@ export default function TypewriterText({ titles = defaultTitles }: { titles?: st
                     setTitleIndex((titleIndex + 1) % titles.length);
                 }
             }
-        }, isDeleting ? 40 : 80);
+        }, isDeleting ? 50 : 100);
 
         return () => clearTimeout(timeout);
     }, [charIndex, isDeleting, titleIndex, titles]);
@@ -43,9 +43,12 @@ export default function TypewriterText({ titles = defaultTitles }: { titles?: st
     const displayText = titles[titleIndex].slice(0, charIndex);
 
     return (
-        <span>
-            Aspiring {displayText}
-            <span className="animate-pulse">|</span>
+        <span className="inline-block min-w-[200px]">
+            {displayText}
+            <span className="animate-pulse border-r-2 border-[var(--background)] ml-1">&nbsp;</span>
         </span>
     );
-}
+});
+
+TypewriterText.displayName = "TypewriterText";
+export default TypewriterText;

@@ -1,98 +1,13 @@
 import SiteLayout from "@/components/siteLayout"
-import { FaLinkedin, FaGithub, FaXTwitter } from 'react-icons/fa6';
+import { FaGithub } from 'react-icons/fa6';
 import { CgWebsite } from "react-icons/cg";
-import { MdEmail } from "react-icons/md";
 import ExperienceTimeline, { ExperienceTimelineItem } from "@/components/ExperienceTimeline";
-import TypewriterText from "@/components/TypewriterText";
 import ProjectCarousel, { ProjectCard } from "@/components/ProjectCarousel";
 import portfolioData from "@/data/portfolio.json";
 
 export default function Home() {
   return (
-    <SiteLayout
-      sidebar={
-        <div className="flex flex-col h-full w-full">
-          <div className="flex-shrink-0 mb-8 lg:mb-4 text-center lg:text-left pt-4 lg:pt-0">
-            <h1 className="hidden lg:block text-2xl font-semibold mb-2 text-[var(--background)]">Navneeth Dhamotharan</h1>
-            <p className="text-[var(--background)] text-xl lg:text-lg font-medium">
-              <TypewriterText />
-            </p>
-          </div>
-
-          <div className="flex flex-col gap-4">
-            <nav
-              className="
-                  flex flex-col gap-6 lg:gap-2
-                  text-center lg:text-left
-                  lg:pr-2 lg:flex-grow
-                  "
-            >
-              <a href="#about" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl text-[var(--sidebar-link)] hover:text-[var(--link-hover)]">
-                About
-              </a>
-              <a href="#education" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl text-[var(--sidebar-link)] hover:text-[var(--link-hover)]">
-                Education
-              </a>
-              <a href="#experience" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl text-[var(--sidebar-link)] hover:text-[var(--link-hover)]">
-                Experience
-              </a>
-              <a href="#skills" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl text-[var(--sidebar-link)] hover:text-[var(--link-hover)]">
-                Skills
-              </a>
-              <a href="#projects-data" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl text-[var(--sidebar-link)] hover:text-[var(--link-hover)]">
-                Data Projects
-              </a>
-              <a href="#projects-swe" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl text-[var(--sidebar-link)] hover:text-[var(--link-hover)]">
-                SWE Projects
-              </a>
-
-              <a href="#resume" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl text-[var(--sidebar-link)] hover:text-[var(--link-hover)]">
-                Resume
-              </a>
-              <a href="/notes" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl font-bold text-[var(--link-hover)] border-l-2 border-[var(--link-hover)] lg:pl-3 mt-4">
-                My Notes
-              </a>
-            </nav>
-
-            <div className="mt-8 lg:mt-0 text-center lg:text-left">
-              <p className="text-[var(--background)] text-2xl lg:text-xl font-medium">Get In Touch</p>
-            </div>
-            <nav
-              className="
-                  flex flex-col gap-6 lg:gap-2
-                  items-center lg:items-start
-                  lg:pr-2 lg:flex-grow
-                  "
-            >
-              <a href="mailto:nd17@uw.edu" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl flex flex-row items-center gap-4 lg:gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
-                <MdEmail />
-                <span>nd17@uw.edu</span>
-              </a>
-
-              <a href="https://www.linkedin.com/in/navneethd" target="_blank" rel="noopener noreferrer" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl flex flex-row items-center gap-4 lg:gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
-                <FaLinkedin />
-                <span>LinkedIn</span>
-              </a>
-
-              <a href="https://github.com/navneethd8" target="_blank" rel="noopener noreferrer" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl flex flex-row items-center gap-4 lg:gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
-                <FaGithub />
-                <span>GitHub</span>
-              </a>
-
-              <a href="https://navneethd.me" target="_blank" rel="noopener noreferrer" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl flex flex-row items-center gap-4 lg:gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
-                <CgWebsite />
-                <span>Website</span>
-              </a>
-
-              <a href="https://x.com/NavneethDG" target="_blank" rel="noopener noreferrer" className="px-4 py-2 lg:py-1 text-2xl lg:text-xl flex flex-row items-center gap-4 lg:gap-2 text-[var(--background)] hover:text-[var(--link-hover)]">
-                <FaXTwitter />
-                <span>Twitter / X</span>
-              </a>
-            </nav>
-          </div>
-        </div>
-      }
-    >
+    <SiteLayout>
       <section id="about" className="mb-4">
         <h2 id="about-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[2px] after:w-12 after:bg-[var(--foreground)] after:mt-2">
           About Me !
@@ -130,6 +45,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       <section id="education" className="mb-4">
         <h2 id="education-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
           Education
@@ -155,13 +71,14 @@ export default function Home() {
           Core Methods in Data Science
         </p>
       </section>
+
       <section id="experience" className="mb-4">
         <h2 id="experience-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
           Experience
         </h2>
 
         <ExperienceTimeline>
-          {portfolioData.experience.map((exp, idx) => (
+          {portfolioData.experience.map((exp: { role: string, company: string, location: string, date: string, logoSrc: string, summary: string, github?: string, link?: string }, idx: number) => (
             <ExperienceTimelineItem
               key={idx}
               role={exp.role}
@@ -201,6 +118,7 @@ export default function Home() {
           ))}
         </ExperienceTimeline>
       </section>
+
       <section id="skills" className="mb-4">
         <h2 id="skills-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
           Skills
@@ -251,13 +169,14 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       <section id="projects-data" className="mb-4">
         <h2 id="sprojects-subheading" className="relative text-2xl font-bold mb-4 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
           Data Projects
         </h2>
 
         <ProjectCarousel>
-          {portfolioData.dataProjects.map((project, idx) => (
+          {portfolioData.dataProjects.map((project: { title: string, date: string, tags: string[], summary: string, link?: string, github?: string }, idx: number) => (
             <ProjectCard
               key={idx}
               title={project.title}
@@ -296,13 +215,14 @@ export default function Home() {
           ))}
         </ProjectCarousel>
       </section>
+
       <section id="projects-swe" className="mb-4">
         <h2 id="swe-projects-subheading" className="relative text-2xl font-bold mb-6 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
           Software Engineering Projects
         </h2>
 
         <ProjectCarousel>
-          {portfolioData.sweProjects.map((project, idx) => (
+          {portfolioData.sweProjects.map((project: { title: string, date: string, tags: string[], summary: string, link?: string, github?: string }, idx: number) => (
             <ProjectCard
               key={idx}
               title={project.title}
@@ -339,6 +259,7 @@ export default function Home() {
           ))}
         </ProjectCarousel>
       </section>
+
       <section id="resume" className="mb-4">
         <h2 id="resume-subheading" className="relative text-2xl font-bold mb-6 after:content-[''] after:block after:h-[3px] after:w-16 after:bg-[var(--foreground)] after:mt-2">
           Resume

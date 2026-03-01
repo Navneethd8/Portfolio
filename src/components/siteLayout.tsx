@@ -2,13 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
+import MainSidebar from "./MainSidebar";
 
 interface SiteLayoutProps {
-  sidebar: React.ReactNode;
   children: React.ReactNode;
 }
 
-const SiteLayout: React.FC<SiteLayoutProps> = ({ sidebar, children }) => {
+const SiteLayout: React.FC<SiteLayoutProps> = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   // Close sidebar on route change or when clicked on a link
@@ -59,7 +59,7 @@ const SiteLayout: React.FC<SiteLayoutProps> = ({ sidebar, children }) => {
         `}
       >
         <div className="flex flex-col h-full mt-16 md:mt-20 lg:mt-0">
-          {sidebar}
+          <MainSidebar />
         </div>
       </aside>
 
