@@ -76,6 +76,17 @@ const createExcerpt = (body: string) => {
 };
 
 /**
+ * Convert inline markdown to HTML (for content inside raw HTML blocks like callouts)
+ */
+function processInlineMarkdown(text: string): string {
+    return text
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        .replace(/`(.+?)`/g, '<code>$1</code>')
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+}
+
+/**
  * Pre-process Obsidian-specific markdown syntax before passing to unified pipeline.
  * Handles: callouts, image embeds, highlights, footnotes, wikilinks
  */
@@ -93,7 +104,6 @@ function preprocessObsidian(content: string): string {
     );
 
     // Close callout blocks: find where the blockquote content ends
-    // This regex finds callout openings and wraps subsequent > lines
     const lines = processed.split('\n');
     const result: string[] = [];
     let inCallout = false;
@@ -110,8 +120,10 @@ function preprocessObsidian(content: string): string {
 
         if (inCallout) {
             if (line.startsWith('>')) {
-                // Content inside the callout — strip the > prefix
-                result.push(line.replace(/^>\s?/, ''));
+                // Content inside the callout — strip the > prefix and convert inline markdown
+                let content = line.replace(/^>\s?/, '');
+                content = processInlineMarkdown(content);
+                result.push(content);
             } else {
                 // End of callout
                 result.push('</div></div>');
