@@ -1,12 +1,11 @@
 import React from 'react';
 import SiteLayout from '@/components/siteLayout';
 import NotesExplorer from '@/components/NotesExplorer';
-import { getAllNotes, getAllTags } from '@/lib/notes';
+import { getAllNotesMeta, getAllTags } from '@/lib/notes';
 
-export default async function NotesPage() {
-    // Fetch data on the server
-    const notes = await getAllNotes();
-    const tags = await getAllTags();
+export default function NotesPage() {
+    const notes = getAllNotesMeta();
+    const tags = getAllTags();
 
     return (
         <SiteLayout>

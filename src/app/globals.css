@@ -71,8 +71,10 @@ a:hover {
 }
 
 nav a,
-a.resume-link {
+a.resume-link,
+a.no-underline {
   text-decoration: none;
+  color: inherit;
 }
 
 nav a {
@@ -118,4 +120,342 @@ body {
   .pause-on-hover:hover {
     animation-play-state: paused;
   }
+}
+
+/* ==========================================
+   OBSIDIAN-FLAVORED MARKDOWN STYLES
+   ========================================== */
+
+/* --- KaTeX Math Rendering --- */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.75rem 0;
+  margin: 1.5rem 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.katex-display > .katex {
+  white-space: nowrap;
+}
+
+.katex {
+  font-size: 1.1em !important;
+}
+
+/* Make inline math blend with surrounding text */
+.prose .katex {
+  color: inherit;
+}
+
+/* Display math block styling */
+.prose .katex-display {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(50, 50, 50, 0.5);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+}
+
+/* --- Obsidian Callouts --- */
+.obsidian-callout {
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+  border-left: 4px solid;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.obsidian-callout .callout-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  text-transform: capitalize;
+}
+
+.obsidian-callout .callout-content {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+.obsidian-callout .callout-content p {
+  margin: 0.25rem 0;
+}
+
+/* Callout type colors */
+.callout-note {
+  border-left-color: #448aff;
+  background: rgba(68, 138, 255, 0.06) !important;
+}
+.callout-note .callout-title { color: #448aff; }
+.callout-note .callout-icon::before { content: "ℹ️"; }
+
+.callout-info {
+  border-left-color: #448aff;
+  background: rgba(68, 138, 255, 0.06) !important;
+}
+.callout-info .callout-title { color: #448aff; }
+.callout-info .callout-icon::before { content: "ℹ️"; }
+
+.callout-tip {
+  border-left-color: #00bfa5;
+  background: rgba(0, 191, 165, 0.06) !important;
+}
+.callout-tip .callout-title { color: #00bfa5; }
+.callout-tip .callout-icon::before { content: "💡"; }
+
+.callout-important {
+  border-left-color: #ab47bc;
+  background: rgba(171, 71, 188, 0.06) !important;
+}
+.callout-important .callout-title { color: #ab47bc; }
+.callout-important .callout-icon::before { content: "❗"; }
+
+.callout-warning {
+  border-left-color: #ff9100;
+  background: rgba(255, 145, 0, 0.06) !important;
+}
+.callout-warning .callout-title { color: #ff9100; }
+.callout-warning .callout-icon::before { content: "⚠️"; }
+
+.callout-caution {
+  border-left-color: #ff5252;
+  background: rgba(255, 82, 82, 0.06) !important;
+}
+.callout-caution .callout-title { color: #ff5252; }
+.callout-caution .callout-icon::before { content: "🔴"; }
+
+.callout-question {
+  border-left-color: #ffab40;
+  background: rgba(255, 171, 64, 0.06) !important;
+}
+.callout-question .callout-title { color: #ffab40; }
+.callout-question .callout-icon::before { content: "❓"; }
+
+.callout-example {
+  border-left-color: #7c4dff;
+  background: rgba(124, 77, 255, 0.06) !important;
+}
+.callout-example .callout-title { color: #7c4dff; }
+.callout-example .callout-icon::before { content: "📝"; }
+
+.callout-abstract, .callout-summary {
+  border-left-color: #00b0ff;
+  background: rgba(0, 176, 255, 0.06) !important;
+}
+.callout-abstract .callout-title, .callout-summary .callout-title { color: #00b0ff; }
+.callout-abstract .callout-icon::before, .callout-summary .callout-icon::before { content: "📋"; }
+
+.callout-todo {
+  border-left-color: #448aff;
+  background: rgba(68, 138, 255, 0.06) !important;
+}
+.callout-todo .callout-title { color: #448aff; }
+.callout-todo .callout-icon::before { content: "☑️"; }
+
+.callout-success {
+  border-left-color: #00c853;
+  background: rgba(0, 200, 83, 0.06) !important;
+}
+.callout-success .callout-title { color: #00c853; }
+.callout-success .callout-icon::before { content: "✅"; }
+
+.callout-failure {
+  border-left-color: #ff5252;
+  background: rgba(255, 82, 82, 0.06) !important;
+}
+.callout-failure .callout-title { color: #ff5252; }
+.callout-failure .callout-icon::before { content: "❌"; }
+
+.callout-danger {
+  border-left-color: #ff1744;
+  background: rgba(255, 23, 68, 0.06) !important;
+}
+.callout-danger .callout-title { color: #ff1744; }
+.callout-danger .callout-icon::before { content: "⚡"; }
+
+.callout-bug {
+  border-left-color: #ff6e40;
+  background: rgba(255, 110, 64, 0.06) !important;
+}
+.callout-bug .callout-title { color: #ff6e40; }
+.callout-bug .callout-icon::before { content: "🐛"; }
+
+.callout-quote {
+  border-left-color: #78909c;
+  background: rgba(120, 144, 156, 0.06) !important;
+}
+.callout-quote .callout-title { color: #78909c; }
+.callout-quote .callout-icon::before { content: "💬"; }
+
+/* --- Obsidian Highlights (==text==) --- */
+mark {
+  background: rgba(255, 215, 0, 0.25);
+  color: inherit;
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+/* --- Obsidian Image Embeds --- */
+.obsidian-embed {
+  border-radius: 10px;
+  border: 1px solid rgba(50, 50, 50, 0.5);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  margin: 1.5rem auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.obsidian-embed:hover {
+  transform: scale(1.01);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* --- Wikilinks --- */
+.wikilink {
+  color: #6ee7b7;
+  border-bottom: 1px dashed rgba(110, 231, 183, 0.4);
+  cursor: help;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.wikilink:hover {
+  color: #34d399;
+  border-bottom-color: rgba(52, 211, 153, 0.7);
+}
+
+/* --- Footnotes --- */
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(50, 50, 50, 0.5);
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.footnotes ol {
+  padding-left: 1.5rem;
+}
+
+sup a {
+  color: #6ee7b7;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.8em;
+  padding: 0 2px;
+}
+
+sup a:hover {
+  color: #34d399;
+}
+
+/* --- Enhanced Code Blocks --- */
+.prose pre {
+  position: relative;
+  border: 1px solid rgba(50, 50, 50, 0.5);
+  border-radius: 10px !important;
+}
+
+.prose pre code {
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+.prose code:not(pre code) {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(50, 50, 50, 0.5);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.85em;
+  color: #e2e8f0;
+}
+
+/* --- Custom Scrollbar --- */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(100, 100, 100, 0.3);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 100, 100, 0.5);
+}
+
+/* --- Tables (GFM) --- */
+.prose table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+}
+
+.prose th {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(50, 50, 50, 0.5);
+  padding: 0.6rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.prose td {
+  border: 1px solid rgba(50, 50, 50, 0.5);
+  padding: 0.6rem 1rem;
+}
+
+.prose tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* --- Horizontal rules --- */
+.prose hr {
+  border: none;
+  border-top: 1px solid rgba(50, 50, 50, 0.5);
+  margin: 2rem 0;
+}
+
+/* --- Task lists (GFM) --- */
+.prose ul:has(input[type="checkbox"]) {
+  list-style: none;
+  padding-left: 0;
+}
+
+.prose input[type="checkbox"] {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(110, 231, 183, 0.4);
+  border-radius: 3px;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  position: relative;
+  cursor: default;
+}
+
+.prose input[type="checkbox"]:checked {
+  background: rgba(110, 231, 183, 0.3);
+  border-color: #6ee7b7;
+}
+
+.prose input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  top: -2px;
+  left: 2px;
+  font-size: 12px;
+  color: #6ee7b7;
 }

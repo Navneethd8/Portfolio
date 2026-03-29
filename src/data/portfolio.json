@@ -1,7 +1,7 @@
 {
     "about": {
         "description": "I'm currently a Bachelor's student at the University of Washington, specializing in Data Science under the iSchool, with a second degree in Economics. My primary interests lie in Software and Data Engineering, with a growing focus on the intersection of Machine Learning and economic applications.",
-        "resumeUrl": "Navneeth_Dhamotharan_Resume.pdf"
+        "resumeUrl": "/Navneeth_Dhamotharan_Resume.pdf"
     },
     "experience": [
         {
@@ -9,7 +9,7 @@
             "company": "Eat Together",
             "location": "Seattle, WA",
             "date": "Sep. 2025 – Present",
-            "logoSrc": "images/ETLogo.png",
+            "logoSrc": "/images/ETLogo.png",
             "link": "https://www.eat-together.org/",
             "summary": "Leading student connectivity and a shared meal platform for the UW community.",
             "bullets": [
@@ -21,7 +21,7 @@
             "company": "FlyDubai",
             "location": "Dubai, UAE",
             "date": "Jun. 2025 – Sep. 2025",
-            "logoSrc": "images/flydubai.avif",
+            "logoSrc": "/images/flydubai.avif",
             "summary": "Developed highly accurate ML models for flight delay prediction and operations optimizations.",
             "bullets": [
                 "Developed models to predict flight delay accuracy for 600,000+ rows and 90+ features with an 80% R².",
@@ -36,7 +36,7 @@
             "company": "Software Engineering Career Club",
             "location": "Seattle, WA",
             "date": "Apr. 2025 – Present",
-            "logoSrc": "images/swecc.jpg",
+            "logoSrc": "/images/swecc.jpg",
             "link": "https://swecc.org/",
             "github": "https://github.com/swecc-uw",
             "summary": "Mentoring 35+ students in open-source development and improving job search platforms.",
@@ -50,7 +50,7 @@
             "company": "Eat Together",
             "location": "Seattle, WA",
             "date": "Dec. 2024 – Sep. 2025",
-            "logoSrc": "images/ETLogo.png",
+            "logoSrc": "/images/ETLogo.png",
             "link": "https://www.eat-together.org/",
             "summary": "Led a cross-functional team of 6 developers in building cross-platform engagement features.",
             "bullets": [
@@ -64,7 +64,7 @@
             "company": "Eat Together",
             "location": "Seattle, WA",
             "date": "Jan. 2024 – Dec. 2024",
-            "logoSrc": "images/ETLogo.png",
+            "logoSrc": "/images/ETLogo.png",
             "link": "https://www.eat-together.org/",
             "summary": "Developed media galleries, integrated Firebase, and scaled the app by minimizing load.",
             "bullets": [

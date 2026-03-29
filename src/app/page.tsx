@@ -272,14 +272,14 @@ export default function Home() {
         </h3>
         <div className="flex justify-center gap-5">
           <a
-            href="Navneeth_Dhamotharan_Resume.pdf"
+            href="/Navneeth_Dhamotharan_Resume.pdf"
             target="_blank"
             className="resume-link px-6 py-2 rounded-md text-lg font-mono text-center"
           >
             Software Engineering Resume
           </a>
           <a
-            href="Dhamotharan_Navneeth_Resume.pdf"
+            href="/Dhamotharan_Navneeth_Resume.pdf"
             target="_blank"
             className=" resume-link px-6 py-2 rounded-md text-lg font-mono text-center"
           >
