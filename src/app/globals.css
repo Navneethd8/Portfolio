@@ -509,12 +509,17 @@ sup a:hover {
   width: 100%;
   margin: 1.5rem 0;
   font-size: 0.9rem;
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
 }
 
 .prose th {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(50, 50, 50, 0.5);
-  padding: 0.6rem 1rem;
+  padding: 0.75rem 1.25rem;
   text-align: left;
   font-weight: 600;
   color: #e2e8f0;
@@ -522,7 +527,7 @@ sup a:hover {
 
 .prose td {
   border: 1px solid rgba(50, 50, 50, 0.5);
-  padding: 0.6rem 1rem;
+  padding: 0.75rem 1.25rem;
 }
 
 .prose tr:nth-child(even) {
