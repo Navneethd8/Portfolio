@@ -1,18 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
 
 const NOTES_DIRECTORY = path.join(process.cwd(), 'notes');
 
-// Recursively search for a file in the notes directory
-function findFile(dir: string, targetName: string): string | null {
-    if (!fs.existsSync(dir)) return null;
-    const entries = fs.readdirSync(dir, { withFileTypes: true });
+async function findFile(dir: string, targetName: string): Promise<string | null> {
+    try {
+        await fs.access(dir);
+    } catch {
+        return null;
+    }
+
+    let entries;
+    try {
+        entries = await fs.readdir(dir, { withFileTypes: true });
+    } catch {
+        return null;
+    }
 
     for (const entry of entries) {
         const fullPath = path.join(dir, entry.name);
         if (entry.isDirectory()) {
-            const found = findFile(fullPath, targetName);
+            const found = await findFile(fullPath, targetName);
             if (found) return found;
         } else if (entry.name === targetName) {
             return fullPath;
@@ -44,7 +53,7 @@ export async function GET(
         return new NextResponse('Forbidden', { status: 403 });
     }
 
-    const filePath = findFile(NOTES_DIRECTORY, decodedFilename);
+    const filePath = await findFile(NOTES_DIRECTORY, decodedFilename);
 
     if (!filePath) {
         return new NextResponse('Not found', { status: 404 });
@@ -53,12 +62,17 @@ export async function GET(
     const ext = path.extname(filePath).toLowerCase();
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
 
-    const fileBuffer = fs.readFileSync(filePath);
+    try {
+        const fileBuffer = await fs.readFile(filePath);
 
-    return new NextResponse(new Uint8Array(fileBuffer), {
-        headers: {
-            'Content-Type': contentType,
-            'Cache-Control': 'public, max-age=31536000, immutable',
-        },
-    });
+        return new NextResponse(new Uint8Array(fileBuffer), {
+            headers: {
+                'Content-Type': contentType,
+                'Cache-Control': 'public, max-age=31536000, immutable',
+            },
+        });
+    } catch (error) {
+        console.error(`Failed to read file ${filePath}:`, error);
+        return new NextResponse('Internal Server Error', { status: 500 });
+    }
 }
