@@ -4,6 +4,25 @@ import path from 'path';
 
 const NOTES_DIRECTORY = path.join(process.cwd(), 'notes');
 
+function isValidFilename(filename: string): boolean {
+    if (filename.includes('..')) return false;
+    if (filename.includes('/') || filename.includes('\\')) return false;
+    
+    const decoded = decodeURIComponent(filename);
+    if (decoded.includes('..')) return false;
+    if (decoded.includes('/') || decoded.includes('\\')) return false;
+    
+    if (/[<>:"|?*\x00-\x1f]/.test(decoded)) return false;
+    
+    return true;
+}
+
+function isWithinDirectory(filePath: string, directory: string): boolean {
+    const resolvedPath = path.resolve(filePath);
+    const resolvedDir = path.resolve(directory);
+    return resolvedPath.startsWith(resolvedDir + path.sep);
+}
+
 async function findFile(dir: string, targetName: string): Promise<string | null> {
     try {
         await fs.access(dir);
@@ -46,17 +65,20 @@ export async function GET(
     { params }: { params: Promise<{ filename: string }> }
 ) {
     const { filename } = await params;
-    const decodedFilename = decodeURIComponent(filename);
-
-    // Security: prevent directory traversal
-    if (decodedFilename.includes('..') || decodedFilename.includes('/')) {
+    
+    if (!isValidFilename(filename)) {
         return new NextResponse('Forbidden', { status: 403 });
     }
 
+    const decodedFilename = decodeURIComponent(filename);
     const filePath = await findFile(NOTES_DIRECTORY, decodedFilename);
 
     if (!filePath) {
         return new NextResponse('Not found', { status: 404 });
+    }
+
+    if (!isWithinDirectory(filePath, NOTES_DIRECTORY)) {
+        return new NextResponse('Forbidden', { status: 403 });
     }
 
     const ext = path.extname(filePath).toLowerCase();
