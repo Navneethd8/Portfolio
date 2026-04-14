@@ -29,6 +29,12 @@ export interface Note extends NoteMetadata {
     html: string;
 }
 
+interface ParsedNote {
+    metadata: NoteMetadata;
+    content: string;
+    cleanedBody: string;
+}
+
 function getAllMarkdownFiles(dir: string, fileList: string[] = []): string[] {
     if (!fs.existsSync(dir)) return fileList;
     const files = fs.readdirSync(dir);
@@ -200,9 +206,10 @@ async function renderMarkdown(content: string): Promise<string> {
 }
 
 /**
- * Parse a single markdown file into its metadata (no HTML rendering).
+ * Parse a single markdown file into its metadata and content.
+ * Returns both metadata and raw content to avoid duplicate file reads.
  */
-function parseNoteMetadata(filePath: string): NoteMetadata {
+function parseNote(filePath: string): ParsedNote {
     const fileContent = fs.readFileSync(filePath, 'utf8');
     const { data, content } = matter(fileContent);
 
@@ -223,7 +230,7 @@ function parseNoteMetadata(filePath: string): NoteMetadata {
 
     const cleanedBody = content.replace(/^#\s+.+$/m, "").trim();
 
-    return {
+    const metadata: NoteMetadata = {
         title: data.title || extractTitle(content, slugToTitle(slug)),
         date: data.date ? (data.date instanceof Date ? data.date.toISOString().split('T')[0] : String(data.date)) : '',
         tags: Array.isArray(data.tags) ? data.tags : data.tags ? [data.tags] : [],
@@ -233,6 +240,12 @@ function parseNoteMetadata(filePath: string): NoteMetadata {
         group: group,
         subgroup: subgroup,
         snippet: createExcerpt(cleanedBody),
+    };
+
+    return {
+        metadata,
+        content,
+        cleanedBody,
     };
 }
 
@@ -249,7 +262,7 @@ export function getAllNotesMeta(): NoteMetadata[] {
 
     const files = getAllMarkdownFiles(NOTES_DIRECTORY);
 
-    const notes = files.map((filePath) => parseNoteMetadata(filePath));
+    const notes = files.map((filePath) => parseNote(filePath).metadata);
 
     const sortedNotes = notes.sort((a, b) => {
         if (a.date && b.date) {
@@ -280,16 +293,12 @@ export async function getNoteBySlug(slug: string): Promise<Note | null> {
 
     if (!fs.existsSync(filePath)) return null;
 
-    const metadata = parseNoteMetadata(filePath);
-
-    const fileContent = fs.readFileSync(filePath, 'utf8');
-    const { content } = matter(fileContent);
-    const cleanedBody = content.replace(/^#\s+.+$/m, "").trim();
-    const html = await renderMarkdown(cleanedBody);
+    const parsed = parseNote(filePath);
+    const html = await renderMarkdown(parsed.cleanedBody);
 
     return {
-        ...metadata,
-        content,
+        ...parsed.metadata,
+        content: parsed.content,
         html,
     };
 }
