@@ -37,16 +37,26 @@ interface ParsedNote {
 
 function getAllMarkdownFiles(dir: string, fileList: string[] = []): string[] {
     if (!fs.existsSync(dir)) return fileList;
-    const files = fs.readdirSync(dir);
+    
+    let files: string[];
+    try {
+        files = fs.readdirSync(dir);
+    } catch (error) {
+        console.error(`Failed to read directory ${dir}:`, error);
+        return fileList;
+    }
 
     files.forEach((file) => {
         const filePath = path.join(dir, file);
-        if (fs.statSync(filePath).isDirectory()) {
-            // Skip .obsidian and nested 'notes' directory (submodule artifact)
-            if (file === '.obsidian' || (dir === NOTES_DIRECTORY && file === 'notes')) return;
-            getAllMarkdownFiles(filePath, fileList);
-        } else if (file.endsWith('.md') && file !== 'template.md') {
-            fileList.push(filePath);
+        try {
+            if (fs.statSync(filePath).isDirectory()) {
+                if (file === '.obsidian' || (dir === NOTES_DIRECTORY && file === 'notes')) return;
+                getAllMarkdownFiles(filePath, fileList);
+            } else if (file.endsWith('.md') && file !== 'template.md') {
+                fileList.push(filePath);
+            }
+        } catch (error) {
+            console.error(`Failed to stat file ${filePath}:`, error);
         }
     });
 
@@ -209,8 +219,15 @@ async function renderMarkdown(content: string): Promise<string> {
  * Parse a single markdown file into its metadata and content.
  * Returns both metadata and raw content to avoid duplicate file reads.
  */
-function parseNote(filePath: string): ParsedNote {
-    const fileContent = fs.readFileSync(filePath, 'utf8');
+function parseNote(filePath: string): ParsedNote | null {
+    let fileContent: string;
+    try {
+        fileContent = fs.readFileSync(filePath, 'utf8');
+    } catch (error) {
+        console.error(`Failed to read note at ${filePath}:`, error);
+        return null;
+    }
+    
     const { data, content } = matter(fileContent);
 
     const relativePath = path.relative(NOTES_DIRECTORY, filePath);
@@ -262,7 +279,10 @@ export function getAllNotesMeta(): NoteMetadata[] {
 
     const files = getAllMarkdownFiles(NOTES_DIRECTORY);
 
-    const notes = files.map((filePath) => parseNote(filePath).metadata);
+    const notes = files
+        .map((filePath) => parseNote(filePath))
+        .filter((result): result is ParsedNote => result !== null)
+        .map((result) => result.metadata);
 
     const sortedNotes = notes.sort((a, b) => {
         if (a.date && b.date) {
@@ -294,6 +314,8 @@ export async function getNoteBySlug(slug: string): Promise<Note | null> {
     if (!fs.existsSync(filePath)) return null;
 
     const parsed = parseNote(filePath);
+    if (!parsed) return null;
+    
     const html = await renderMarkdown(parsed.cleanedBody);
 
     return {
