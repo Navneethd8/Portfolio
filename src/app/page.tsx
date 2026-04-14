@@ -4,6 +4,7 @@ import { CgWebsite } from "react-icons/cg";
 import ExperienceTimeline, { ExperienceTimelineItem } from "@/components/ExperienceTimeline";
 import ProjectCarousel, { ProjectCard } from "@/components/ProjectCarousel";
 import portfolioData from "@/data/portfolio.json";
+import type { Experience, Project } from "@/types/portfolio";
 import Image from "next/image";
 
 export default function Home() {
@@ -81,7 +82,7 @@ export default function Home() {
         </h2>
 
         <ExperienceTimeline>
-          {portfolioData.experience.map((exp: { role: string, company: string, location: string, date: string, logoSrc: string, summary: string, github?: string, link?: string }, idx: number) => (
+          {portfolioData.experience.map((exp: Experience, idx: number) => (
             <ExperienceTimelineItem
               key={idx}
               role={exp.role}
@@ -179,7 +180,7 @@ export default function Home() {
         </h2>
 
         <ProjectCarousel>
-          {portfolioData.dataProjects.map((project: { title: string, date: string, tags: string[], summary: string, link?: string, github?: string }, idx: number) => (
+          {portfolioData.dataProjects.map((project: Project, idx: number) => (
             <ProjectCard
               key={idx}
               title={project.title}
@@ -225,7 +226,7 @@ export default function Home() {
         </h2>
 
         <ProjectCarousel>
-          {portfolioData.sweProjects.map((project: { title: string, date: string, tags: string[], summary: string, link?: string, github?: string }, idx: number) => (
+          {portfolioData.sweProjects.map((project: Project, idx: number) => (
             <ProjectCard
               key={idx}
               title={project.title}
