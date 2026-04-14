@@ -267,6 +267,8 @@ function parseNote(filePath: string): ParsedNote | null {
 }
 
 let metaCache: NoteMetadata[] | null = null;
+const noteCache = new Map<string, { note: Note; timestamp: number }>();
+const NOTE_CACHE_TTL = 5 * 60 * 1000; // 5 minutes in dev, permanent in prod
 
 /**
  * Get metadata for all notes — NO HTML rendering.
@@ -307,8 +309,19 @@ export function getAllTags(): string[] {
 /**
  * Get a single note by slug — including full HTML rendering.
  * Only called when a user navigates to a specific note page.
+ * Results are cached to avoid expensive re-rendering.
  */
 export async function getNoteBySlug(slug: string): Promise<Note | null> {
+    const isProduction = process.env.NODE_ENV === 'production';
+    
+    const cached = noteCache.get(slug);
+    if (cached) {
+        if (isProduction || Date.now() - cached.timestamp < NOTE_CACHE_TTL) {
+            return cached.note;
+        }
+        noteCache.delete(slug);
+    }
+
     const filePath = path.join(NOTES_DIRECTORY, `${slug}.md`);
 
     if (!fs.existsSync(filePath)) return null;
@@ -318,9 +331,13 @@ export async function getNoteBySlug(slug: string): Promise<Note | null> {
     
     const html = await renderMarkdown(parsed.cleanedBody);
 
-    return {
+    const note: Note = {
         ...parsed.metadata,
         content: parsed.content,
         html,
     };
+
+    noteCache.set(slug, { note, timestamp: Date.now() });
+
+    return note;
 }
