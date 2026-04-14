@@ -18,7 +18,6 @@ export interface NoteMetadata {
     tags: string[];
     slug: string;
     path: string;
-    category: string;
     group: string;
     subgroup: string | null;
     snippet: string;
@@ -253,9 +252,8 @@ function parseNote(filePath: string): ParsedNote | null {
         tags: Array.isArray(data.tags) ? data.tags : data.tags ? [data.tags] : [],
         slug,
         path: filePath,
-        category: group,
-        group: group,
-        subgroup: subgroup,
+        group,
+        subgroup,
         snippet: createExcerpt(cleanedBody),
     };
 
