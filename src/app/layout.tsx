@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "katex/dist/katex.min.css";
 import "./globals.css";
+import MlpAtmosphere from "@/components/MlpAtmosphere";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -25,12 +27,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${spaceGrotesk.variable} ${geistMono.variable} antialiased`}>
-        {/* Background overlay (optional) */}
-        <div className="bg-overlay"></div>
-
-        {/* Your actual page content */}
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${spaceGrotesk.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning
+      >
+        <Script id="theme-init" strategy="beforeInteractive">
+          {`(function(){try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();`}
+        </Script>
+        <MlpAtmosphere />
         {children}
       </body>
     </html>

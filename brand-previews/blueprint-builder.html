@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blueprint Builder - Brand Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /*
+      BLUEPRINT BUILDER
+      Based on your existing codebase:
+      - Space Grotesk (your primary font)
+      - Blue color palette (#2563EB, #3B82F6)
+      - Sidebar layout pattern
+      - Selected work: editorial list (Signal & Noise style)
+      - Underline accents on headings
+      - Notes terminal: dark by default on dark site; light shell when site is light
+      - Background: 48px grid + canvas MLP (feed-forward pulse) snapped to grid; grid stays, motion adds life
+      
+      Personality: Technical, structured, architectural
+    */
+    
+    :root {
+      --background: #FFFFFF;
+      --foreground: #050E3C;
+      --sidebar: #2B2B2B;
+      --sidebar-link: #93C5FD;
+      --card-bg: #F0F4F8;
+      
+      --text: #2C2C2C;
+      --paragraph: #4D4D4D;
+      
+      --h1: #111111;
+      --h2: #222222;
+      --h3: #333333;
+      --h4: #444444;
+      
+      --link: #2563EB;
+      --link-hover: #1D4ED8;
+      
+      --tag-bg: #3B82F6;
+      --tag-text: #FFFFFF;
+      
+      --border: #E2E8F0;
+      --grid-color: rgba(37, 99, 235, 0.04);
+      --grid-bloom: rgba(37, 99, 235, 0.14);
+      --mlp-edge: rgba(37, 99, 235, 0.11);
+      --mlp-node: rgba(37, 99, 235, 0.18);
+      --mlp-pulse: rgba(59, 130, 246, 0.55);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #1A1A1A;
+        --foreground: #FFFFFF;
+        --sidebar: #F4F4F4;
+        --sidebar-link: #1D4ED8;
+        --card-bg: #2C3036;
+        
+        --text: #EAEAEA;
+        --paragraph: #CCCCCC;
+        
+        --h1: #FFFFFF;
+        --h2: #EAEAEA;
+        --h3: #DDDDDD;
+        --h4: #CCCCCC;
+        
+        --link: #64B5F6;
+        --link-hover: #90CAF9;
+        
+        --tag-bg: #2563EB;
+        --tag-text: #FFFFFF;
+        
+        --border: #3D4450;
+        --grid-color: rgba(100, 181, 246, 0.03);
+        --grid-bloom: rgba(147, 197, 253, 0.1);
+        --mlp-edge: rgba(147, 197, 253, 0.09);
+        --mlp-node: rgba(147, 197, 253, 0.16);
+        --mlp-pulse: rgba(147, 197, 253, 0.5);
+      }
+    }
+
+    [data-theme="dark"] {
+      --background: #1A1A1A;
+      --foreground: #FFFFFF;
+      --sidebar: #F4F4F4;
+      --sidebar-link: #1D4ED8;
+      --card-bg: #2C3036;
+      
+      --text: #EAEAEA;
+      --paragraph: #CCCCCC;
+      
+      --h1: #FFFFFF;
+      --h2: #EAEAEA;
+      --h3: #DDDDDD;
+      --h4: #CCCCCC;
+      
+      --link: #64B5F6;
+      --link-hover: #90CAF9;
+      
+      --tag-bg: #2563EB;
+      --tag-text: #FFFFFF;
+      
+      --border: #3D4450;
+      --grid-color: rgba(100, 181, 246, 0.03);
+      --grid-bloom: rgba(147, 197, 253, 0.1);
+      --mlp-edge: rgba(147, 197, 253, 0.09);
+      --mlp-node: rgba(147, 197, 253, 0.16);
+      --mlp-pulse: rgba(147, 197, 253, 0.5);
+    }
+
+    [data-theme="light"] {
+      --background: #FFFFFF;
+      --foreground: #050E3C;
+      --sidebar: #2B2B2B;
+      --sidebar-link: #93C5FD;
+      --card-bg: #F0F4F8;
+      
+      --text: #2C2C2C;
+      --paragraph: #4D4D4D;
+      
+      --h1: #111111;
+      --h2: #222222;
+      --h3: #333333;
+      --h4: #444444;
+      
+      --link: #2563EB;
+      --link-hover: #1D4ED8;
+      
+      --tag-bg: #3B82F6;
+      --tag-text: #FFFFFF;
+      
+      --border: #E2E8F0;
+      --grid-color: rgba(37, 99, 235, 0.04);
+      --grid-bloom: rgba(37, 99, 235, 0.14);
+      --mlp-edge: rgba(37, 99, 235, 0.11);
+      --mlp-node: rgba(37, 99, 235, 0.18);
+      --mlp-pulse: rgba(59, 130, 246, 0.55);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      background-color: var(--background);
+      color: var(--foreground);
+      line-height: 1.6;
+      min-height: 100vh;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    /* MLP under the grid — grid unchanged, life layered in */
+    .atmosphere {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    #mlp-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      opacity: 0.92;
+    }
+
+    .grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* Soft pulse at grid crossings — reinforces “signal on a lattice” */
+    .grid-lines::before {
+      content: "";
+      position: absolute;
+      inset: -48px;
+      background-image: radial-gradient(
+        circle at 24px 24px,
+        var(--grid-bloom) 0.5px,
+        transparent 2px
+      );
+      background-size: 48px 48px;
+      opacity: 0.35;
+      animation: grid-bloom-drift 14s ease-in-out infinite;
+    }
+
+    @keyframes grid-bloom-drift {
+      0%, 100% {
+        opacity: 0.22;
+        transform: translate(0, 0);
+      }
+      33% {
+        opacity: 0.42;
+        transform: translate(8px, 4px);
+      }
+      66% {
+        opacity: 0.3;
+        transform: translate(4px, 10px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .grid-lines::before {
+        animation: none;
+        opacity: 0.28;
+        transform: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    a { color: var(--link); text-decoration: underline; transition: color 0.2s ease; }
+    a:hover { color: var(--link-hover); }
+    
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--link);
+      outline-offset: 2px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.5fr) minmax(0, 3fr);
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 1024px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: auto;
+        padding: 1rem 1.5rem;
+        z-index: 50;
+      }
+      .main {
+        margin-top: 80px;
+      }
+    }
+
+    .sidebar {
+      background: var(--sidebar);
+      color: var(--background);
+      padding: 2rem;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (max-width: 1024px) {
+      .sidebar {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: auto;
+        position: fixed;
+      }
+    }
+
+    .sidebar-header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--background);
+    }
+
+    .sidebar-tagline {
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: var(--background);
+      opacity: 0.9;
+    }
+
+    .sidebar-nav {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    @media (max-width: 1024px) {
+      .sidebar-nav { display: none; }
+      .sidebar-tagline { display: none; }
+    }
+
+    .sidebar-nav a {
+      color: var(--sidebar-link);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      font-size: 1.125rem;
+      transition: color 0.2s;
+    }
+
+    .sidebar-nav a:hover {
+      color: var(--link-hover);
+    }
+
+    .sidebar-contact {
+      margin-top: auto;
+      padding-top: 2rem;
+    }
+
+    @media (max-width: 1024px) {
+      .sidebar-contact { display: none; }
+    }
+
+    .sidebar-contact h3 {
+      font-size: 1.125rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      color: var(--background);
+    }
+
+    .sidebar-contact a {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--background);
+      text-decoration: none;
+      padding: 0.375rem 0;
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    .sidebar-contact a:hover {
+      opacity: 1;
+      color: var(--link-hover);
+    }
+
+    .theme-toggle {
+      background: transparent;
+      border: 1px solid var(--background);
+      color: var(--background);
+      padding: 0.5rem;
+      cursor: pointer;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    .theme-toggle:hover { opacity: 1; }
+    .theme-toggle svg { width: 20px; height: 20px; }
+    
+    .sun-icon { display: none; }
+    .moon-icon { display: block; }
+    [data-theme="dark"] .sun-icon { display: block; }
+    [data-theme="dark"] .moon-icon { display: none; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .sun-icon { display: block; }
+      :root:not([data-theme="light"]) .moon-icon { display: none; }
+    }
+
+    .main {
+      padding: 2rem 3rem;
+      max-width: 900px;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--h1);
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      height: 2px;
+      width: 3rem;
+      background: var(--foreground);
+      margin-top: 0.5rem;
+    }
+
+    .about-content {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 640px) {
+      .about-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
+
+    .about-image {
+      width: 160px;
+      height: 160px;
+      border-radius: 8px;
+      background: var(--card-bg);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      border: 1px solid var(--border);
+    }
+
+    .about-text h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--h2);
+    }
+
+    .about-text p {
+      color: var(--paragraph);
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    @media (max-width: 640px) {
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+
+    .skills-category h3 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      color: var(--foreground);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      padding: 0.25rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-family: 'Geist Mono', monospace;
+    }
+
+    /* Selected work — list layout (Signal & Noise style) */
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--paragraph);
+      margin-bottom: 0.5rem;
+    }
+
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-row {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      gap: 1rem;
+      align-items: center;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: padding-left 0.2s ease;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .project-row:hover {
+        padding-left: 0.5rem;
+      }
+    }
+
+    .project-row:first-of-type {
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 768px) {
+      .project-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+    }
+
+    .project-row-name {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      color: var(--foreground);
+      margin: 0;
+    }
+
+    .project-row-desc {
+      font-size: 0.9rem;
+      color: var(--paragraph);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .project-row-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: flex-end;
+    }
+
+    @media (max-width: 768px) {
+      .project-row-tags {
+        justify-content: flex-start;
+      }
+    }
+
+    .project-row-tag {
+      font-size: 0.75rem;
+      font-family: 'Geist Mono', monospace;
+      color: var(--paragraph);
+      padding: 0.2rem 0.65rem;
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      background: transparent;
+    }
+
+    .timeline {
+      position: relative;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 1rem;
+      padding-bottom: 2rem;
+      position: relative;
+    }
+
+    .timeline-item:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 23px;
+      top: 48px;
+      bottom: 0;
+      width: 2px;
+      background: var(--card-bg);
+    }
+
+    .timeline-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--card-bg);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 1px solid var(--border);
+      z-index: 1;
+    }
+
+    .timeline-content {
+      flex: 1;
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .timeline-role {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--foreground);
+    }
+
+    .timeline-company {
+      font-size: 1rem;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    .timeline-date {
+      font-size: 0.875rem;
+      opacity: 0.6;
+      white-space: nowrap;
+    }
+
+    .timeline-summary {
+      font-style: italic;
+      opacity: 0.7;
+      margin-top: 0.375rem;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* ==========================================
+       NOTES TERMINAL SECTION
+       Preserves your existing terminal aesthetic
+       while integrating with Blueprint Builder theme
+       ========================================== */
+    
+    .notes-terminal {
+      /* Dark shell: deliberately darker than page so it reads as a “device” */
+      --term-bg: #030303;
+      --term-panel: #111111;
+      --term-panel-deep: #050505;
+      --term-border: #3f3f46;
+      --term-text: #d4d4d8;
+      --term-muted: #71717a;
+      --term-dim: #52525b;
+      --term-green: #4ade80;
+      --term-green-soft: rgba(74, 222, 128, 0.85);
+      --term-card: #0c0c0c;
+      --term-folder: #a1a1aa;
+      --term-folder-hover: #fafafa;
+      --term-frame: rgba(228, 228, 231, 0.22);
+      --term-outer-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.06),
+        0 28px 72px rgba(0, 0, 0, 0.65),
+        0 10px 28px rgba(0, 0, 0, 0.45);
+
+      background: var(--term-bg);
+      border: 2px solid var(--term-frame);
+      border-radius: 12px;
+      overflow: hidden;
+      font-family: 'Geist Mono', monospace;
+      color: var(--term-text);
+      box-shadow: var(--term-outer-shadow);
+      isolation: isolate;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    /* Light site: terminal reads as a framed panel on the page (not another gray card) */
+    [data-theme="light"] .notes-terminal {
+      --term-bg: #e2e8f0;
+      --term-panel: #cbd5e1;
+      --term-panel-deep: #f1f5f9;
+      --term-border: #94a3b8;
+      --term-text: #0f172a;
+      --term-muted: #475569;
+      --term-dim: #64748b;
+      --term-green: #166534;
+      --term-green-soft: rgba(22, 101, 52, 0.9);
+      --term-card: #ffffff;
+      --term-folder: #334155;
+      --term-folder-hover: #020617;
+      --term-frame: rgba(15, 23, 42, 0.35);
+      --term-outer-shadow:
+        0 0 0 1px rgba(37, 99, 235, 0.18),
+        0 24px 56px rgba(15, 23, 42, 0.16),
+        0 10px 24px rgba(15, 23, 42, 0.1);
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) .notes-terminal {
+        --term-bg: #e2e8f0;
+        --term-panel: #cbd5e1;
+        --term-panel-deep: #f1f5f9;
+        --term-border: #94a3b8;
+        --term-text: #0f172a;
+        --term-muted: #475569;
+        --term-dim: #64748b;
+        --term-green: #166534;
+        --term-green-soft: rgba(22, 101, 52, 0.9);
+        --term-card: #ffffff;
+        --term-folder: #334155;
+        --term-folder-hover: #020617;
+        --term-frame: rgba(15, 23, 42, 0.35);
+        --term-outer-shadow:
+          0 0 0 1px rgba(37, 99, 235, 0.18),
+          0 24px 56px rgba(15, 23, 42, 0.16),
+          0 10px 24px rgba(15, 23, 42, 0.1);
+      }
+    }
+
+    .terminal-chrome {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem;
+      background: var(--term-panel);
+      border-bottom: 1px solid var(--term-border);
+      position: relative;
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 6px;
+      position: absolute;
+      left: 1rem;
+    }
+
+    .terminal-dots span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .terminal-dots span:nth-child(1) { background: #ef4444; }
+    .terminal-dots span:nth-child(2) { background: #f59e0b; }
+    .terminal-dots span:nth-child(3) { background: #22c55e; }
+
+    .terminal-title {
+      font-size: 0.75rem;
+      color: var(--term-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .terminal-search {
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--term-border);
+      background: var(--term-bg);
+    }
+
+    .terminal-prompt {
+      color: var(--term-green);
+      font-weight: 700;
+      margin-right: 0.75rem;
+    }
+
+    .terminal-search input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--term-green);
+      font-family: 'Geist Mono', monospace;
+      font-size: 0.875rem;
+      outline: none;
+    }
+
+    .terminal-search input::placeholder {
+      color: var(--term-dim);
+    }
+
+    .terminal-content {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      min-height: 300px;
+    }
+
+    @media (max-width: 768px) {
+      .terminal-content {
+        grid-template-columns: 1fr;
+      }
+      .terminal-sidebar {
+        display: none;
+      }
+    }
+
+    .terminal-sidebar {
+      background: var(--term-panel-deep);
+      border-right: 1px solid var(--term-border);
+      padding: 0.75rem;
+    }
+
+    .terminal-folder {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8rem;
+      color: var(--term-folder);
+      cursor: pointer;
+      border-left: 2px solid transparent;
+      transition: all 0.15s;
+    }
+
+    .terminal-folder:hover {
+      background: var(--term-panel);
+      color: var(--term-folder-hover);
+    }
+
+    .terminal-folder.active {
+      background: var(--term-panel);
+      color: var(--term-green);
+      border-left-color: var(--term-green);
+    }
+
+    .terminal-folder-icon {
+      color: #eab308;
+      opacity: 0.7;
+    }
+
+    .terminal-main {
+      padding: 1.5rem;
+      background: var(--term-bg);
+    }
+
+    .terminal-section-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--term-green);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--term-border);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .note-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .note-card {
+      background: var(--term-card);
+      border: 1px solid var(--term-border);
+      padding: 1rem;
+      transition: border-color 0.15s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .note-card:hover {
+      border-color: var(--term-green);
+    }
+
+    .note-card-path {
+      font-size: 0.65rem;
+      color: var(--term-green-soft);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .note-card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--term-text);
+      margin-bottom: 0.5rem;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .note-card:hover .note-card-title {
+      color: var(--term-green);
+    }
+
+    .note-card-snippet {
+      font-size: 0.75rem;
+      color: var(--term-muted);
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+
+    .note-card-snippet .cmd {
+      color: var(--term-green);
+    }
+
+    .note-card-tags {
+      display: flex;
+      gap: 0.375rem;
+      flex-wrap: wrap;
+    }
+
+    .note-tag {
+      font-size: 0.6rem;
+      padding: 0.2rem 0.4rem;
+      background: var(--term-bg);
+      border: 1px solid var(--term-border);
+      color: var(--term-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .note-card:hover .note-tag {
+      color: var(--term-green);
+      border-color: color-mix(in srgb, var(--term-green) 35%, var(--term-border));
+    }
+  </style>
+</head>
+<body>
+  <div class="atmosphere" aria-hidden="true">
+    <canvas id="mlp-canvas" width="800" height="600"></canvas>
+    <div class="grid-lines"></div>
+  </div>
+
+  <div class="layout">
+    <aside class="sidebar" role="navigation" aria-label="Main navigation">
+      <div class="sidebar-header">
+        <h1>Navneeth Dhamotharan</h1>
+        <p class="sidebar-tagline">Data Scientist & Engineer</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#notes">Notes</a>
+        <a href="#resume">Resume</a>
+      </nav>
+
+      <div class="sidebar-contact">
+        <h3>Get In Touch</h3>
+        <a href="mailto:nd17@uw.edu">nd17@uw.edu</a>
+        <a href="https://linkedin.com/in/navneethd">LinkedIn</a>
+        <a href="https://github.com/navneethd8">GitHub</a>
+      </div>
+
+      <button class="theme-toggle" aria-label="Toggle dark mode" onclick="toggleTheme()" style="margin-top: 1rem;">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+      </button>
+    </aside>
+
+    <main id="main-content" class="main" role="main">
+      <section id="about" class="section" aria-labelledby="about-heading">
+        <h2 id="about-heading" class="section-title">About Me!</h2>
+        <div class="about-content">
+          <div class="about-image" aria-hidden="true">N</div>
+          <div class="about-text">
+            <h3>Hi! I'm Navneeth</h3>
+            <p>I'm currently a Bachelor's student at the University of Washington, specializing in Data Science under the iSchool, with a second degree in Economics.</p>
+            <p>My primary interests lie in Software and Data Engineering, with a growing focus on the intersection of Machine Learning and economic applications.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="experience" class="section" aria-labelledby="experience-heading">
+        <h2 id="experience-heading" class="section-title">Experience</h2>
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="timeline-logo">FD</div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <div>
+                  <div class="timeline-role">Data Science Intern</div>
+                  <div class="timeline-company">FlyDubai</div>
+                </div>
+                <span class="timeline-date">Jun. 2025 – Sep. 2025</span>
+              </div>
+              <p class="timeline-summary">Developed highly accurate ML models for flight delay prediction and operations optimizations.</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <div class="timeline-logo">ET</div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <div>
+                  <div class="timeline-role">Director</div>
+                  <div class="timeline-company">Eat Together</div>
+                </div>
+                <span class="timeline-date">Sep. 2025 – Present</span>
+              </div>
+              <p class="timeline-summary">Leading student connectivity and a shared meal platform for the UW community.</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <div class="timeline-logo">SW</div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <div>
+                  <div class="timeline-role">Software Engineering Officer</div>
+                  <div class="timeline-company">SWECC</div>
+                </div>
+                <span class="timeline-date">Apr. 2025 – Present</span>
+              </div>
+              <p class="timeline-summary">Mentoring 35+ students in open-source development and improving job search platforms.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="skills" class="section" aria-labelledby="skills-heading">
+        <h2 id="skills-heading" class="section-title">Skills</h2>
+        <div class="skills-grid">
+          <div class="skills-category">
+            <h3>Languages</h3>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">Java</span>
+              <span class="tag">SQL</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">R</span>
+            </div>
+          </div>
+          <div class="skills-category">
+            <h3>Tools & Frameworks</h3>
+            <div class="tags">
+              <span class="tag">React</span>
+              <span class="tag">Next.js</span>
+              <span class="tag">Docker</span>
+              <span class="tag">AWS</span>
+              <span class="tag">GCP</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section" aria-labelledby="projects-heading">
+        <p class="section-label">Selected Work</p>
+        <h2 id="projects-heading" class="section-title">Projects</h2>
+        <div class="projects-list" role="list">
+          <article class="project-row" role="listitem">
+            <h3 class="project-row-name">MacroScope</h3>
+            <p class="project-row-desc">Interactive global economic map predicting inflation trends across 400K+ IMF fiscal records.</p>
+            <div class="project-row-tags">
+              <span class="project-row-tag">Python</span>
+              <span class="project-row-tag">Geopandas</span>
+              <span class="project-row-tag">XGBoost</span>
+            </div>
+          </article>
+          <article class="project-row" role="listitem">
+            <h3 class="project-row-name">Bingo on the Ave</h3>
+            <p class="project-row-desc">Award-winning geolocation checklist app engaging 40,000+ UW students with scavenger hunts.</p>
+            <div class="project-row-tags">
+              <span class="project-row-tag">React</span>
+              <span class="project-row-tag">Next.js</span>
+              <span class="project-row-tag">TypeScript</span>
+            </div>
+          </article>
+          <article class="project-row" role="listitem">
+            <h3 class="project-row-name">DataMed</h3>
+            <p class="project-row-desc">Award-winning ML model optimizing healthcare cost predictions across 1.2M medical records.</p>
+            <div class="project-row-tags">
+              <span class="project-row-tag">Python</span>
+              <span class="project-row-tag">Scikit-learn</span>
+              <span class="project-row-tag">Optuna</span>
+            </div>
+          </article>
+          <article class="project-row" role="listitem">
+            <h3 class="project-row-name">Fundit</h3>
+            <p class="project-row-desc">Cross-platform financial app with real-time portfolio management via Plaid and Polygon.</p>
+            <div class="project-row-tags">
+              <span class="project-row-tag">React Native</span>
+              <span class="project-row-tag">Firebase</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="notes" class="section" aria-labelledby="notes-heading">
+        <h2 id="notes-heading" class="section-title">Notes</h2>
+        <p style="color: var(--paragraph); margin-bottom: 1.5rem;">Course notes, technical writeups, and things I'm learning.</p>
+        
+        <div class="notes-terminal">
+          <div class="terminal-chrome">
+            <div class="terminal-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <span class="terminal-title">navneeth@portfolio: ~/notes</span>
+          </div>
+          
+          <div class="terminal-search">
+            <span class="terminal-prompt">❯</span>
+            <input type="text" placeholder="grep -i 'search notes, tags, content...'" readonly>
+          </div>
+          
+          <div class="terminal-content">
+            <aside class="terminal-sidebar">
+              <div class="terminal-folder active">
+                <span class="terminal-folder-icon">📁</span> ~/all_notes
+              </div>
+              <div class="terminal-folder">
+                <span class="terminal-folder-icon">📁</span> Data Science/
+              </div>
+              <div class="terminal-folder">
+                <span class="terminal-folder-icon">📁</span> Economics/
+              </div>
+              <div class="terminal-folder">
+                <span class="terminal-folder-icon">📁</span> Algorithms/
+              </div>
+              <div class="terminal-folder">
+                <span class="terminal-folder-icon">📁</span> ML & AI/
+              </div>
+            </aside>
+            
+            <main class="terminal-main">
+              <h3 class="terminal-section-title">
+                <span class="terminal-folder-icon">📁</span> ~/Data Science
+              </h3>
+              <div class="note-cards-grid">
+                <a href="#" class="note-card">
+                  <div class="note-card-path">📄 data-science/pandas-basics.md</div>
+                  <h4 class="note-card-title">Pandas Fundamentals</h4>
+                  <p class="note-card-snippet">
+                    <span class="cmd">$</span> cat pandas-basics.md | head -n 3<br>
+                    DataFrames, Series, and essential operations for data manipulation...
+                  </p>
+                  <div class="note-card-tags">
+                    <span class="note-tag">[python]</span>
+                    <span class="note-tag">[pandas]</span>
+                  </div>
+                </a>
+                <a href="#" class="note-card">
+                  <div class="note-card-path">📄 data-science/sql-queries.md</div>
+                  <h4 class="note-card-title">Advanced SQL Patterns</h4>
+                  <p class="note-card-snippet">
+                    <span class="cmd">$</span> cat sql-queries.md | head -n 3<br>
+                    Window functions, CTEs, and optimization techniques...
+                  </p>
+                  <div class="note-card-tags">
+                    <span class="note-tag">[sql]</span>
+                    <span class="note-tag">[postgres]</span>
+                  </div>
+                </a>
+                <a href="#" class="note-card">
+                  <div class="note-card-path">📄 ml-ai/neural-networks.md</div>
+                  <h4 class="note-card-title">Neural Network Basics</h4>
+                  <p class="note-card-snippet">
+                    <span class="cmd">$</span> cat neural-networks.md | head -n 3<br>
+                    Backpropagation, activation functions, and architecture design...
+                  </p>
+                  <div class="note-card-tags">
+                    <span class="note-tag">[ml]</span>
+                    <span class="note-tag">[pytorch]</span>
+                  </div>
+                </a>
+              </div>
+            </main>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    function getThemePreference() {
+      const stored = localStorage.getItem('theme');
+      if (stored) return stored;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme') || getThemePreference();
+      const next = current === 'dark' ? 'light' : 'dark';
+      setTheme(next);
+    }
+
+    const initialTheme = getThemePreference();
+    if (localStorage.getItem('theme')) {
+      setTheme(initialTheme);
+    }
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.getItem('theme')) {
+        document.documentElement.removeAttribute('data-theme');
+      }
+    });
+  </script>
+
+  <script>
+    (function () {
+      const canvas = document.getElementById("mlp-canvas");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+      const GRID = 48;
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function cssColor(name) {
+        return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || "rgba(59,130,246,0.4)";
+      }
+
+      function snapCenter(v) {
+        return Math.round((v - GRID / 2) / GRID) * GRID + GRID / 2;
+      }
+
+      let nodes = [];
+      let edges = [];
+      let edgeLengths = [];
+      let totalEdgeLength = 0;
+      let layers = [];
+      let cssW = 800;
+      let cssH = 600;
+
+      function buildGraph(w, h) {
+        const marginX = GRID * 2;
+        const marginY = GRID * 2;
+        const usableW = w - marginX * 2;
+        const usableH = h - marginY * 2;
+        /* 5 layers — compact pyramid */
+        const counts = [2, 4, 5, 4, 3];
+        layers = counts.map((count, li) => {
+          const t = counts.length === 1 ? 0.5 : li / (counts.length - 1);
+          const rawX = marginX + t * usableW;
+          const x = snapCenter(rawX);
+          const ys = [];
+          for (let j = 0; j < count; j++) {
+            const rawY = marginY + ((j + 1) / (count + 1)) * usableH;
+            ys.push({ x, y: snapCenter(rawY), layer: li });
+          }
+          return ys;
+        });
+
+        nodes = layers.flat();
+        edges = [];
+        for (let L = 0; L < layers.length - 1; L++) {
+          const A = layers[L];
+          const B = layers[L + 1];
+          for (let ia = 0; ia < A.length; ia++) {
+            for (let ib = 0; ib < B.length; ib++) {
+              if (((ia + ib + L * 3) % 4 === 0) || ((ia * 2 + ib + L) % 5 <= 1)) {
+                const a = A[ia];
+                const b = B[ib];
+                edges.push({ x1: a.x, y1: a.y, x2: b.x, y2: b.y, layer: L });
+              }
+            }
+          }
+        }
+        if (edges.length < 32) {
+          edges = [];
+          for (let L = 0; L < layers.length - 1; L++) {
+            const A = layers[L];
+            const B = layers[L + 1];
+            for (const a of A) {
+              for (const b of B) {
+                edges.push({ x1: a.x, y1: a.y, x2: b.x, y2: b.y, layer: L });
+              }
+            }
+          }
+        }
+
+        edgeLengths = edges.map((e) => {
+          const dx = e.x2 - e.x1;
+          const dy = e.y2 - e.y1;
+          return Math.hypot(dx, dy);
+        });
+        totalEdgeLength = edgeLengths.reduce((s, l) => s + l, 0);
+      }
+
+      function parseRgba(str) {
+        const m = str.match(/rgba?\(([^)]+)\)/);
+        if (!m) return [59, 130, 246, 0.45];
+        const p = m[1].split(/[\s,]+/).map(Number);
+        if (p.length === 3) return [p[0], p[1], p[2], 1];
+        return [p[0], p[1], p[2], p[3]];
+      }
+
+      function resize() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        cssW = window.innerWidth;
+        cssH = window.innerHeight;
+        canvas.width = Math.floor(cssW * dpr);
+        canvas.height = Math.floor(cssH * dpr);
+        canvas.style.width = cssW + "px";
+        canvas.style.height = cssH + "px";
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        buildGraph(cssW, cssH);
+      }
+
+      let start = performance.now();
+      let pulsePos = 0;
+
+      function drawStatic() {
+        ctx.clearRect(0, 0, cssW, cssH);
+        const edgeCol = cssColor("--mlp-edge");
+        const nodeCol = cssColor("--mlp-node");
+        ctx.lineWidth = 1;
+        for (const e of edges) {
+          ctx.strokeStyle = edgeCol;
+          ctx.beginPath();
+          ctx.moveTo(e.x1, e.y1);
+          ctx.lineTo(e.x2, e.y2);
+          ctx.stroke();
+        }
+        for (const n of nodes) {
+          ctx.fillStyle = nodeCol;
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, 3.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      function pulseAt(globalPos) {
+        if (!edges.length || totalEdgeLength <= 0) return null;
+        let acc = 0;
+        let edgeIndex = 0;
+        let local = 0;
+        const target = ((globalPos % totalEdgeLength) + totalEdgeLength) % totalEdgeLength;
+        for (let i = 0; i < edges.length; i++) {
+          const len = edgeLengths[i];
+          if (acc + len >= target) {
+            edgeIndex = i;
+            local = target - acc;
+            break;
+          }
+          acc += len;
+        }
+        if (edges.length === 0) return null;
+        const e = edges[edgeIndex];
+        const len = edgeLengths[edgeIndex] || 1;
+        const u = local / len;
+        return {
+          px: e.x1 + (e.x2 - e.x1) * u,
+          py: e.y1 + (e.y2 - e.y1) * u,
+        };
+      }
+
+      function drawFrame(now) {
+        ctx.clearRect(0, 0, cssW, cssH);
+
+        const edgeCol = cssColor("--mlp-edge");
+        const nodeCol = cssColor("--mlp-node");
+        const pulseStr = cssColor("--mlp-pulse");
+        const [pr, pg, pb, pa] = parseRgba(
+          pulseStr.startsWith("rgba") || pulseStr.startsWith("rgb") ? pulseStr : "rgba(59,130,246,0.55)"
+        );
+
+        const t = (now - start) / 1000;
+        /* Slower “learning” — easier to watch the activation move edge-to-edge */
+        const speed = 0.065;
+        pulsePos = (t * speed * totalEdgeLength) % (totalEdgeLength || 1);
+        const numLayers = layers.length || 4;
+        const activeLayer = Math.floor((t * 0.18) % numLayers);
+
+        ctx.lineWidth = 1;
+        for (let i = 0; i < edges.length; i++) {
+          const e = edges[i];
+          ctx.strokeStyle = edgeCol;
+          ctx.globalAlpha = 0.45 + 0.06 * e.layer;
+          ctx.beginPath();
+          ctx.moveTo(e.x1, e.y1);
+          ctx.lineTo(e.x2, e.y2);
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+        }
+
+        function drawPulse(globalPos, radius, alphaMul) {
+          const pt = pulseAt(globalPos);
+          if (!pt) return;
+          const g = ctx.createRadialGradient(pt.px, pt.py, 0, pt.px, pt.py, radius);
+          g.addColorStop(0, `rgba(${pr},${pg},${pb},${0.32 * pa * alphaMul})`);
+          g.addColorStop(0.4, `rgba(${pr},${pg},${pb},${0.1 * pa * alphaMul})`);
+          g.addColorStop(1, "rgba(0,0,0,0)");
+          ctx.fillStyle = g;
+          ctx.beginPath();
+          ctx.arc(pt.px, pt.py, radius, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = `rgba(${pr},${pg},${pb},${0.8 * pa * alphaMul})`;
+          ctx.beginPath();
+          ctx.arc(pt.px, pt.py, 3.6, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        drawPulse(pulsePos + totalEdgeLength * 0.42, 16, 0.4);
+        drawPulse(pulsePos, 22, 1);
+
+        for (const n of nodes) {
+          const boost = n.layer === activeLayer ? 1.22 : 1;
+          ctx.fillStyle = nodeCol;
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, 3.5 * boost, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        requestAnimationFrame(drawFrame);
+      }
+
+      resize();
+      window.addEventListener("resize", resize);
+
+      new MutationObserver(() => {
+        resize();
+        if (reduceMotion) drawStatic();
+      }).observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["data-theme"],
+      });
+
+      if (reduceMotion) {
+        drawStatic();
+        window.addEventListener("resize", () => {
+          resize();
+          drawStatic();
+        });
+      } else {
+        requestAnimationFrame(drawFrame);
+      }
+    })();
+  </script>
+</body>
+</html>
