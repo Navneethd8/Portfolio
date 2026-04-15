@@ -18,7 +18,6 @@ export interface NoteMetadata {
     tags: string[];
     slug: string;
     path: string;
-    category: string;
     group: string;
     subgroup: string | null;
     snippet: string;
@@ -29,18 +28,34 @@ export interface Note extends NoteMetadata {
     html: string;
 }
 
+interface ParsedNote {
+    metadata: NoteMetadata;
+    content: string;
+    cleanedBody: string;
+}
+
 function getAllMarkdownFiles(dir: string, fileList: string[] = []): string[] {
     if (!fs.existsSync(dir)) return fileList;
-    const files = fs.readdirSync(dir);
+    
+    let files: string[];
+    try {
+        files = fs.readdirSync(dir);
+    } catch (error) {
+        console.error(`Failed to read directory ${dir}:`, error);
+        return fileList;
+    }
 
     files.forEach((file) => {
         const filePath = path.join(dir, file);
-        if (fs.statSync(filePath).isDirectory()) {
-            // Skip .obsidian and nested 'notes' directory (submodule artifact)
-            if (file === '.obsidian' || (dir === NOTES_DIRECTORY && file === 'notes')) return;
-            getAllMarkdownFiles(filePath, fileList);
-        } else if (file.endsWith('.md') && file !== 'template.md') {
-            fileList.push(filePath);
+        try {
+            if (fs.statSync(filePath).isDirectory()) {
+                if (file === '.obsidian' || (dir === NOTES_DIRECTORY && file === 'notes')) return;
+                getAllMarkdownFiles(filePath, fileList);
+            } else if (file.endsWith('.md') && file !== 'template.md') {
+                fileList.push(filePath);
+            }
+        } catch (error) {
+            console.error(`Failed to stat file ${filePath}:`, error);
         }
     });
 
@@ -200,10 +215,18 @@ async function renderMarkdown(content: string): Promise<string> {
 }
 
 /**
- * Parse a single markdown file into its metadata (no HTML rendering).
+ * Parse a single markdown file into its metadata and content.
+ * Returns both metadata and raw content to avoid duplicate file reads.
  */
-function parseNoteMetadata(filePath: string): NoteMetadata {
-    const fileContent = fs.readFileSync(filePath, 'utf8');
+function parseNote(filePath: string): ParsedNote | null {
+    let fileContent: string;
+    try {
+        fileContent = fs.readFileSync(filePath, 'utf8');
+    } catch (error) {
+        console.error(`Failed to read note at ${filePath}:`, error);
+        return null;
+    }
+    
     const { data, content } = matter(fileContent);
 
     const relativePath = path.relative(NOTES_DIRECTORY, filePath);
@@ -223,20 +246,27 @@ function parseNoteMetadata(filePath: string): NoteMetadata {
 
     const cleanedBody = content.replace(/^#\s+.+$/m, "").trim();
 
-    return {
+    const metadata: NoteMetadata = {
         title: data.title || extractTitle(content, slugToTitle(slug)),
         date: data.date ? (data.date instanceof Date ? data.date.toISOString().split('T')[0] : String(data.date)) : '',
         tags: Array.isArray(data.tags) ? data.tags : data.tags ? [data.tags] : [],
         slug,
         path: filePath,
-        category: group,
-        group: group,
-        subgroup: subgroup,
+        group,
+        subgroup,
         snippet: createExcerpt(cleanedBody),
+    };
+
+    return {
+        metadata,
+        content,
+        cleanedBody,
     };
 }
 
 let metaCache: NoteMetadata[] | null = null;
+const noteCache = new Map<string, { note: Note; timestamp: number }>();
+const NOTE_CACHE_TTL = 5 * 60 * 1000; // 5 minutes in dev, permanent in prod
 
 /**
  * Get metadata for all notes — NO HTML rendering.
@@ -249,7 +279,10 @@ export function getAllNotesMeta(): NoteMetadata[] {
 
     const files = getAllMarkdownFiles(NOTES_DIRECTORY);
 
-    const notes = files.map((filePath) => parseNoteMetadata(filePath));
+    const notes = files
+        .map((filePath) => parseNote(filePath))
+        .filter((result): result is ParsedNote => result !== null)
+        .map((result) => result.metadata);
 
     const sortedNotes = notes.sort((a, b) => {
         if (a.date && b.date) {
@@ -274,22 +307,35 @@ export function getAllTags(): string[] {
 /**
  * Get a single note by slug — including full HTML rendering.
  * Only called when a user navigates to a specific note page.
+ * Results are cached to avoid expensive re-rendering.
  */
 export async function getNoteBySlug(slug: string): Promise<Note | null> {
+    const isProduction = process.env.NODE_ENV === 'production';
+    
+    const cached = noteCache.get(slug);
+    if (cached) {
+        if (isProduction || Date.now() - cached.timestamp < NOTE_CACHE_TTL) {
+            return cached.note;
+        }
+        noteCache.delete(slug);
+    }
+
     const filePath = path.join(NOTES_DIRECTORY, `${slug}.md`);
 
     if (!fs.existsSync(filePath)) return null;
 
-    const metadata = parseNoteMetadata(filePath);
+    const parsed = parseNote(filePath);
+    if (!parsed) return null;
+    
+    const html = await renderMarkdown(parsed.cleanedBody);
 
-    const fileContent = fs.readFileSync(filePath, 'utf8');
-    const { content } = matter(fileContent);
-    const cleanedBody = content.replace(/^#\s+.+$/m, "").trim();
-    const html = await renderMarkdown(cleanedBody);
-
-    return {
-        ...metadata,
-        content,
+    const note: Note = {
+        ...parsed.metadata,
+        content: parsed.content,
         html,
     };
+
+    noteCache.set(slug, { note, timestamp: Date.now() });
+
+    return note;
 }
