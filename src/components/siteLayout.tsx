@@ -36,7 +36,7 @@ const SiteLayout: React.FC<SiteLayoutProps> = ({ children }) => {
   }, [isOpen]);
 
   return (
-    <div className="flex flex-col min-h-screen lg:grid lg:grid-cols-[minmax(280px,0.5fr)_minmax(0,3fr)]">
+    <div className="site-shell relative z-10 flex min-h-screen flex-col lg:grid lg:grid-cols-[minmax(280px,0.5fr)_minmax(0,3fr)]">
       {/* Mobile Top Bar */}
       <div className="lg:hidden flex justify-between items-center p-4 bg-[var(--sidebar)] text-[var(--background)] border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
         <h1 className="text-xl font-bold truncate">Navneeth Dhamotharan</h1>
@@ -63,7 +63,10 @@ const SiteLayout: React.FC<SiteLayoutProps> = ({ children }) => {
         </div>
       </aside>
 
-      <main className="p-8 mx-auto w-full max-w-8xl">{children}</main>
+      {/* No background here — keeps MlpAtmosphere visible behind content */}
+      <main className="mx-auto w-full max-w-8xl px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
+        {children}
+      </main>
     </div>
   );
 };
