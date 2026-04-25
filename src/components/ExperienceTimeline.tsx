@@ -10,6 +10,7 @@ interface ExperienceTimelineItemProps {
     date: string;
     logoSrc: string;
     summary: string;
+    bullets?: string[];
     links?: React.ReactNode;
     isLast?: boolean;
 }
@@ -17,9 +18,11 @@ interface ExperienceTimelineItemProps {
 export function ExperienceTimelineItem({
     role,
     company,
+    location,
     date,
     logoSrc,
     summary,
+    bullets,
     links,
     isLast = false,
 }: ExperienceTimelineItemProps) {
@@ -46,18 +49,28 @@ export function ExperienceTimelineItem({
                 <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
                         <h3 className="text-lg font-bold text-[var(--foreground)] leading-tight">{role}</h3>
-                        <div className="flex items-center gap-2 mt-0.5">
+                        <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-0.5">
                             <span className="text-base font-medium opacity-90">{company}</span>
-                            {links && (
+                            {location ? (
+                                <span className="text-sm opacity-70">{location}</span>
+                            ) : null}
+                            {links ? (
                                 <div className="flex items-center gap-2 text-base">
                                     {links}
                                 </div>
-                            )}
+                            ) : null}
                         </div>
                     </div>
                     <span className="text-sm font-medium opacity-60 whitespace-nowrap pt-1">{date}</span>
                 </div>
-                <p className="text-base italic opacity-70 mt-1.5 line-clamp-2">{summary}</p>
+                <p className="text-base italic opacity-70 mt-1.5">{summary}</p>
+                {bullets && bullets.length > 0 ? (
+                    <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-[var(--paragraph)]">
+                        {bullets.map((b, i) => (
+                            <li key={i}>{b}</li>
+                        ))}
+                    </ul>
+                ) : null}
             </div>
         </div>
     );
