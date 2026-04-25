@@ -4,7 +4,14 @@ import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
 const GRID = 48;
-const COUNTS = [2, 4, 5, 4, 3];
+
+/** Wider screens get the full decorative MLP; narrow viewports use tiny 3–1–3 / 3–1–2 stacks. */
+function layerCountsForWidth(cssWidth: number): number[] {
+  if (cssWidth >= 1024) return [2, 4, 5, 4, 3];
+  if (cssWidth >= 768) return [3, 5, 4, 3];
+  if (cssWidth >= 480) return [3, 1, 3];
+  return [3, 1, 2];
+}
 
 function snapCenter(v: number) {
   return Math.round((v - GRID / 2) / GRID) * GRID + GRID / 2;
@@ -47,6 +54,10 @@ export default function MlpAtmosphere() {
     let layers: Node[][] = [];
     let cssW = 800;
     let cssH = 600;
+    let layerCounts = layerCountsForWidth(cssW);
+    let nodeRadius = 3.5;
+    let pulseRadii: [number, number] = [22, 16];
+    let edgeLineWidth = 1;
     let raf = 0;
     const start = performance.now();
 
@@ -56,8 +67,8 @@ export default function MlpAtmosphere() {
       const usableW = w - marginX * 2;
       const usableH = h - marginY * 2;
 
-      layers = COUNTS.map((count, li) => {
-        const t = COUNTS.length === 1 ? 0.5 : li / (COUNTS.length - 1);
+      layers = layerCounts.map((count, li) => {
+        const t = layerCounts.length === 1 ? 0.5 : li / (layerCounts.length - 1);
         const rawX = marginX + t * usableW;
         const x = snapCenter(rawX);
         const ys: Node[] = [];
@@ -106,6 +117,24 @@ export default function MlpAtmosphere() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       cssW = window.innerWidth;
       cssH = window.innerHeight;
+      layerCounts = layerCountsForWidth(cssW);
+      if (cssW < 480) {
+        nodeRadius = 2.25;
+        pulseRadii = [12, 9];
+        edgeLineWidth = 0.75;
+      } else if (cssW < 768) {
+        nodeRadius = 2.75;
+        pulseRadii = [14, 11];
+        edgeLineWidth = 0.85;
+      } else if (cssW < 1024) {
+        nodeRadius = 3.1;
+        pulseRadii = [18, 13];
+        edgeLineWidth = 0.95;
+      } else {
+        nodeRadius = 3.5;
+        pulseRadii = [22, 16];
+        edgeLineWidth = 1;
+      }
       el.width = Math.floor(cssW * dpr);
       el.height = Math.floor(cssH * dpr);
       el.style.width = `${cssW}px`;
@@ -142,7 +171,7 @@ export default function MlpAtmosphere() {
       c2d.clearRect(0, 0, cssW, cssH);
       const edgeCol = cssColor("--mlp-edge");
       const nodeCol = cssColor("--mlp-node");
-      c2d.lineWidth = 1;
+      c2d.lineWidth = edgeLineWidth;
       for (const e of edges) {
         c2d.strokeStyle = edgeCol;
         c2d.beginPath();
@@ -153,7 +182,7 @@ export default function MlpAtmosphere() {
       for (const n of nodes) {
         c2d.fillStyle = nodeCol;
         c2d.beginPath();
-        c2d.arc(n.x, n.y, 3.5, 0, Math.PI * 2);
+        c2d.arc(n.x, n.y, nodeRadius, 0, Math.PI * 2);
         c2d.fill();
       }
     }
@@ -170,10 +199,11 @@ export default function MlpAtmosphere() {
       const t = (now - start) / 1000;
       const speed = 0.065;
       const pulsePos = (t * speed * totalEdgeLength) % (totalEdgeLength || 1);
-      const numLayers = layers.length || COUNTS.length;
+      const numLayers = layers.length || layerCounts.length;
       const activeLayer = Math.floor((t * 0.18) % numLayers);
 
-      c2d.lineWidth = 1;
+      c2d.lineWidth = edgeLineWidth;
+      const pulseCoreRadius = Math.max(1.6, nodeRadius * 1.06);
       for (const e of edges) {
         c2d.strokeStyle = edgeCol;
         c2d.globalAlpha = 0.45 + 0.06 * e.layer;
@@ -197,18 +227,19 @@ export default function MlpAtmosphere() {
         c2d.fill();
         c2d.fillStyle = `rgba(${pr},${pg},${pb},${0.8 * pa * alphaMul})`;
         c2d.beginPath();
-        c2d.arc(pt.px, pt.py, 3.6, 0, Math.PI * 2);
+        c2d.arc(pt.px, pt.py, pulseCoreRadius, 0, Math.PI * 2);
         c2d.fill();
       }
 
-      drawPulse(pulsePos + totalEdgeLength * 0.42, 16, 0.4);
-      drawPulse(pulsePos, 22, 1);
+      const [pulseR, pulseR2] = pulseRadii;
+      drawPulse(pulsePos + totalEdgeLength * 0.42, pulseR2, 0.4);
+      drawPulse(pulsePos, pulseR, 1);
 
       for (const n of nodes) {
         const boost = n.layer === activeLayer ? 1.22 : 1;
         c2d.fillStyle = nodeCol;
         c2d.beginPath();
-        c2d.arc(n.x, n.y, 3.5 * boost, 0, Math.PI * 2);
+        c2d.arc(n.x, n.y, nodeRadius * boost, 0, Math.PI * 2);
         c2d.fill();
       }
 
