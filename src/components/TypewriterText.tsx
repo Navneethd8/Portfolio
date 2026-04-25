@@ -43,9 +43,9 @@ const TypewriterText = memo(({ titles = defaultTitles }: { titles?: string[] }) 
     const displayText = titles[titleIndex].slice(0, charIndex);
 
     return (
-        <span className="inline-block min-w-[200px]">
+        <span className="inline-block max-w-full min-w-0 align-middle">
             {displayText}
-            <span className="animate-pulse border-r-2 border-[var(--background)] ml-1">&nbsp;</span>
+            <span className="ml-0.5 inline-block animate-pulse border-r-2 border-[var(--background)]">&nbsp;</span>
         </span>
     );
 });

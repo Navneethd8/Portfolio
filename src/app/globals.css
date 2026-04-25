@@ -158,6 +158,19 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+/* Mobile fixed header + drawer share this height (no overlap). Desktop sidebar width. */
+.site-shell {
+  /* One row: title + 44px menu control + border; safe-area baked in so spacer matches header */
+  --mobile-nav-header-height: calc(env(safe-area-inset-top, 0px) + 3.5rem);
+  --sidebar-width: 18rem; /* 288px — matches lg:w-72 */
+}
+
+@media (min-width: 640px) {
+  .site-shell {
+    --mobile-nav-header-height: calc(env(safe-area-inset-top, 0px) + 3.75rem);
+  }
+}
+
 /* Grid + MLP live behind site content (see MlpAtmosphere.tsx) */
 .atmosphere {
   position: fixed;
@@ -616,6 +629,11 @@ sup a:hover {
 }
 
 /* --- Custom Scrollbar --- */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 100, 100, 0.35) transparent;
+}
+
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
   height: 6px;

@@ -36,35 +36,43 @@ const SiteLayout: React.FC<SiteLayoutProps> = ({ children }) => {
   }, [isOpen]);
 
   return (
-    <div className="site-shell relative z-10 flex min-h-screen flex-col lg:grid lg:grid-cols-[minmax(280px,0.5fr)_minmax(0,3fr)]">
-      {/* Mobile Top Bar */}
-      <div className="lg:hidden flex justify-between items-center p-4 bg-[var(--sidebar)] text-[var(--background)] border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
-        <h1 className="text-xl font-bold truncate">Navneeth Dhamotharan</h1>
+    <div className="site-shell relative z-10 flex min-h-[100dvh] flex-col lg:min-h-screen">
+      {/* Mobile: fixed top bar (always above drawer). Spacer keeps document flow aligned. */}
+      <header className="fixed left-0 right-0 top-0 z-[60] flex h-[var(--mobile-nav-header-height)] items-center justify-between gap-2 overflow-hidden border-b border-gray-200 bg-[var(--sidebar)] px-3 text-[var(--background)] sm:gap-3 sm:px-4 dark:border-gray-800 lg:hidden">
+        <h1 className="min-w-0 flex-1 truncate pr-1 text-left text-base font-bold leading-tight sm:pr-2 sm:text-lg">
+          Navneeth Dhamotharan
+        </h1>
         <button
+          type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className="text-2xl p-2 focus:outline-none"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md text-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sidebar-link)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sidebar)] sm:h-12 sm:w-12 sm:text-2xl"
           aria-label="Toggle Menu"
           aria-expanded={isOpen}
         >
           {isOpen ? <FaTimes /> : <FaBars />}
         </button>
-      </div>
+      </header>
+      <div
+        className="shrink-0 lg:hidden h-[var(--mobile-nav-header-height)]"
+        aria-hidden
+      />
 
-      {/* Sidebar - Overlay on mobile, grid column on desktop */}
+      {/* Sidebar: drawer starts exactly below fixed header; desktop: fixed left column */}
       <aside
         className={`
-          fixed inset-0 z-40 bg-[var(--sidebar)] p-8 overflow-y-auto transition-transform transform duration-300 ease-in-out
-          ${isOpen ? "translate-x-0" : "-translate-x-full"}
-          lg:relative lg:translate-x-0 lg:block lg:sticky lg:top-0 lg:h-screen lg:p-4 lg:border-r lg:border-gray-200 lg:dark:border-gray-800 lg:border-b-0
+          fixed bottom-0 left-0 right-0 z-40 flex flex-col bg-[var(--sidebar)] transition-transform duration-300 ease-in-out
+          top-[var(--mobile-nav-header-height)] max-lg:overflow-hidden
+          ${isOpen ? "translate-x-0" : "-translate-x-full pointer-events-none max-lg:invisible"}
+          lg:pointer-events-auto lg:visible lg:inset-y-0 lg:right-auto lg:top-0 lg:z-30 lg:h-[100dvh] lg:max-h-[100dvh] lg:w-[var(--sidebar-width)] lg:max-w-[100vw] lg:translate-x-0 lg:overflow-hidden lg:border-r lg:border-gray-200 lg:dark:border-gray-800 lg:transition-none
         `}
       >
-        <div className="flex flex-col h-full mt-16 md:mt-20 lg:mt-0">
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden px-5 py-6 pb-[max(1.5rem,env(safe-area-inset-bottom,0px))] sm:px-8 sm:py-8 lg:min-h-full lg:overflow-visible lg:px-4 lg:py-4 lg:pb-4">
           <MainSidebar />
         </div>
       </aside>
 
-      {/* No background here — keeps MlpAtmosphere visible behind content */}
-      <main className="mx-auto w-full max-w-8xl px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
+      {/* Main: width accounts for fixed sidebar so layout does not overflow */}
+      <main className="mx-auto w-full max-w-8xl px-5 py-8 sm:px-8 sm:py-10 lg:ml-[var(--sidebar-width)] lg:w-[calc(100%-var(--sidebar-width))] lg:max-w-none lg:px-10 lg:py-12">
         {children}
       </main>
     </div>
