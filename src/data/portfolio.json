@@ -41,7 +41,20 @@
           }
         ]
       },
-      "I'm currently building IsoCourt, a way for badminton players to "
+      {
+        "segments": [
+          {
+            "text": "I'm currently building "
+          },
+          {
+            "text": "IsoCourt",
+            "link": "https://isocourt.fit"
+          },
+          {
+            "text": ", an AI badminton coach using computer vision and the latest language models to give you actionable feedback."
+          }
+        ]
+      }
     ]
   },
   "education": {
