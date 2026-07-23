@@ -34,7 +34,9 @@ export default function ThemeToggle() {
       setTheme(attr);
       return;
     }
-    setTheme(effectiveTheme());
+    const initialTheme = effectiveTheme();
+    applyTheme(initialTheme);
+    setTheme(initialTheme);
   }, []);
 
   const toggle = useCallback(() => {

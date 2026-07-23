@@ -12,55 +12,55 @@ interface NoteLayoutProps {
 
 export default function NoteLayout({ note }: NoteLayoutProps) {
     return (
-        <div className="h-[calc(100vh-120px)] lg:h-[calc(100vh-64px)] flex flex-col bg-[#0a0a0a] border border-[#333] rounded-xl overflow-hidden shadow-2xl text-gray-300">
+        <div className="notes-terminal h-[calc(100vh-120px)] lg:h-[calc(100vh-64px)] flex flex-col border rounded-xl overflow-hidden transition-colors duration-200">
             {/* macOS Window Header */}
-            <div className="font-mono flex items-center justify-center py-3 bg-[#1a1a1a] border-b border-[#333] relative w-full">
+            <div className="font-mono flex items-center justify-center py-3 bg-[var(--note-header)] border-b border-[var(--note-border)] relative w-full">
                 <div className="flex space-x-2 absolute left-4">
                     <div className="w-3 h-3 rounded-full bg-red-500"></div>
                     <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
                     <div className="w-3 h-3 rounded-full bg-green-500"></div>
                 </div>
-                <div className="text-xs text-gray-500 font-medium tracking-wider truncate px-2 max-w-[calc(100%-120px)]">
+                <div className="text-xs text-[var(--note-muted)] font-medium tracking-wider truncate px-2 max-w-[calc(100%-120px)]">
                     <span className="hidden sm:inline">navneeth@portfolio: </span>~/notes/{note.slug}.md
                 </div>
             </div>
 
             {/* Content */}
-            <main className="font-sans flex-1 overflow-y-auto bg-[#0a0a0a] custom-scrollbar">
+            <main className="font-sans flex-1 overflow-y-auto bg-[var(--note-bg)] custom-scrollbar">
                 <div className="max-w-4xl mx-auto p-4 lg:p-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
                     <Link
                         href="/notes"
-                        className="font-mono no-underline mb-6 flex items-center gap-2 hover:text-green-400 transition-colors text-sm"
-                        style={{ color: '#22c55e' }}
+                        className="font-mono no-underline mb-6 flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity text-sm"
+                        style={{ color: 'var(--note-accent)' }}
                     >
                         <FaArrowLeft /> cd ..
                     </Link>
 
-                    <div className="mb-10 text-left border-b border-[#333] pb-6">
-                        <div className="font-mono text-xs text-green-500/70 mb-3 flex items-center gap-2">
-                            <Link href="/notes" className="no-underline hover:text-green-400 transition-colors" style={{ color: 'rgba(34,197,94,0.7)' }}>~/notes</Link>
+                    <div className="mb-10 text-left border-b border-[var(--note-border)] pb-6">
+                        <div className="font-mono text-xs text-[var(--note-accent)] mb-3 flex items-center gap-2">
+                            <Link href="/notes" className="no-underline opacity-75 hover:opacity-100 transition-opacity" style={{ color: 'var(--note-accent)' }}>~/notes</Link>
                             <span>/</span>
-                            <Link href="/notes" className="no-underline hover:text-green-400 transition-colors" style={{ color: 'rgba(34,197,94,0.7)' }}>{note.group}</Link>
+                            <Link href="/notes" className="no-underline opacity-75 hover:opacity-100 transition-opacity" style={{ color: 'var(--note-accent)' }}>{note.group}</Link>
                             {note.subgroup && (
                                 <>
                                     <span>/</span>
-                                    <span className="text-green-500/70">{note.subgroup}</span>
+                                    <span className="text-[var(--note-accent)] opacity-75">{note.subgroup}</span>
                                 </>
                             )}
                             <span>/</span>
-                            <span className="text-gray-400">{note.title}.md</span>
+                            <span className="text-[var(--note-muted)]">{note.title}.md</span>
                         </div>
-                        <h1 className="text-3xl lg:text-4xl font-bold text-gray-100 leading-tight mb-4">{note.title}</h1>
+                        <h1 className="text-3xl lg:text-4xl font-bold text-[var(--note-heading)] leading-tight mb-4">{note.title}</h1>
                         <div className="flex flex-wrap items-center gap-4">
                             {note.date && (
-                                <span className="flex items-center gap-1.5 text-xs text-gray-500 border border-[#333] px-2 py-1 bg-[#121212]">
-                                    <FaCalendarAlt className="text-green-500/70" /> {note.date}
+                                <span className="flex items-center gap-1.5 text-xs text-[var(--note-muted)] border border-[var(--note-border)] px-2 py-1 bg-[var(--note-code-bg)]">
+                                    <FaCalendarAlt className="text-[var(--note-accent)] opacity-75" /> {note.date}
                                 </span>
                             )}
                             <div className="flex gap-2">
                                 {note.tags.map(tag => (
-                                    <span key={tag} className="flex items-center gap-1 px-2 py-1 bg-[#121212] text-gray-400 text-[10px] border border-[#333]">
-                                        <FaTags className="scale-75 text-green-500/70" /> {tag}
+                                    <span key={tag} className="flex items-center gap-1 px-2 py-1 bg-[var(--note-code-bg)] text-[var(--note-muted)] text-[10px] border border-[var(--note-border)]">
+                                        <FaTags className="scale-75 text-[var(--note-accent)] opacity-75" /> {tag}
                                     </span>
                                 ))}
                             </div>

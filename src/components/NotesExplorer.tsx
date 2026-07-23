@@ -75,26 +75,26 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
             .replace(/\b\w/g, (c) => c.toUpperCase());
 
     return (
-        <div className="h-[calc(100vh-120px)] lg:h-[calc(100vh-64px)] flex flex-col bg-[#0a0a0a] border border-[#333] rounded-xl overflow-hidden shadow-2xl font-mono text-gray-300">
+        <div className="notes-terminal h-[calc(100vh-120px)] lg:h-[calc(100vh-64px)] flex flex-col border rounded-xl overflow-hidden font-mono transition-colors duration-200">
             {/* macOS Window Header */}
-            <div className="flex items-center justify-center py-3 bg-[#1a1a1a] border-b border-[#333] relative w-full">
+            <div className="flex items-center justify-center py-3 bg-[var(--note-header)] border-b border-[var(--note-border)] relative w-full">
                 <div className="flex space-x-2 absolute left-4">
                     <div className="w-3 h-3 rounded-full bg-red-500"></div>
                     <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
                     <div className="w-3 h-3 rounded-full bg-green-500"></div>
                 </div>
-                <div className="text-xs text-gray-500 font-medium tracking-wider truncate px-2 max-w-[calc(100%-120px)]">
+                <div className="text-xs text-[var(--note-muted)] font-medium tracking-wider truncate px-2 max-w-[calc(100%-120px)]">
                     <span className="hidden sm:inline">navneeth@portfolio: </span>~/notes
                 </div>
             </div>
 
             {/* Search Bar (Terminal Style) */}
-            <div className="flex items-center px-4 py-3 border-b border-[#333] bg-[#0a0a0a]">
-                <span className="text-green-500 mr-3 font-bold">❯</span>
+            <div className="flex items-center px-4 py-3 border-b border-[var(--note-border)] bg-[var(--note-bg)]">
+                <span className="text-[var(--note-accent)] mr-3 font-bold">❯</span>
                 <input
                     type="search"
                     placeholder="grep -i 'search notes, tags, content...'"
-                    className="flex-1 bg-transparent text-green-400 focus:outline-none placeholder-gray-600 text-sm"
+                    className="flex-1 bg-transparent text-[var(--note-accent)] focus:outline-none placeholder:text-[var(--note-faint)] text-sm"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                 />
@@ -102,24 +102,24 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
 
             <div className="flex flex-1 overflow-hidden">
                 {/* Sidebar */}
-                <aside className="w-full lg:w-72 flex-shrink-0 border-r border-[#333] bg-[#0d0d0d] overflow-y-auto custom-scrollbar block">
+                <aside className="w-full lg:w-72 flex-shrink-0 border-r border-[var(--note-border)] bg-[var(--note-panel)] overflow-y-auto custom-scrollbar block">
                     <div className="p-3 space-y-1">
                         <button
                             onClick={() => {
                                 setActiveGroup("all");
                             }}
                             className={`w-full text-left px-3 py-2 transition-all flex items-center justify-between text-sm ${activeGroup === "all"
-                                ? 'bg-[#1a1a1a] text-green-400 border-l-2 border-green-500'
-                                : 'text-gray-400 hover:bg-[#1a1a1a] hover:text-gray-200 border-l-2 border-transparent'
+                                ? 'bg-[var(--note-accent-soft)] text-[var(--note-accent)] border-l-2 border-[var(--note-accent)]'
+                                : 'text-[var(--note-muted)] hover:bg-[var(--note-hover)] hover:text-[var(--note-heading)] border-l-2 border-transparent'
                                 }`}
                         >
                             <span className="flex items-center gap-2">
-                                <FaBookOpen className={activeGroup === "all" ? "text-green-500" : "text-gray-500"} /> ~/all_notes
+                                <FaBookOpen className={activeGroup === "all" ? "text-[var(--note-accent)]" : "text-[var(--note-muted)]"} /> ~/all_notes
                             </span>
-                            <span className={`text-[10px] px-2 py-0.5 ${activeGroup === "all" ? "text-green-400" : "text-gray-600"}`}>[{notes.length}]</span>
+                            <span className={`text-[10px] px-2 py-0.5 ${activeGroup === "all" ? "text-[var(--note-accent)]" : "text-[var(--note-faint)]"}`}>[{notes.length}]</span>
                         </button>
 
-                        <div className="pt-6 pb-2 px-3 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-600">
+                        <div className="pt-6 pb-2 px-3 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-[var(--note-faint)]">
                             <FaTags className="opacity-70" /> Tags
                         </div>
 
@@ -129,8 +129,8 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
                                     key={tag}
                                     onClick={() => setActiveTag(tag)}
                                     className={`px-2 py-1 text-[10px] transition-all flex items-center gap-1 border ${activeTag === tag
-                                        ? 'bg-green-500/10 text-green-400 border-green-500/50'
-                                        : 'bg-transparent text-gray-500 border-[#333] hover:border-gray-500 hover:text-gray-300'
+                                        ? 'bg-[var(--note-accent-soft)] text-[var(--note-accent)] border-[var(--note-accent)]'
+                                        : 'bg-transparent text-[var(--note-muted)] border-[var(--note-border)] hover:border-[var(--note-muted)] hover:text-[var(--note-heading)]'
                                         }`}
                                 >
                                     {tag === "all" ? "[all]" : `[${tag}]`}
@@ -138,7 +138,7 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
                             ))}
                         </div>
 
-                        <div className="pt-2 pb-2 px-3 text-[10px] font-bold uppercase tracking-widest text-gray-600">Directories</div>
+                        <div className="pt-2 pb-2 px-3 text-[10px] font-bold uppercase tracking-widest text-[var(--note-faint)]">Directories</div>
 
                         {Object.keys(sidebarTree).sort().map((group) => {
                             const isExpanded = expandedGroups.has(group) || activeGroup === group;
@@ -147,12 +147,12 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
                             return (
                                 <div key={group} className="space-y-0.5">
                                     <div className={`w-full transition-all flex items-center group flex-shrink-0 text-sm ${activeGroup === group
-                                        ? 'bg-[#1a1a1a] text-green-400 border-l-2 border-green-500'
-                                        : 'text-gray-400 hover:bg-[#1a1a1a] hover:text-gray-200 border-l-2 border-transparent'
+                                        ? 'bg-[var(--note-accent-soft)] text-[var(--note-accent)] border-l-2 border-[var(--note-accent)]'
+                                        : 'text-[var(--note-muted)] hover:bg-[var(--note-hover)] hover:text-[var(--note-heading)] border-l-2 border-transparent'
                                         }`}>
                                         <button
                                             onClick={(e) => toggleExpand(group, e)}
-                                            className="px-2 py-2 text-gray-500 hover:text-gray-300 transition-colors"
+                                            className="px-2 py-2 text-[var(--note-muted)] hover:text-[var(--note-heading)] transition-colors"
                                             aria-label="Toggle Folder"
                                         >
                                             {isExpanded ? <FaChevronDown className="text-[10px]" /> : <FaChevronRight className="text-[10px]" />}
@@ -167,15 +167,15 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
                                             className="flex-1 flex items-center justify-between py-2 pr-3 truncate text-left"
                                         >
                                             <span className="flex items-center gap-2 truncate">
-                                                <FaFolder className={activeGroup === group ? 'text-yellow-500/80' : 'text-yellow-600/50'} />
+                                                <FaFolder className="text-[var(--note-folder)]" />
                                                 {titleFromGroup(group)}/
                                             </span>
-                                            <span className={`text-[10px] ${activeGroup === group ? "text-green-400" : "text-gray-600"}`}>[{totalItems}]</span>
+                                            <span className={`text-[10px] ${activeGroup === group ? "text-[var(--note-accent)]" : "text-[var(--note-faint)]"}`}>[{totalItems}]</span>
                                         </button>
                                     </div>
 
                                     {isExpanded && (
-                                        <div className="ml-5 border-l border-[#333] pl-2 space-y-0.5 my-1">
+                                        <div className="ml-5 border-l border-[var(--note-border)] pl-2 space-y-0.5 my-1">
                                             {/* Subgroups */}
                                             {Object.keys(sidebarTree[group].subgroups).sort().map(sub => {
                                                 const subKey = `${group}/${sub}`;
@@ -184,12 +184,12 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
                                                 return (
                                                     <div key={sub} className="space-y-0.5">
                                                         <div className={`w-full transition-all flex items-center text-sm ${activeGroup === sub
-                                                            ? 'bg-[#1a1a1a] text-green-400 border-l-2 border-green-500'
-                                                            : 'text-gray-400 hover:bg-[#1a1a1a] hover:text-gray-200 border-l-2 border-transparent'
+                                                            ? 'bg-[var(--note-accent-soft)] text-[var(--note-accent)] border-l-2 border-[var(--note-accent)]'
+                                                            : 'text-[var(--note-muted)] hover:bg-[var(--note-hover)] hover:text-[var(--note-heading)] border-l-2 border-transparent'
                                                             }`}>
                                                             <button
                                                                 onClick={(e) => toggleExpand(subKey, e)}
-                                                                className="px-2 py-1.5 text-gray-500 hover:text-gray-300 transition-colors"
+                                                                className="px-2 py-1.5 text-[var(--note-muted)] hover:text-[var(--note-heading)] transition-colors"
                                                                 aria-label="Toggle Folder"
                                                             >
                                                                 {isSubExpanded ? <FaChevronDown className="text-[10px]" /> : <FaChevronRight className="text-[10px]" />}
@@ -203,20 +203,20 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
                                                                 }}
                                                                 className="flex-1 flex items-center gap-2 py-1.5 pr-3 truncate text-left"
                                                             >
-                                                                <FaFolder className={activeGroup === sub ? 'text-yellow-500/80' : 'text-yellow-600/50'} />
+                                                                <FaFolder className="text-[var(--note-folder)]" />
                                                                 <span className="truncate">{titleFromGroup(sub)}/</span>
                                                             </button>
                                                         </div>
 
                                                         {isSubExpanded && (
-                                                            <div className="ml-5 border-l border-[#333] pl-2 space-y-0.5 my-1">
+                                                            <div className="ml-5 border-l border-[var(--note-border)] pl-2 space-y-0.5 my-1">
                                                                 {sidebarTree[group].subgroups[sub].sort((a, b) => a.title.localeCompare(b.title)).map(note => (
                                                                     <Link
                                                                         key={note.slug}
                                                                         href={`/notes/${note.slug}`}
-                                                                        className="no-underline w-full text-left px-3 py-1.5 text-xs transition-all flex items-center gap-2 text-gray-500 hover:bg-[#1a1a1a] hover:text-gray-300 border-l-2 border-transparent"
+                                                                        className="no-underline w-full text-left px-3 py-1.5 text-xs transition-all flex items-center gap-2 text-[var(--note-muted)] hover:bg-[var(--note-hover)] hover:text-[var(--note-heading)] border-l-2 border-transparent"
                                                                     >
-                                                                        <FaFileAlt className="flex-shrink-0 text-gray-600" />
+                                                                        <FaFileAlt className="flex-shrink-0 text-[var(--note-faint)]" />
                                                                         <span className="truncate">{note.title}.md</span>
                                                                     </Link>
                                                                 ))}
@@ -231,9 +231,9 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
                                                 <Link
                                                     key={note.slug}
                                                     href={`/notes/${note.slug}`}
-                                                    className="no-underline w-full text-left px-3 py-1.5 text-xs transition-all flex items-center gap-2 text-gray-500 hover:bg-[#1a1a1a] hover:text-gray-300 border-l-2 border-transparent"
+                                                    className="no-underline w-full text-left px-3 py-1.5 text-xs transition-all flex items-center gap-2 text-[var(--note-muted)] hover:bg-[var(--note-hover)] hover:text-[var(--note-heading)] border-l-2 border-transparent"
                                                 >
-                                                    <FaFileAlt className="flex-shrink-0 text-gray-600" />
+                                                    <FaFileAlt className="flex-shrink-0 text-[var(--note-faint)]" />
                                                     <span className="truncate">{note.title}.md</span>
                                                 </Link>
                                             ))}
@@ -246,33 +246,33 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
                 </aside>
 
                 {/* Main Content — Note Cards Grid */}
-                <main className="flex-1 overflow-y-auto bg-[#0a0a0a] custom-scrollbar hidden lg:block">
+                <main className="flex-1 overflow-y-auto bg-[var(--note-bg)] custom-scrollbar hidden lg:block">
                     <div className="p-4 lg:p-8">
                         {Object.entries(displayGroups).map(([group, groupNotes]) => (
                             <div key={group} className="mb-12">
-                                <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-green-500 mb-6 border-b border-[#333] pb-2 flex items-center gap-2">
-                                    <FaFolder className="text-yellow-500/80" /> ~/{titleFromGroup(group)}
+                                <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--note-accent)] mb-6 border-b border-[var(--note-border)] pb-2 flex items-center gap-2">
+                                    <FaFolder className="text-[var(--note-folder)]" /> ~/{titleFromGroup(group)}
                                 </h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     {groupNotes.map((note) => (
                                         <Link
                                             key={note.slug}
                                             href={`/notes/${note.slug}`}
-                                            className="no-underline group text-left p-5 bg-[#121212] border border-[#333] hover:border-green-500 transition-all relative overflow-hidden h-[240px] flex flex-col"
+                                            className="no-underline group text-left p-5 bg-[var(--note-card)] border border-[var(--note-border)] hover:border-[var(--note-accent)] transition-all relative overflow-hidden h-[240px] flex flex-col shadow-sm"
                                         >
                                             <div className="relative flex flex-col h-full w-full">
-                                                <div className="text-[10px] text-green-500/70 mb-2 uppercase tracking-wider flex-shrink-0 flex items-center gap-1">
+                                                <div className="text-[10px] text-[var(--note-accent)] opacity-75 mb-2 uppercase tracking-wider flex-shrink-0 flex items-center gap-1">
                                                     <FaFileAlt /> {note.subgroup || note.group}/{note.slug}.md
                                                 </div>
-                                                <h4 className="text-lg font-bold text-gray-200 mb-3 group-hover:text-green-400 transition-colors line-clamp-2 flex-shrink-0">{note.title}</h4>
-                                                <p className="text-xs text-gray-500 line-clamp-3 mb-4 flex-1">
-                                                    <span className="text-green-500 mr-2">$</span>
+                                                <h4 className="text-lg font-bold text-[var(--note-heading)] mb-3 group-hover:text-[var(--note-accent)] transition-colors line-clamp-2 flex-shrink-0">{note.title}</h4>
+                                                <p className="text-xs text-[var(--note-muted)] line-clamp-3 mb-4 flex-1">
+                                                    <span className="text-[var(--note-accent)] mr-2">$</span>
                                                     cat {note.slug}.md | head -n 3<br />
-                                                    <span className="text-gray-400 mt-1 block">{note.snippet}</span>
+                                                    <span className="text-[var(--note-text)] mt-1 block">{note.snippet}</span>
                                                 </p>
                                                 <div className="flex gap-2 flex-wrap flex-shrink-0">
                                                     {note.tags.slice(0, 3).map(tag => (
-                                                        <span key={tag} className="px-2 py-0.5 bg-[#0a0a0a] border border-[#333] text-[10px] text-gray-400 group-hover:text-green-400 transition-colors uppercase tracking-wider truncate max-w-full">[{tag}]</span>
+                                                        <span key={tag} className="px-2 py-0.5 bg-[var(--note-code-bg)] border border-[var(--note-border)] text-[10px] text-[var(--note-muted)] group-hover:text-[var(--note-accent)] transition-colors uppercase tracking-wider truncate max-w-full">[{tag}]</span>
                                                     ))}
                                                 </div>
                                             </div>
@@ -283,10 +283,10 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
                         ))}
                         {filteredNotes.length === 0 && (
                             <div className="text-center py-20">
-                                <div className="text-6xl mb-4 text-[#333]">_</div>
-                                <h3 className="text-sm font-bold text-green-500 font-mono">Process completed with exit code 1.</h3>
-                                <p className="text-xs text-gray-500 mt-2">No notes found matching your grep query.</p>
-                                <button onClick={() => { setQuery(""); setActiveTag("all"); setActiveGroup("all"); }} className="mt-6 px-4 py-2 bg-[#121212] border border-[#333] text-green-500 text-xs hover:bg-[#1a1a1a] transition-colors">
+                                <div className="text-6xl mb-4 text-[var(--note-border)]">_</div>
+                                <h3 className="text-sm font-bold text-[var(--note-accent)] font-mono">Process completed with exit code 1.</h3>
+                                <p className="text-xs text-[var(--note-muted)] mt-2">No notes found matching your grep query.</p>
+                                <button onClick={() => { setQuery(""); setActiveTag("all"); setActiveGroup("all"); }} className="mt-6 px-4 py-2 bg-[var(--note-card)] border border-[var(--note-border)] text-[var(--note-accent)] text-xs hover:bg-[var(--note-hover)] transition-colors">
                                     clear
                                 </button>
                             </div>
