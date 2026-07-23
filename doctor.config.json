@@ -1,0 +1,12 @@
+{
+  "$schema": "https://react.doctor/schema/config.json",
+  "ignore": {
+    "files": ["worktrees/**"],
+    "overrides": [
+      {
+        "files": ["src/components/MarkdownRenderer.tsx"],
+        "rules": ["react-doctor/dangerous-html-sink"]
+      }
+    ]
+  }
+}

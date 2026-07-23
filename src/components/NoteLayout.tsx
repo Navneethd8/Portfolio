@@ -27,7 +27,7 @@ export default function NoteLayout({ note }: NoteLayoutProps) {
 
             {/* Content */}
             <main className="font-sans flex-1 overflow-y-auto bg-[var(--note-bg)] custom-scrollbar">
-                <div className="max-w-4xl mx-auto p-4 lg:p-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <div className="mx-auto max-w-4xl p-4 lg:p-12">
                     <Link
                         href="/notes"
                         className="font-mono no-underline mb-6 flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity text-sm"

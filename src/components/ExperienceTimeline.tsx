@@ -8,7 +8,7 @@ interface ExperienceTimelineItemProps {
     company: string;
     location?: string;
     date: string;
-    logoSrc: string;
+    logoSrc?: string;
     summary: string;
     bullets?: string[];
     links?: React.ReactNode;
@@ -34,19 +34,33 @@ export function ExperienceTimelineItem({
             )}
 
             {/* Logo / dot */}
-            <div className="relative z-10 flex-shrink-0">
-                <Image
-                    src={logoSrc}
-                    alt={`${company} Logo`}
-                    width={48}
-                    height={48}
-                    className="w-12 h-12 rounded-full object-cover"
-                />
+            <div className="relative z-10 shrink-0">
+                {logoSrc ? (
+                    <Image
+                        src={logoSrc}
+                        alt={`${company} Logo`}
+                        width={48}
+                        height={48}
+                        className="h-12 w-12 rounded-xl border border-[var(--border)] bg-white object-contain p-1"
+                    />
+                ) : (
+                    <div
+                        className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--card-bg)] text-sm font-bold text-[var(--foreground)]"
+                        aria-hidden
+                    >
+                        {company
+                            .split(/\s+/)
+                            .map((word) => word[0])
+                            .join("")
+                            .slice(0, 2)
+                            .toUpperCase()}
+                    </div>
+                )}
             </div>
 
             {/* Content */}
             <div className="flex-1 min-w-0">
-                <div className="flex items-start justify-between gap-2">
+                <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
                     <div className="min-w-0">
                         <h3 className="text-lg font-bold text-[var(--foreground)] leading-tight">{role}</h3>
                         <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-0.5">
@@ -61,13 +75,13 @@ export function ExperienceTimelineItem({
                             ) : null}
                         </div>
                     </div>
-                    <span className="text-sm font-medium opacity-60 whitespace-nowrap pt-1">{date}</span>
+                    <span className="whitespace-nowrap text-sm font-medium opacity-60 sm:pt-1">{date}</span>
                 </div>
-                <p className="text-base italic opacity-70 mt-1.5">{summary}</p>
+                <p className="mt-1.5 max-w-3xl text-[0.95rem] leading-relaxed text-[var(--paragraph)]">{summary}</p>
                 {bullets && bullets.length > 0 ? (
                     <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-[var(--paragraph)]">
-                        {bullets.map((b, i) => (
-                            <li key={i}>{b}</li>
+                        {bullets.map((bullet) => (
+                            <li key={bullet}>{bullet}</li>
                         ))}
                     </ul>
                 ) : null}

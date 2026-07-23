@@ -10,6 +10,12 @@ interface NotesExplorerProps {
     initialTags: string[];
 }
 
+function titleFromGroup(group: string) {
+    return group
+        .replace(/[-_]/g, " ")
+        .replace(/\b\w/g, (character) => character.toUpperCase());
+}
+
 export default function NotesExplorer({ initialNotes: notes, initialTags: allTags }: NotesExplorerProps) {
     const [query, setQuery] = useState("");
     const [activeTag, setActiveTag] = useState("all");
@@ -69,11 +75,6 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
         }, {} as Record<string, NoteMetadata[]>);
     }, [filteredNotes, activeGroup]);
 
-    const titleFromGroup = (group: string) =>
-        group
-            .replace(/[-_]/g, " ")
-            .replace(/\b\w/g, (c) => c.toUpperCase());
-
     return (
         <div className="notes-terminal h-[calc(100vh-120px)] lg:h-[calc(100vh-64px)] flex flex-col border rounded-xl overflow-hidden font-mono transition-colors duration-200">
             {/* macOS Window Header */}
@@ -90,10 +91,17 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
 
             {/* Search Bar (Terminal Style) */}
             <div className="flex items-center px-4 py-3 border-b border-[var(--note-border)] bg-[var(--note-bg)]">
-                <span className="text-[var(--note-accent)] mr-3 font-bold">❯</span>
+                <label
+                    htmlFor="notes-search"
+                    className="mr-3 flex items-center gap-2 text-xs font-bold text-[var(--note-accent)]"
+                >
+                    <span aria-hidden>❯</span>
+                    <span>grep</span>
+                </label>
                 <input
+                    id="notes-search"
                     type="search"
-                    placeholder="grep -i 'search notes, tags, content...'"
+                    placeholder="-i 'search notes, tags, content...'"
                     className="flex-1 bg-transparent text-[var(--note-accent)] focus:outline-none placeholder:text-[var(--note-faint)] text-sm"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
@@ -102,13 +110,14 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
 
             <div className="flex flex-1 overflow-hidden">
                 {/* Sidebar */}
-                <aside className="w-full lg:w-72 flex-shrink-0 border-r border-[var(--note-border)] bg-[var(--note-panel)] overflow-y-auto custom-scrollbar block">
+                <aside className="w-full shrink-0 overflow-y-auto border-r border-[var(--note-border)] bg-[var(--note-panel)] custom-scrollbar lg:w-72">
                     <div className="p-3 space-y-1">
                         <button
+                            type="button"
                             onClick={() => {
                                 setActiveGroup("all");
                             }}
-                            className={`w-full text-left px-3 py-2 transition-all flex items-center justify-between text-sm ${activeGroup === "all"
+                            className={`flex w-full items-center justify-between px-3 py-2 text-left text-sm transition-colors ${activeGroup === "all"
                                 ? 'bg-[var(--note-accent-soft)] text-[var(--note-accent)] border-l-2 border-[var(--note-accent)]'
                                 : 'text-[var(--note-muted)] hover:bg-[var(--note-hover)] hover:text-[var(--note-heading)] border-l-2 border-transparent'
                                 }`}
@@ -126,9 +135,10 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
                         <div className="flex flex-wrap gap-2 px-3 pb-4">
                             {availableTags.map((tag) => (
                                 <button
+                                    type="button"
                                     key={tag}
                                     onClick={() => setActiveTag(tag)}
-                                    className={`px-2 py-1 text-[10px] transition-all flex items-center gap-1 border ${activeTag === tag
+                                    className={`flex items-center gap-1 border px-2 py-1 text-[10px] transition-colors ${activeTag === tag
                                         ? 'bg-[var(--note-accent-soft)] text-[var(--note-accent)] border-[var(--note-accent)]'
                                         : 'bg-transparent text-[var(--note-muted)] border-[var(--note-border)] hover:border-[var(--note-muted)] hover:text-[var(--note-heading)]'
                                         }`}
@@ -146,11 +156,12 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
 
                             return (
                                 <div key={group} className="space-y-0.5">
-                                    <div className={`w-full transition-all flex items-center group flex-shrink-0 text-sm ${activeGroup === group
+                                    <div className={`group flex w-full shrink-0 items-center text-sm transition-colors ${activeGroup === group
                                         ? 'bg-[var(--note-accent-soft)] text-[var(--note-accent)] border-l-2 border-[var(--note-accent)]'
                                         : 'text-[var(--note-muted)] hover:bg-[var(--note-hover)] hover:text-[var(--note-heading)] border-l-2 border-transparent'
                                         }`}>
                                         <button
+                                            type="button"
                                             onClick={(e) => toggleExpand(group, e)}
                                             className="px-2 py-2 text-[var(--note-muted)] hover:text-[var(--note-heading)] transition-colors"
                                             aria-label="Toggle Folder"
@@ -158,6 +169,7 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
                                             {isExpanded ? <FaChevronDown className="text-[10px]" /> : <FaChevronRight className="text-[10px]" />}
                                         </button>
                                         <button
+                                            type="button"
                                             onClick={(e) => {
                                                 setActiveGroup(group);
                                                 if (!expandedGroups.has(group)) {
@@ -183,11 +195,12 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
 
                                                 return (
                                                     <div key={sub} className="space-y-0.5">
-                                                        <div className={`w-full transition-all flex items-center text-sm ${activeGroup === sub
+                                                        <div className={`flex w-full items-center text-sm transition-colors ${activeGroup === sub
                                                             ? 'bg-[var(--note-accent-soft)] text-[var(--note-accent)] border-l-2 border-[var(--note-accent)]'
                                                             : 'text-[var(--note-muted)] hover:bg-[var(--note-hover)] hover:text-[var(--note-heading)] border-l-2 border-transparent'
                                                             }`}>
                                                             <button
+                                                                type="button"
                                                                 onClick={(e) => toggleExpand(subKey, e)}
                                                                 className="px-2 py-1.5 text-[var(--note-muted)] hover:text-[var(--note-heading)] transition-colors"
                                                                 aria-label="Toggle Folder"
@@ -195,6 +208,7 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
                                                                 {isSubExpanded ? <FaChevronDown className="text-[10px]" /> : <FaChevronRight className="text-[10px]" />}
                                                             </button>
                                                             <button
+                                                                type="button"
                                                                 onClick={(e) => {
                                                                     setActiveGroup(sub);
                                                                     if (!expandedGroups.has(subKey)) {
@@ -210,13 +224,13 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
 
                                                         {isSubExpanded && (
                                                             <div className="ml-5 border-l border-[var(--note-border)] pl-2 space-y-0.5 my-1">
-                                                                {sidebarTree[group].subgroups[sub].sort((a, b) => a.title.localeCompare(b.title)).map(note => (
+                                                                {[...sidebarTree[group].subgroups[sub]].sort((a, b) => a.title.localeCompare(b.title)).map(note => (
                                                                     <Link
                                                                         key={note.slug}
                                                                         href={`/notes/${note.slug}`}
-                                                                        className="no-underline w-full text-left px-3 py-1.5 text-xs transition-all flex items-center gap-2 text-[var(--note-muted)] hover:bg-[var(--note-hover)] hover:text-[var(--note-heading)] border-l-2 border-transparent"
+                                                                        className="flex w-full items-center gap-2 border-l-2 border-transparent px-3 py-1.5 text-left text-xs text-[var(--note-muted)] no-underline transition-colors hover:bg-[var(--note-hover)] hover:text-[var(--note-heading)]"
                                                                     >
-                                                                        <FaFileAlt className="flex-shrink-0 text-[var(--note-faint)]" />
+                                                                        <FaFileAlt className="shrink-0 text-[var(--note-faint)]" />
                                                                         <span className="truncate">{note.title}.md</span>
                                                                     </Link>
                                                                 ))}
@@ -227,13 +241,13 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
                                             })}
 
                                             {/* Direct Notes in Group */}
-                                            {sidebarTree[group].notes.sort((a, b) => a.title.localeCompare(b.title)).map(note => (
+                                            {[...sidebarTree[group].notes].sort((a, b) => a.title.localeCompare(b.title)).map(note => (
                                                 <Link
                                                     key={note.slug}
                                                     href={`/notes/${note.slug}`}
-                                                    className="no-underline w-full text-left px-3 py-1.5 text-xs transition-all flex items-center gap-2 text-[var(--note-muted)] hover:bg-[var(--note-hover)] hover:text-[var(--note-heading)] border-l-2 border-transparent"
+                                                    className="flex w-full items-center gap-2 border-l-2 border-transparent px-3 py-1.5 text-left text-xs text-[var(--note-muted)] no-underline transition-colors hover:bg-[var(--note-hover)] hover:text-[var(--note-heading)]"
                                                 >
-                                                    <FaFileAlt className="flex-shrink-0 text-[var(--note-faint)]" />
+                                                    <FaFileAlt className="shrink-0 text-[var(--note-faint)]" />
                                                     <span className="truncate">{note.title}.md</span>
                                                 </Link>
                                             ))}
@@ -258,19 +272,19 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
                                         <Link
                                             key={note.slug}
                                             href={`/notes/${note.slug}`}
-                                            className="no-underline group text-left p-5 bg-[var(--note-card)] border border-[var(--note-border)] hover:border-[var(--note-accent)] transition-all relative overflow-hidden h-[240px] flex flex-col shadow-sm"
+                                            className="group relative flex h-[240px] flex-col overflow-hidden border border-[var(--note-border)] bg-[var(--note-card)] p-5 text-left no-underline shadow-sm transition-colors hover:border-[var(--note-accent)]"
                                         >
                                             <div className="relative flex flex-col h-full w-full">
-                                                <div className="text-[10px] text-[var(--note-accent)] opacity-75 mb-2 uppercase tracking-wider flex-shrink-0 flex items-center gap-1">
+                                                <div className="mb-2 flex shrink-0 items-center gap-1 text-[10px] uppercase tracking-wider text-[var(--note-accent)] opacity-75">
                                                     <FaFileAlt /> {note.subgroup || note.group}/{note.slug}.md
                                                 </div>
-                                                <h4 className="text-lg font-bold text-[var(--note-heading)] mb-3 group-hover:text-[var(--note-accent)] transition-colors line-clamp-2 flex-shrink-0">{note.title}</h4>
+                                                <h4 className="mb-3 line-clamp-2 shrink-0 text-lg font-bold text-[var(--note-heading)] transition-colors group-hover:text-[var(--note-accent)]">{note.title}</h4>
                                                 <p className="text-xs text-[var(--note-muted)] line-clamp-3 mb-4 flex-1">
                                                     <span className="text-[var(--note-accent)] mr-2">$</span>
                                                     cat {note.slug}.md | head -n 3<br />
                                                     <span className="text-[var(--note-text)] mt-1 block">{note.snippet}</span>
                                                 </p>
-                                                <div className="flex gap-2 flex-wrap flex-shrink-0">
+                                                <div className="flex shrink-0 flex-wrap gap-2">
                                                     {note.tags.slice(0, 3).map(tag => (
                                                         <span key={tag} className="px-2 py-0.5 bg-[var(--note-code-bg)] border border-[var(--note-border)] text-[10px] text-[var(--note-muted)] group-hover:text-[var(--note-accent)] transition-colors uppercase tracking-wider truncate max-w-full">[{tag}]</span>
                                                     ))}
@@ -286,7 +300,7 @@ export default function NotesExplorer({ initialNotes: notes, initialTags: allTag
                                 <div className="text-6xl mb-4 text-[var(--note-border)]">_</div>
                                 <h3 className="text-sm font-bold text-[var(--note-accent)] font-mono">Process completed with exit code 1.</h3>
                                 <p className="text-xs text-[var(--note-muted)] mt-2">No notes found matching your grep query.</p>
-                                <button onClick={() => { setQuery(""); setActiveTag("all"); setActiveGroup("all"); }} className="mt-6 px-4 py-2 bg-[var(--note-card)] border border-[var(--note-border)] text-[var(--note-accent)] text-xs hover:bg-[var(--note-hover)] transition-colors">
+                                <button type="button" onClick={() => { setQuery(""); setActiveTag("all"); setActiveGroup("all"); }} className="mt-6 border border-[var(--note-border)] bg-[var(--note-card)] px-4 py-2 text-xs text-[var(--note-accent)] transition-colors hover:bg-[var(--note-hover)]">
                                     clear
                                 </button>
                             </div>

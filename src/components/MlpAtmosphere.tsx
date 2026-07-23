@@ -3,29 +3,48 @@
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
-const GRID = 48;
+type NetworkNode = {
+  x: number;
+  y: number;
+  layer: number;
+  index: number;
+};
 
-/** Wider screens get the full decorative MLP; narrow viewports use tiny 3–1–3 / 3–1–2 stacks. */
-function layerCountsForWidth(cssWidth: number): number[] {
-  if (cssWidth >= 1024) return [2, 4, 5, 4, 3];
-  if (cssWidth >= 768) return [3, 5, 4, 3];
-  if (cssWidth >= 480) return [3, 1, 3];
-  return [3, 1, 2];
+type NetworkEdge = {
+  from: NetworkNode;
+  to: NetworkNode;
+  layer: number;
+  emphasis: number;
+};
+
+type Rgba = [number, number, number, number];
+
+function layerCountsForWidth(width: number): number[] {
+  if (width >= 1280) return [3, 5, 6, 5, 3];
+  if (width >= 1024) return [3, 4, 5, 4, 3];
+  if (width >= 768) return [3, 4, 3];
+  return [2, 3, 2];
 }
 
-function snapCenter(v: number) {
-  return Math.round((v - GRID / 2) / GRID) * GRID + GRID / 2;
+function parseColor(value: string, fallback: Rgba): Rgba {
+  const match = value.match(/rgba?\(([^)]+)\)/);
+  if (!match) return fallback;
+
+  const parts = match[1].split(/[\s,]+/).map(Number);
+  return [
+    parts[0] ?? fallback[0],
+    parts[1] ?? fallback[1],
+    parts[2] ?? fallback[2],
+    parts[3] ?? 1,
+  ];
 }
 
-type Node = { x: number; y: number; layer: number };
-type Edge = { x1: number; y1: number; x2: number; y2: number; layer: number };
+function rgba([r, g, b, a]: Rgba, opacity = 1) {
+  return `rgba(${r},${g},${b},${Math.min(1, a * opacity)})`;
+}
 
-function parseRgba(str: string): [number, number, number, number] {
-  const m = str.match(/rgba?\(([^)]+)\)/);
-  if (!m) return [59, 130, 246, 0.55];
-  const p = m[1].split(/[\s,]+/).map(Number);
-  if (p.length === 3) return [p[0], p[1], p[2], 1];
-  return [p[0], p[1], p[2], p[3]];
+function gaussian(distance: number, spread: number) {
+  return Math.exp(-(distance * distance) / spread);
 }
 
 export default function MlpAtmosphere() {
@@ -35,249 +54,256 @@ export default function MlpAtmosphere() {
 
   useEffect(() => {
     if (hiddenOnNotes) return;
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const rawCtx = canvas.getContext("2d");
-    if (!rawCtx) return;
-    const c2d: CanvasRenderingContext2D = rawCtx;
 
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const targetCanvas = canvasRef.current;
+    if (!targetCanvas) return;
 
-    function cssColor(name: string) {
-      return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || "rgba(59,130,246,0.4)";
+    const targetContext = targetCanvas.getContext("2d");
+    if (!targetContext) return;
+
+    const canvas: HTMLCanvasElement = targetCanvas;
+    const context: CanvasRenderingContext2D = targetContext;
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    let layers: NetworkNode[][] = [];
+    let edges: NetworkEdge[] = [];
+    let animationFrame = 0;
+    let lastFrame = 0;
+
+    function themeColor(name: string, fallback: string) {
+      return (
+        getComputedStyle(document.documentElement)
+          .getPropertyValue(name)
+          .trim() || fallback
+      );
     }
 
-    let nodes: Node[] = [];
-    let edges: Edge[] = [];
-    let edgeLengths: number[] = [];
-    let totalEdgeLength = 0;
-    let layers: Node[][] = [];
-    let cssW = 800;
-    let cssH = 600;
-    let layerCounts = layerCountsForWidth(cssW);
-    let nodeRadius = 3.5;
-    let pulseRadii: [number, number] = [22, 16];
-    let edgeLineWidth = 1;
-    let raf = 0;
-    const start = performance.now();
+    function buildNetwork() {
+      const counts = layerCountsForWidth(width);
+      const isNarrow = width < 768;
+      const left = isNarrow ? width * 0.08 : Math.max(340, width * 0.34);
+      const right = width - (isNarrow ? width * 0.08 : Math.max(46, width * 0.045));
+      const centerY = height * (isNarrow ? 0.58 : 0.52);
+      const verticalSpan = Math.min(
+        height * (isNarrow ? 0.46 : 0.62),
+        isNarrow ? 320 : 500,
+      );
 
-    function buildGraph(w: number, h: number) {
-      const marginX = GRID * 2;
-      const marginY = GRID * 2;
-      const usableW = w - marginX * 2;
-      const usableH = h - marginY * 2;
+      layers = counts.map((count, layer) => {
+        const x =
+          counts.length === 1
+            ? (left + right) / 2
+            : left + (layer / (counts.length - 1)) * (right - left);
 
-      layers = layerCounts.map((count, li) => {
-        const t = layerCounts.length === 1 ? 0.5 : li / (layerCounts.length - 1);
-        const rawX = marginX + t * usableW;
-        const x = snapCenter(rawX);
-        const ys: Node[] = [];
-        for (let j = 0; j < count; j++) {
-          const rawY = marginY + ((j + 1) / (count + 1)) * usableH;
-          ys.push({ x, y: snapCenter(rawY), layer: li });
-        }
-        return ys;
+        return Array.from({ length: count }, (_, index) => {
+          const normalized = count === 1 ? 0 : index / (count - 1) - 0.5;
+          const layerOffset =
+            Math.sin((layer / Math.max(1, counts.length - 1)) * Math.PI) *
+            Math.min(20, height * 0.02);
+
+          return {
+            x,
+            y: centerY + normalized * verticalSpan + layerOffset,
+            layer,
+            index,
+          };
+        });
       });
 
-      nodes = layers.flat();
       edges = [];
-      for (let L = 0; L < layers.length - 1; L++) {
-        const A = layers[L];
-        const B = layers[L + 1];
-        for (let ia = 0; ia < A.length; ia++) {
-          for (let ib = 0; ib < B.length; ib++) {
-            if (((ia + ib + L * 3) % 4 === 0) || ((ia * 2 + ib + L) % 5 <= 1)) {
-              const a = A[ia];
-              const b = B[ib];
-              edges.push({ x1: a.x, y1: a.y, x2: b.x, y2: b.y, layer: L });
-            }
-          }
-        }
-      }
-      if (edges.length < 32) {
-        edges = [];
-        for (let L = 0; L < layers.length - 1; L++) {
-          const A = layers[L];
-          const B = layers[L + 1];
-          for (const a of A) {
-            for (const b of B) {
-              edges.push({ x1: a.x, y1: a.y, x2: b.x, y2: b.y, layer: L });
-            }
-          }
-        }
-      }
 
-      edgeLengths = edges.map((e) => Math.hypot(e.x2 - e.x1, e.y2 - e.y1));
-      totalEdgeLength = edgeLengths.reduce((s, l) => s + l, 0);
+      for (let layer = 0; layer < layers.length - 1; layer++) {
+        const current = layers[layer];
+        const next = layers[layer + 1];
+
+        current.forEach((node) => {
+          const sourcePosition =
+            current.length === 1 ? 0.5 : node.index / (current.length - 1);
+          const nearest = [...next]
+            .sort((a, b) => {
+              const aPosition =
+                next.length === 1 ? 0.5 : a.index / (next.length - 1);
+              const bPosition =
+                next.length === 1 ? 0.5 : b.index / (next.length - 1);
+              return (
+                Math.abs(sourcePosition - aPosition) -
+                Math.abs(sourcePosition - bPosition)
+              );
+            })
+            .slice(0, isNarrow ? 2 : 3);
+
+          nearest.forEach((target, rank) => {
+            edges.push({
+              from: node,
+              to: target,
+              layer,
+              emphasis: rank === 0 ? 1 : rank === 1 ? 0.68 : 0.42,
+            });
+          });
+        });
+      }
     }
 
     function resize() {
-      const el = canvasRef.current;
-      if (!el) return;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      cssW = window.innerWidth;
-      cssH = window.innerHeight;
-      layerCounts = layerCountsForWidth(cssW);
-      if (cssW < 480) {
-        nodeRadius = 2.25;
-        pulseRadii = [12, 9];
-        edgeLineWidth = 0.75;
-      } else if (cssW < 768) {
-        nodeRadius = 2.75;
-        pulseRadii = [14, 11];
-        edgeLineWidth = 0.85;
-      } else if (cssW < 1024) {
-        nodeRadius = 3.1;
-        pulseRadii = [18, 13];
-        edgeLineWidth = 0.95;
-      } else {
-        nodeRadius = 3.5;
-        pulseRadii = [22, 16];
-        edgeLineWidth = 1;
-      }
-      el.width = Math.floor(cssW * dpr);
-      el.height = Math.floor(cssH * dpr);
-      el.style.width = `${cssW}px`;
-      el.style.height = `${cssH}px`;
-      c2d.setTransform(dpr, 0, 0, dpr, 0, 0);
-      buildGraph(cssW, cssH);
+      width = window.innerWidth;
+      height = window.innerHeight;
+
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      buildNetwork();
     }
 
-    function pulseAt(globalPos: number) {
-      if (!edges.length || totalEdgeLength <= 0) return null;
-      let acc = 0;
-      let edgeIndex = 0;
-      let local = 0;
-      const target = ((globalPos % totalEdgeLength) + totalEdgeLength) % totalEdgeLength;
-      for (let i = 0; i < edges.length; i++) {
-        const len = edgeLengths[i];
-        if (acc + len >= target) {
-          edgeIndex = i;
-          local = target - acc;
-          break;
-        }
-        acc += len;
-      }
-      const e = edges[edgeIndex];
-      const len = edgeLengths[edgeIndex] || 1;
-      const u = local / len;
-      return {
-        px: e.x1 + (e.x2 - e.x1) * u,
-        py: e.y1 + (e.y2 - e.y1) * u,
-      };
-    }
+    function draw(now: number, staticFrame = false) {
+      context.clearRect(0, 0, width, height);
 
-    function drawStatic() {
-      c2d.clearRect(0, 0, cssW, cssH);
-      const edgeCol = cssColor("--mlp-edge");
-      const nodeCol = cssColor("--mlp-node");
-      c2d.lineWidth = edgeLineWidth;
-      for (const e of edges) {
-        c2d.strokeStyle = edgeCol;
-        c2d.beginPath();
-        c2d.moveTo(e.x1, e.y1);
-        c2d.lineTo(e.x2, e.y2);
-        c2d.stroke();
-      }
-      for (const n of nodes) {
-        c2d.fillStyle = nodeCol;
-        c2d.beginPath();
-        c2d.arc(n.x, n.y, nodeRadius, 0, Math.PI * 2);
-        c2d.fill();
-      }
-    }
-
-    function drawFrame(now: number) {
-      c2d.clearRect(0, 0, cssW, cssH);
-      const edgeCol = cssColor("--mlp-edge");
-      const nodeCol = cssColor("--mlp-node");
-      const pulseStr = cssColor("--mlp-pulse");
-      const [pr, pg, pb, pa] = parseRgba(
-        pulseStr.startsWith("rgba") || pulseStr.startsWith("rgb") ? pulseStr : "rgba(59,130,246,0.55)"
+      const edgeColor = parseColor(
+        themeColor("--mlp-edge", "rgba(0,120,212,0.08)"),
+        [0, 120, 212, 0.08],
+      );
+      const nodeColor = parseColor(
+        themeColor("--mlp-node", "rgba(77,170,252,0.16)"),
+        [77, 170, 252, 0.16],
+      );
+      const pulseColor = parseColor(
+        themeColor("--mlp-pulse", "rgba(0,120,212,0.48)"),
+        [0, 120, 212, 0.48],
       );
 
-      const t = (now - start) / 1000;
-      const speed = 0.065;
-      const pulsePos = (t * speed * totalEdgeLength) % (totalEdgeLength || 1);
-      const numLayers = layers.length || layerCounts.length;
-      const activeLayer = Math.floor((t * 0.18) % numLayers);
+      const layerCount = Math.max(1, layers.length);
+      const elapsed = now / 1000;
+      const wavePosition = staticFrame
+        ? -2
+        : ((elapsed * 0.42) % (layerCount + 2)) - 1;
+      const baseRadius = width < 768 ? 2.2 : 2.8;
 
-      c2d.lineWidth = edgeLineWidth;
-      const pulseCoreRadius = Math.max(1.6, nodeRadius * 1.06);
-      for (const e of edges) {
-        c2d.strokeStyle = edgeCol;
-        c2d.globalAlpha = 0.45 + 0.06 * e.layer;
-        c2d.beginPath();
-        c2d.moveTo(e.x1, e.y1);
-        c2d.lineTo(e.x2, e.y2);
-        c2d.stroke();
-        c2d.globalAlpha = 1;
+      context.lineCap = "round";
+
+      edges.forEach((edge) => {
+        const activation = staticFrame
+          ? 0
+          : gaussian(wavePosition - (edge.layer + 0.5), 0.24);
+        const baseOpacity = 0.42 * edge.emphasis;
+        const edgeGradient = context.createLinearGradient(
+          edge.from.x,
+          edge.from.y,
+          edge.to.x,
+          edge.to.y,
+        );
+
+        edgeGradient.addColorStop(0, rgba(edgeColor, baseOpacity));
+        edgeGradient.addColorStop(
+          0.55,
+          rgba(edgeColor, baseOpacity + activation * 1.55),
+        );
+        edgeGradient.addColorStop(
+          1,
+          rgba(edgeColor, baseOpacity + activation * 0.55),
+        );
+
+        context.strokeStyle = edgeGradient;
+        context.lineWidth = 0.7 + activation * 0.65;
+        context.beginPath();
+        context.moveTo(edge.from.x, edge.from.y);
+        context.lineTo(edge.to.x, edge.to.y);
+        context.stroke();
+      });
+
+      layers.flat().forEach((node) => {
+        const activation = staticFrame
+          ? 0
+          : gaussian(wavePosition - node.layer, 0.18);
+        const radius = baseRadius + activation * 1.25;
+
+        if (activation > 0.04) {
+          const glowRadius = radius + 10 + activation * 7;
+          const glow = context.createRadialGradient(
+            node.x,
+            node.y,
+            0,
+            node.x,
+            node.y,
+            glowRadius,
+          );
+          glow.addColorStop(0, rgba(pulseColor, 0.45 * activation));
+          glow.addColorStop(0.45, rgba(pulseColor, 0.12 * activation));
+          glow.addColorStop(1, rgba(pulseColor, 0));
+          context.fillStyle = glow;
+          context.beginPath();
+          context.arc(node.x, node.y, glowRadius, 0, Math.PI * 2);
+          context.fill();
+        }
+
+        context.fillStyle = rgba(nodeColor, 0.56 + activation * 1.9);
+        context.beginPath();
+        context.arc(node.x, node.y, radius, 0, Math.PI * 2);
+        context.fill();
+
+        context.strokeStyle = rgba(pulseColor, 0.38 + activation * 1.15);
+        context.lineWidth = 0.75 + activation * 0.5;
+        context.beginPath();
+        context.arc(node.x, node.y, radius + 2.5, 0, Math.PI * 2);
+        context.stroke();
+      });
+    }
+
+    function animate(now: number) {
+      if (now - lastFrame >= 1000 / 30) {
+        draw(now);
+        lastFrame = now;
       }
-
-      function drawPulse(globalPos: number, radius: number, alphaMul: number) {
-        const pt = pulseAt(globalPos);
-        if (!pt) return;
-        const rad = c2d.createRadialGradient(pt.px, pt.py, 0, pt.px, pt.py, radius);
-        rad.addColorStop(0, `rgba(${pr},${pg},${pb},${0.32 * pa * alphaMul})`);
-        rad.addColorStop(0.4, `rgba(${pr},${pg},${pb},${0.1 * pa * alphaMul})`);
-        rad.addColorStop(1, "rgba(0,0,0,0)");
-        c2d.fillStyle = rad;
-        c2d.beginPath();
-        c2d.arc(pt.px, pt.py, radius, 0, Math.PI * 2);
-        c2d.fill();
-        c2d.fillStyle = `rgba(${pr},${pg},${pb},${0.8 * pa * alphaMul})`;
-        c2d.beginPath();
-        c2d.arc(pt.px, pt.py, pulseCoreRadius, 0, Math.PI * 2);
-        c2d.fill();
-      }
-
-      const [pulseR, pulseR2] = pulseRadii;
-      drawPulse(pulsePos + totalEdgeLength * 0.42, pulseR2, 0.4);
-      drawPulse(pulsePos, pulseR, 1);
-
-      for (const n of nodes) {
-        const boost = n.layer === activeLayer ? 1.22 : 1;
-        c2d.fillStyle = nodeCol;
-        c2d.beginPath();
-        c2d.arc(n.x, n.y, nodeRadius * boost, 0, Math.PI * 2);
-        c2d.fill();
-      }
-
-      raf = requestAnimationFrame(drawFrame);
+      animationFrame = requestAnimationFrame(animate);
     }
 
     resize();
-    const onResize = () => {
-      resize();
-      if (reduceMotion) drawStatic();
-    };
-    window.addEventListener("resize", onResize);
 
-    const mo = new MutationObserver(() => {
+    const handleResize = () => {
       resize();
-      if (reduceMotion) drawStatic();
+      if (reduceMotion) draw(performance.now(), true);
+    };
+    window.addEventListener("resize", handleResize);
+
+    const themeObserver = new MutationObserver(() => {
+      if (reduceMotion) draw(performance.now(), true);
     });
-    mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
 
     if (reduceMotion) {
-      drawStatic();
+      draw(performance.now(), true);
     } else {
-      raf = requestAnimationFrame(drawFrame);
+      animationFrame = requestAnimationFrame(animate);
     }
 
     return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("resize", onResize);
-      mo.disconnect();
+      cancelAnimationFrame(animationFrame);
+      window.removeEventListener("resize", handleResize);
+      themeObserver.disconnect();
     };
   }, [hiddenOnNotes]);
 
   if (hiddenOnNotes) return null;
 
   return (
-    <div className="atmosphere pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden>
-      <canvas ref={canvasRef} className="mlp-canvas absolute inset-0 block h-full w-full opacity-[0.92]" width={800} height={600} />
-      <div className="grid-lines pointer-events-none absolute inset-0" />
+    <div className="atmosphere" aria-hidden>
+      <canvas
+        ref={canvasRef}
+        className="mlp-canvas"
+        width={800}
+        height={600}
+      />
+      <div className="grid-lines" />
     </div>
   );
 }

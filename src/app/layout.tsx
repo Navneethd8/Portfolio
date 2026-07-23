@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Navneeth Dhamotharan",
-  description: "A Personal website highlighting an aspiring Data Scientist's journey.",
+  description: "Navneeth Dhamotharan builds practical software across data engineering, machine learning, and applied research.",
 };
 
 export default function RootLayout({

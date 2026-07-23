@@ -6,11 +6,53 @@ import remarkParse from 'remark-parse';
 import remarkMath from 'remark-math';
 import remarkGfm from 'remark-gfm';
 import remarkRehype from 'remark-rehype';
+import rehypeRaw from 'rehype-raw';
+import rehypeSanitize, { defaultSchema, type Options as SanitizeOptions } from 'rehype-sanitize';
 import rehypeKatex from 'rehype-katex';
 import rehypeStringify from 'rehype-stringify';
 import rehypeHighlight from 'rehype-highlight';
 
 const NOTES_DIRECTORY = path.join(process.cwd(), 'notes');
+
+const noteSanitizeSchema: SanitizeOptions = {
+    ...defaultSchema,
+    attributes: {
+        ...defaultSchema.attributes,
+        code: [
+            ...(defaultSchema.attributes?.code || []),
+            ['className', /^language-/],
+        ],
+        div: [
+            ...(defaultSchema.attributes?.div || []),
+            [
+                'className',
+                'obsidian-callout',
+                /^callout-/,
+                'callout-title',
+                'callout-content',
+                'math',
+                'math-display',
+            ],
+            'dataCallout',
+        ],
+        img: [
+            ...(defaultSchema.attributes?.img || []),
+            ['className', 'obsidian-embed'],
+            'width',
+        ],
+        span: [
+            ...(defaultSchema.attributes?.span || []),
+            [
+                'className',
+                'callout-icon',
+                'wikilink',
+                'math',
+                'math-inline',
+            ],
+            'title',
+        ],
+    },
+};
 
 export interface NoteMetadata {
     title: string;
@@ -195,8 +237,11 @@ async function renderMarkdown(content: string): Promise<string> {
         .use(remarkMath)         // Parse $...$ and $$...$$ 
         .use(remarkGfm)          // Tables, strikethrough, task lists, etc.
         .use(remarkRehype, {
-            allowDangerousHtml: true  // Allow our callout HTML to pass through
+            allowDangerousHtml: true  // Parse custom Obsidian HTML in the next step
         })
+        .use(rehypeRaw)
+        // Sanitize note-authored HTML before trusted rendering plugins add markup.
+        .use(rehypeSanitize, noteSanitizeSchema)
         .use(rehypeKatex, {
             throwOnError: false,
             strict: false,
@@ -206,9 +251,7 @@ async function renderMarkdown(content: string): Promise<string> {
             detect: true,            // Auto-detect language when not specified
             ignoreMissing: true      // Don't throw on unknown languages
         })
-        .use(rehypeStringify, {
-            allowDangerousHtml: true  // Preserve our callout HTML
-        })
+        .use(rehypeStringify)
         .process(preprocessed);
 
     return String(result);
@@ -295,8 +338,7 @@ export function getAllNotesMeta(): NoteMetadata[] {
     return sortedNotes;
 }
 
-export function getAllTags(): string[] {
-    const notes = getAllNotesMeta();
+export function getAllTags(notes: NoteMetadata[] = getAllNotesMeta()): string[] {
     const tags = new Set<string>();
     notes.forEach(note => {
         note.tags.forEach(tag => tags.add(tag));

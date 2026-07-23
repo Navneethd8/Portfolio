@@ -8,7 +8,7 @@ import type { AboutParagraph } from "@/types/portfolio";
 import Image from "next/image";
 
 const sectionHeadingClass =
-  "relative mb-6 text-2xl font-bold tracking-tight text-[var(--foreground)] after:mt-2.5 after:block after:h-0.5 after:w-14 after:bg-[var(--foreground)] after:content-['']";
+  "relative mb-6 text-2xl font-semibold tracking-tight text-[var(--foreground)] after:mt-2.5 after:block after:h-0.5 after:w-10 after:bg-[var(--accent)] after:content-['']";
 
 const proseStackClass =
   "space-y-4 text-base leading-relaxed text-[var(--paragraph)] max-w-prose";
@@ -19,13 +19,17 @@ function AboutParagraphBlock({ paragraph }: { paragraph: AboutParagraph }) {
   }
   return (
     <p>
-      {paragraph.segments.map((s, i) =>
-        s.link ? (
-          <a key={i} href={s.link} className="text-[var(--link)]">
-            {s.text}
+      {paragraph.segments.map((segment) =>
+        segment.link ? (
+          <a
+            key={`${segment.link}:${segment.text}`}
+            href={segment.link}
+            className="text-[var(--link)]"
+          >
+            {segment.text}
           </a>
         ) : (
-          <span key={i}>{s.text}</span>
+          <span key={`text:${segment.text}`}>{segment.text}</span>
         ),
       )}
     </p>
@@ -39,7 +43,7 @@ export default function Home() {
 
   return (
     <SiteLayout>
-      <div className="flex flex-col gap-16 pb-10 sm:gap-20 sm:pb-14">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-14 pb-10 sm:gap-[4.5rem] sm:pb-14">
         <section id="about" className="scroll-mt-28">
           <h2 id="about-subheading" className={sectionHeadingClass}>
             {headings.about}
@@ -50,16 +54,25 @@ export default function Home() {
               alt={about.image.alt}
               width={imgW}
               height={imgH}
-              className="mx-auto h-40 w-40 flex-shrink-0 rounded-lg object-cover md:mx-0"
+              className="mx-auto h-40 w-40 shrink-0 rounded-xl border border-[var(--border)] object-cover shadow-sm md:mx-0"
             />
 
             <div className="min-w-0 flex-1">
-              <h3 className="mb-4 text-xl font-semibold text-[var(--foreground)]">
+              <h3 className="mb-3 text-xl font-semibold text-[var(--foreground)]">
                 {about.greeting}
               </h3>
               <div className={proseStackClass}>
-                {about.paragraphs.map((p, i) => (
-                  <AboutParagraphBlock key={i} paragraph={p} />
+                {about.paragraphs.map((paragraph) => (
+                  <AboutParagraphBlock
+                    key={
+                      typeof paragraph === "string"
+                        ? paragraph
+                        : paragraph.segments
+                            .map(({ link, text }) => `${link ?? "text"}:${text}`)
+                            .join("|")
+                    }
+                    paragraph={paragraph}
+                  />
                 ))}
               </div>
             </div>
@@ -76,7 +89,7 @@ export default function Home() {
             </h3>
             <div className="flex flex-col gap-1 text-base text-[var(--paragraph)] sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-x-6">
               <span>{education.degree}</span>
-              <span className="shrink-0 text-sm italic sm:text-base">{education.graduation}</span>
+              <span className="shrink-0 text-sm text-[var(--paragraph)]/70 sm:text-base">{education.graduation}</span>
             </div>
           </div>
         </section>
@@ -131,6 +144,55 @@ export default function Home() {
           </ExperienceTimeline>
         </section>
 
+        <section id="leadership" className="scroll-mt-28">
+          <h2 id="leadership-subheading" className={sectionHeadingClass}>
+            {headings.clubsLeadership}
+          </h2>
+
+          <ExperienceTimeline>
+            {portfolioData.leadership.map((entry, idx) => (
+              <ExperienceTimelineItem
+                key={`${entry.company}-${entry.role}-${entry.date}`}
+                role={entry.role}
+                company={entry.company}
+                location={entry.location}
+                date={entry.date}
+                logoSrc={entry.logoSrc}
+                summary={entry.summary}
+                isLast={idx === portfolioData.leadership.length - 1}
+                links={
+                  entry.github || entry.link ? (
+                    <>
+                      {entry.github ? (
+                        <a
+                          className="flex items-center gap-1 hover:text-[var(--link-hover)]"
+                          href={entry.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${entry.company} GitHub`}
+                        >
+                          <FaGithub />
+                        </a>
+                      ) : null}
+                      {entry.link ? (
+                        <a
+                          className="flex items-center gap-1 hover:text-[var(--link-hover)]"
+                          href={entry.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${entry.company} Website`}
+                        >
+                          <CgWebsite />
+                        </a>
+                      ) : null}
+                    </>
+                  ) : undefined
+                }
+              />
+            ))}
+          </ExperienceTimeline>
+        </section>
+
         <section id="projects" className="scroll-mt-28">
           <h2 id="projects-subheading" className={sectionHeadingClass}>
             {headings.projects}
@@ -158,7 +220,7 @@ export default function Home() {
                 {skills.languages.map((lang) => (
                   <span
                     key={lang}
-                    className="rounded-md bg-[var(--tag-bg)] px-3 py-1 font-mono text-sm text-[var(--tag-text)]"
+                    className="rounded-full border border-[var(--border)] bg-[var(--card-bg)]/55 px-3 py-1 font-mono text-sm text-[var(--paragraph)]"
                   >
                     {lang}
                   </span>
@@ -173,7 +235,7 @@ export default function Home() {
                 {skills.tools.map((tool) => (
                   <span
                     key={tool}
-                    className="rounded-md bg-[var(--tag-bg)] px-3 py-1 font-mono text-sm text-[var(--tag-text)]"
+                    className="rounded-full border border-[var(--border)] bg-[var(--card-bg)]/55 px-3 py-1 font-mono text-sm text-[var(--paragraph)]"
                   >
                     {tool}
                   </span>
@@ -189,7 +251,7 @@ export default function Home() {
                   {skills.libraries.map((lib) => (
                     <span
                       key={lib}
-                      className="rounded-md bg-[var(--tag-bg)] px-3 py-1 font-mono text-sm text-[var(--tag-text)]"
+                      className="rounded-full border border-[var(--border)] bg-[var(--card-bg)]/55 px-3 py-1 font-mono text-sm text-[var(--paragraph)]"
                     >
                       {lib}
                     </span>
@@ -204,9 +266,9 @@ export default function Home() {
           <h2 id="resume-subheading" className={sectionHeadingClass}>
             {headings.resume}
           </h2>
-          <h3 className="mb-8 text-center text-lg font-semibold text-[var(--foreground)]">
+          <p className="mb-6 text-center text-base text-[var(--paragraph)]">
             {resumeDownloadMessage}
-          </h3>
+          </p>
           <div className="flex flex-col items-stretch justify-center gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-5">
             {resumes.map((r) => (
               <a
@@ -214,7 +276,7 @@ export default function Home() {
                 href={r.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="resume-link rounded-md px-6 py-3 text-center font-mono text-base sm:text-lg"
+                className="resume-link rounded-lg px-6 py-3 text-center text-base font-medium shadow-sm transition-[background-color,transform] hover:-translate-y-0.5"
               >
                 {r.label}
               </a>

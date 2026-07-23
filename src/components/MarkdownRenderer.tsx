@@ -7,6 +7,8 @@ interface MarkdownRendererProps {
 }
 
 const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ html }) => {
+    // `html` has passed through rehype-sanitize in src/lib/notes.ts. This
+    // component is the single, documented HTML rendering boundary for notes.
     return (
         <div
             className="note-prose prose max-w-none min-w-0

@@ -40,19 +40,17 @@ export default function ThemeToggle() {
   }, []);
 
   const toggle = useCallback(() => {
-    setTheme((prev) => {
-      const next = prev === "dark" ? "light" : "dark";
-      applyTheme(next);
-      return next;
-    });
-  }, []);
+    const next = theme === "dark" ? "light" : "dark";
+    applyTheme(next);
+    setTheme(next);
+  }, [theme]);
 
   const isDark = theme === "dark";
 
   return (
     <button
       type="button"
-      className="theme-toggle flex w-full min-h-10 items-center justify-center rounded border border-[var(--background)] px-3 py-2 text-[var(--background)] opacity-80 transition-opacity hover:opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--link)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sidebar)]"
+      className="theme-toggle flex min-h-10 w-full items-center justify-center rounded-sm border border-[var(--sidebar-border)] px-3 py-2 text-[var(--sidebar-muted)] transition-[color,background-color,border-color] hover:border-[var(--accent)] hover:bg-[var(--sidebar-hover)] hover:text-[var(--sidebar-text)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sidebar)]"
       onClick={toggle}
       suppressHydrationWarning
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}

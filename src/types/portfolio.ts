@@ -51,6 +51,7 @@ export type PortfolioHeadings = {
   about: string;
   education: string;
   experience: string;
+  clubsLeadership: string;
   skills: string;
   projects: string;
   resume: string;
@@ -61,7 +62,7 @@ export type ExperienceEntry = {
   company: string;
   location: string;
   date: string;
-  logoSrc: string;
+  logoSrc?: string;
   summary: string;
   github?: string;
   link?: string;
@@ -77,5 +78,6 @@ export type PortfolioData = {
   /** Line shown above the resume download buttons */
   resumeDownloadMessage: string;
   experience: ExperienceEntry[];
+  leadership: ExperienceEntry[];
   projects: ProjectItem[];
 };

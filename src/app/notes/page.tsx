@@ -5,7 +5,7 @@ import { getAllNotesMeta, getAllTags } from '@/lib/notes';
 
 export default function NotesPage() {
     const notes = getAllNotesMeta();
-    const tags = getAllTags();
+    const tags = getAllTags(notes);
 
     return (
         <SiteLayout>
