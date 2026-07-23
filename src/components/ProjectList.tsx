@@ -1,4 +1,5 @@
 import { FaGithub } from "react-icons/fa6";
+import { FaBookOpen } from "react-icons/fa";
 import { CgWebsite } from "react-icons/cg";
 
 export type ProjectItem = {
@@ -8,6 +9,7 @@ export type ProjectItem = {
   summary: string;
   link?: string;
   github?: string;
+  docs?: string;
 };
 
 interface ProjectListProps {
@@ -20,7 +22,7 @@ export default function ProjectList({ projects }: ProjectListProps) {
       {projects.map((project) => {
         const displayTags = project.tags.slice(0, 3);
         const extra = project.tags.length > 3 ? project.tags.length - 3 : 0;
-        const hasLinks = Boolean(project.link || project.github);
+        const hasLinks = Boolean(project.link || project.github || project.docs);
 
         return (
           <li
@@ -70,6 +72,17 @@ export default function ProjectList({ projects }: ProjectListProps) {
                           aria-label={`${project.title} GitHub`}
                         >
                           <FaGithub />
+                        </a>
+                      ) : null}
+                      {project.docs ? (
+                        <a
+                          href={project.docs}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="no-underline hover:text-[var(--link-hover)]"
+                          aria-label={`${project.title} write-up`}
+                        >
+                          <FaBookOpen />
                         </a>
                       ) : null}
                     </span>

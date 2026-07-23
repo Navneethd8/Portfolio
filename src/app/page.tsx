@@ -10,9 +10,6 @@ import Image from "next/image";
 const sectionHeadingClass =
   "relative mb-6 text-2xl font-bold tracking-tight text-[var(--foreground)] after:mt-2.5 after:block after:h-0.5 after:w-14 after:bg-[var(--foreground)] after:content-['']";
 
-const sectionEyebrowClass =
-  "mb-2 text-xs font-semibold uppercase tracking-wide text-[var(--paragraph)]";
-
 const proseStackClass =
   "space-y-4 text-base leading-relaxed text-[var(--paragraph)] max-w-prose";
 
@@ -81,10 +78,6 @@ export default function Home() {
               <span>{education.degree}</span>
               <span className="shrink-0 text-sm italic sm:text-base">{education.graduation}</span>
             </div>
-            <p className="max-w-prose pt-1 text-base leading-relaxed text-[var(--paragraph)]">
-              <span className="font-semibold text-[var(--foreground)]">{education.courseworkHeading}</span>{" "}
-              {education.coursework.join(", ")}
-            </p>
           </div>
         </section>
 
@@ -136,6 +129,20 @@ export default function Home() {
               />
             ))}
           </ExperienceTimeline>
+        </section>
+
+        <section id="projects" className="scroll-mt-28">
+          <h2 id="projects-subheading" className={sectionHeadingClass}>
+            {headings.projects}
+          </h2>
+
+          {portfolioData.projects.length > 0 ? (
+            <ProjectList projects={portfolioData.projects} />
+          ) : (
+            <p className="text-base text-[var(--paragraph)]">
+              Project lineup coming soon.
+            </p>
+          )}
         </section>
 
         <section id="skills" className="scroll-mt-28">
@@ -191,24 +198,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
-
-        <section id="projects-data" className="scroll-mt-28">
-          <p className={sectionEyebrowClass}>{headings.dataProjectsEyebrow}</p>
-          <h2 id="sprojects-subheading" className={sectionHeadingClass}>
-            {headings.dataProjects}
-          </h2>
-
-          <ProjectList projects={portfolioData.dataProjects} />
-        </section>
-
-        <section id="projects-swe" className="scroll-mt-28">
-          <p className={sectionEyebrowClass}>{headings.sweProjectsEyebrow}</p>
-          <h2 id="swe-projects-subheading" className={sectionHeadingClass}>
-            {headings.sweProjects}
-          </h2>
-
-          <ProjectList projects={portfolioData.sweProjects} />
         </section>
 
         <section id="resume" className="scroll-mt-28">

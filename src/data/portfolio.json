@@ -4,10 +4,7 @@
     "education": "Education",
     "experience": "Experience",
     "skills": "Skills",
-    "dataProjectsEyebrow": "Selected work",
-    "dataProjects": "Data Projects",
-    "sweProjectsEyebrow": "Engineering work",
-    "sweProjects": "Software Engineering Projects",
+    "projects": "Projects",
     "resume": "Resume"
   },
   "about": {
@@ -59,19 +56,8 @@
   },
   "education": {
     "institution": "University of Washington, Seattle",
-    "degree": "B.S. Informatics: Data Science + B.A. Economics (GPA: 3.54)",
-    "graduation": "Expected Graduation: Jun 2027",
-    "courseworkHeading": "Relevant Coursework:",
-    "coursework": [
-      "Data Structures and Algorithms",
-      "Introduction to Data Science",
-      "Statistical Analysis in R",
-      "Databases and Data Modelling",
-      "Econometrics",
-      "Object Oriented Programming",
-      "Intermediate Data Programming",
-      "Core Methods in Data Science"
-    ]
+    "degree": "B.S. Informatics: Data Science + B.A. Economics (GPA: 3.66)",
+    "graduation": "Expected Graduation: Jun 2027"
   },
   "skills": {
     "groupLabels": {
@@ -112,10 +98,6 @@
     ]
   },
   "resumes": [
-    {
-      "label": "Software Engineering Resume",
-      "href": "/Navneeth_Dhamotharan_Resume.pdf"
-    },
     {
       "label": "Data Science Resume",
       "href": "/Dhamotharan_Navneeth_Resume.pdf"
@@ -194,123 +176,35 @@
       ]
     }
   ],
-  "dataProjects": [
+  "projects": [
     {
-      "title": "Stock Market Analysis",
-      "date": "Ongoing",
+      "title": "Mesocosm",
+      "date": "May 2026",
       "tags": [
         "Python",
-        "XGBoost",
-        "Scikit-learn",
-        "Pandas",
-        "Tableau"
+        "CLI",
+        "React",
+        "FastAPI",
+        "Docker"
       ],
-      "summary": "Predictive model for SPY stock data, visualizing real-time financial insights via BI dashboard.",
-      "github": "",
-      "link": ""
+      "summary": "Python CLI for scaffolding, submitting, and running reproducible sandbox environments for AI agents, with exportable replay data for showcases.",
+      "link": "https://mesocosm.swecc.org/",
+      "github": "https://github.com/swecc-uw/swecc-mesocosm",
+      "docs": "https://wiki.swecc.org/Blogs/controlled-environments-for-uncontrolled-agents#the-sandbox-the-environments-home"
     },
     {
-      "title": "MacroScope",
-      "date": "May 2025. - Jun. 2025",
-      "tags": [
-        "Python",
-        "Geopandas",
-        "Folium",
-        "XGBoost",
-        "Scikit-learn",
-        "Pandas",
-        "Seaborn",
-        "Matplotlib"
-      ],
-      "summary": "Interactive global economic map predicting inflation trends across 400K+ IMF fiscal records.",
-      "github": "",
-      "link": ""
-    },
-    {
-      "title": "DataMed",
-      "date": "Apr. 2025",
-      "tags": [
-        "Python",
-        "Scikit-learn",
-        "Optuna",
-        "Pandas",
-        "Numpy",
-        "Seaborn",
-        "Matplotlib"
-      ],
-      "summary": "Award-winning ML model optimizing healthcare cost predictions across 1.2M medical records.",
-      "github": "",
-      "link": ""
-    },
-    {
-      "title": "NCAA Basketball Analysis",
-      "date": "Jan 2025. - Mar. 2025",
-      "tags": [
-        "R",
-        "R Studio",
-        "tidyverse",
-        "ggplot2",
-        "dplyr"
-      ],
-      "summary": "Statistical analysis linking NCAA regular season free throws to post-season tournament wins.",
-      "github": "https://github.com/Navneethd8",
-      "link": ""
-    }
-  ],
-  "sweProjects": [
-    {
-      "title": "Bingo on the Ave",
-      "date": "Apr. 2025",
+      "title": "IsoCourt",
+      "date": "Feb 2026",
       "tags": [
         "React",
-        "Next",
-        "TypeScript",
-        "Google Places API"
+        "FastAPI",
+        "PyTorch",
+        "MediaPipe",
+        "Gemini"
       ],
-      "summary": "Award-winning geolocation checklist app engaging 40,000+ UW students with scavenger hunts.",
-      "link": "https://avebingo.vercel.app/",
-      "github": "https://github.com/Navneethd8/sweccathon25"
-    },
-    {
-      "title": "Fundit",
-      "date": "Oct. 2024 – Jun. 2025",
-      "tags": [
-        "React Native",
-        "Expo",
-        "Firebase",
-        "TypeScript",
-        "Plaid API",
-        "Polygon API"
-      ],
-      "summary": "Cross-platform financial app providing real-time portfolio management via Plaid and Polygon.",
-      "github": "https://github.com/hcp-uw/fundit"
-    },
-    {
-      "title": "Mentura",
-      "date": "Oct. 2024",
-      "tags": [
-        "React",
-        "Next",
-        "AWS Amplify",
-        "Perplexity API",
-        "YouTube API"
-      ],
-      "summary": "AI-powered STEM learning platform serving curated concept overviews and video tutorials.",
-      "link": "https://main.dhulrjtlxnvx6.amplifyapp.com/",
-      "github": "https://github.com/study-app-dh24/study-app"
-    },
-    {
-      "title": "SAT Decoded",
-      "date": "Jun. 2023 – Sep. 2024",
-      "tags": [
-        "HTML",
-        "CSS",
-        "SailsJS",
-        "PostgreSQL",
-        "Sendgrid API"
-      ],
-      "summary": "Open-source interactive test prep platform helping 800+ high school students master the SAT.",
-      "github": "https://github.com/Navneethd8/SATDecoded"
+      "summary": "AI badminton coach that analyzes uploaded footage with action recognition and pose estimation to deliver stroke breakdowns and personalized technical feedback.",
+      "link": "https://www.isocourt.fit/",
+      "github": "https://github.com/navneethd8/isocourt"
     }
   ]
 }

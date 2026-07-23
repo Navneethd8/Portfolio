@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { FaLinkedin, FaGithub, FaXTwitter } from 'react-icons/fa6';
-import { CgWebsite } from "react-icons/cg";
 import { MdEmail } from "react-icons/md";
 import TypewriterText from "./TypewriterText";
 import ThemeToggle from "./ThemeToggle";
@@ -17,9 +16,8 @@ const MainSidebar: React.FC = () => {
         { name: 'About', href: '/#about' },
         { name: 'Education', href: '/#education' },
         { name: 'Experience', href: '/#experience' },
+        { name: 'Projects', href: '/#projects' },
         { name: 'Skills', href: '/#skills' },
-        { name: 'Data Projects', href: '/#projects-data' },
-        { name: 'SWE Projects', href: '/#projects-swe' },
         { name: 'Resume', href: '/#resume' },
     ];
 
@@ -27,7 +25,6 @@ const MainSidebar: React.FC = () => {
         { name: 'nd17@uw.edu', href: 'mailto:nd17@uw.edu', icon: <MdEmail /> },
         { name: 'LinkedIn', href: 'https://www.linkedin.com/in/navneethd', icon: <FaLinkedin /> },
         { name: 'GitHub', href: 'https://github.com/navneethd8', icon: <FaGithub /> },
-        { name: 'Website', href: 'https://navneethd.me', icon: <CgWebsite /> },
         { name: 'Twitter / X', href: 'https://x.com/NavneethDG', icon: <FaXTwitter /> },
     ];
 
@@ -42,10 +39,10 @@ const MainSidebar: React.FC = () => {
 
             {/*
               max-lg: one scroll column (nav + contact) so the drawer isn’t “half scroll / half stuck”.
-              lg+: nav fills remaining height and scrolls alone; contact stays pinned to the bottom.
+              lg+: the full navigation stays visible without its own nested scroll area.
             */}
             <div className="custom-scrollbar flex min-h-0 min-w-0 flex-1 flex-col overflow-x-hidden overflow-y-auto overscroll-y-contain pr-1 lg:overflow-hidden">
-                <nav className="flex shrink-0 flex-col gap-4 text-center sm:gap-5 lg:min-h-0 lg:flex-1 lg:gap-2 lg:overflow-y-auto lg:pr-2 lg:text-left">
+                <nav className="flex shrink-0 flex-col gap-4 text-center sm:gap-5 lg:flex-1 lg:gap-2 lg:text-left">
                     {isNotesPage && (
                         <Link
                             href="/"

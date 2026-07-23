@@ -28,8 +28,6 @@ export type PortfolioEducation = {
   institution: string;
   degree: string;
   graduation: string;
-  courseworkHeading: string;
-  coursework: string[];
 };
 
 export type PortfolioSkills = {
@@ -54,10 +52,7 @@ export type PortfolioHeadings = {
   education: string;
   experience: string;
   skills: string;
-  dataProjectsEyebrow: string;
-  dataProjects: string;
-  sweProjectsEyebrow: string;
-  sweProjects: string;
+  projects: string;
   resume: string;
 };
 
@@ -82,6 +77,5 @@ export type PortfolioData = {
   /** Line shown above the resume download buttons */
   resumeDownloadMessage: string;
   experience: ExperienceEntry[];
-  dataProjects: ProjectItem[];
-  sweProjects: ProjectItem[];
+  projects: ProjectItem[];
 };
